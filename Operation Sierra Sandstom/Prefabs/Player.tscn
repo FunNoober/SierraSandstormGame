@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Prefabs/Gun.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Weapons/M4A1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Prefabs/Graphical_User_Interface.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 2.0
@@ -10,6 +11,8 @@ height = 2.0
 extents = Vector3( 1, 0.1, 1 )
 
 [node name="FPSBody" type="KinematicBody"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="BodyCollision" type="CollisionShape" parent="."]
@@ -21,7 +24,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.81482, 0 )
 shape = SubResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
 fov = 90.0
+near = 0.01
+far = 250.0
 
-[node name="Gun" parent="Camera" instance=ExtResource( 2 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.3, -0.3, -2.7 )
+[node name="M4A1" parent="Camera" instance=ExtResource( 2 )]
+transform = Transform( -1.66103e-08, 0, -0.38, 0, 0.38, 0, 0.38, 0, -1.66103e-08, 0.8, -0.8, -1.5 )
+max_ammo = 30
+current_ammo = 30
+shoot_delay = 0.1
+recoil = 0.1
+
+[node name="Graphical_User_Interface" parent="." instance=ExtResource( 3 )]

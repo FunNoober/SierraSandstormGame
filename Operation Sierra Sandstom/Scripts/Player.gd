@@ -84,7 +84,7 @@ func handle_stances(delta):
 		MAX_SPEED = TRUE_MAX_SPEED
 		
 	if Input.is_action_pressed("move_prone"):
-		self.scale.y = lerp(self.scale.y, 0.1, delta*2)
+		self.scale.y = lerp(self.scale.y, 0.2, delta*2)
 		MAX_SPEED = 1
 	else:
 		self.scale.y = lerp(self.scale.y, 1, delta*2)
@@ -93,5 +93,5 @@ func handle_stances(delta):
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
-
 		camera.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY * -1))
+		camera.rotation.x = clamp(camera.rotation.x, -0.90, 1)
