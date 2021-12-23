@@ -15,13 +15,21 @@ onready var camera = get_node("Camera") #Getting the camera node when the game s
 
 var MOUSE_SENSITIVITY = 0.09
 
+export var start_health : float = 100
+var current_health = 100.0
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #Making the mouse no longer visible and making it not move out of the window
+	current_health = start_health
 	
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
 	handle_stances(delta)
+	
+func _process(delta):
+	if current_health <= 0:
+		die()
 	
 func process_input(delta):
 	dir = Vector3() #We want to reset dir everytime so speed does not add up
@@ -95,3 +103,11 @@ func _input(event):
 		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1)) #Rotating the whole character controller on the Y axis
 		camera.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY * -1)) #Rotating the camera on the X axis
 		camera.rotation.x = clamp(camera.rotation.x, -0.90, 1) #Clamping the camera rotation to avoid being up side down
+		
+func take_damage(amount):
+	current_health -= amount
+	if current_health <= 0:
+		die()
+	
+func die():
+	get_tree().reload_current_scene()

@@ -1,35 +1,48 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Prefabs/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Prefabs/Enemy.tscn" type="PackedScene" id=2]
+
+[sub_resource type="NavigationMesh" id=1]
+vertices = PoolVector3Array( -30, 0.5, -39.9, -39.9, 0.5, -39.9, -39.9, 0.5, -33.6, -30, 0.5, -39.9, -39.9, 0.5, -33.6, -39.9, 0.5, -27, -30, 0.5, -39.9, -39.9, 0.5, -27, -39.9, 0.5, -20.7, -20.1, 0.5, -39.9, -30, 0.5, -39.9, -39.9, 0.5, -20.7, -39.9, 0.5, -14.1, -39.9, 0.5, -1.2, -39.9, 0.5, 5.1, -3, 0.5, 8.7, -39.9, 0.5, 11.7, -3.3, 0.5, 11.7, -3, 0.5, 8.7, -39.9, 0.5, 5.1, -39.9, 0.5, -7.8, -39.9, 0.5, -1.2, -3, 0.5, 8.7, 0, 0.5, 8.7, 0, 0.5, -39.9, -10.2, 0.5, -39.9, -20.1, 0.5, -39.9, -39.9, 0.5, -14.1, -39.9, 0.5, -7.8, -10.2, 0.5, -39.9, 3.3, 0.5, 11.7, 3.9, 0.5, 11.7, 4.2, 0.5, 9.9, 3, 0.5, 8.7, 6.9, 0.5, 9.9, 39.9, 0.5, 5.1, 39.9, 0.5, -1.2, 3, 0.5, 8.7, 4.2, 0.5, 9.9, 6.9, 0.5, 9.9, 39.9, 0.5, -1.2, 39.9, 0.5, -7.8, 39.9, 0.5, -33.6, 39.9, 0.5, -39.9, 29.7, 0.5, -39.9, 39.9, 0.5, -27, 39.9, 0.5, -33.6, 29.7, 0.5, -39.9, 39.9, 0.5, -20.7, 39.9, 0.5, -27, 29.7, 0.5, -39.9, 39.9, 0.5, -14.1, 39.9, 0.5, -20.7, 29.7, 0.5, -39.9, 19.8, 0.5, -39.9, 39.9, 0.5, -7.8, 39.9, 0.5, -14.1, 19.8, 0.5, -39.9, 9.9, 0.5, -39.9, 6.9, 0.5, 9.9, 7.2, 0.5, 11.7, 39.9, 0.5, 11.7, 39.9, 0.5, 5.1, 0, 0.5, 8.7, 3, 0.5, 8.7, 39.9, 0.5, -7.8, 9.9, 0.5, -39.9, 0, 0.5, -39.9, -2.1, 5.3, 9.9, -2.1, 5.3, 13.8, 2.1, 5.3, 13.8, 2.1, 5.3, 9.9, -39.9, 0.5, 32.7, -39.9, 0.5, 39.9, -30.3, 0.5, 39.9, -39.9, 0.5, 25.8, -39.9, 0.5, 32.7, -30.3, 0.5, 39.9, -39.9, 0.5, 18.6, -39.9, 0.5, 25.8, -30.3, 0.5, 39.9, -20.7, 0.5, 39.9, -1.5, 0.5, 39.9, -1.2, 0.5, 15, -3.3, 0.5, 14.7, -11.1, 0.5, 39.9, -11.1, 0.5, 39.9, -3.3, 0.5, 14.7, -3.3, 0.5, 11.7, -39.9, 0.5, 11.7, -39.9, 0.5, 18.6, -20.7, 0.5, 39.9, 4.2, 0.5, 13.5, 3.9, 0.5, 11.7, 3.3, 0.5, 11.7, 3.3, 0.5, 14.7, 7.2, 0.5, 11.7, 6.9, 0.5, 13.5, 11.1, 0.5, 39.9, 20.7, 0.5, 39.9, 39.9, 0.5, 18.6, 39.9, 0.5, 11.7, 6.9, 0.5, 13.5, 4.2, 0.5, 13.5, 3.3, 0.5, 14.7, 1.5, 0.5, 39.9, 11.1, 0.5, 39.9, 30.3, 0.5, 39.9, 39.9, 0.5, 39.9, 39.9, 0.5, 32.7, 30.3, 0.5, 39.9, 39.9, 0.5, 32.7, 39.9, 0.5, 25.8, 30.3, 0.5, 39.9, 39.9, 0.5, 25.8, 39.9, 0.5, 18.6, 20.7, 0.5, 39.9, 3.3, 0.5, 14.7, 1.2, 0.5, 15, 1.5, 0.5, 39.9, -1.5, 0.5, 39.9, 1.5, 0.5, 39.9, 1.2, 0.5, 15, -1.2, 0.5, 15 )
+polygons = [ PoolIntArray( 0, 2, 1 ), PoolIntArray( 5, 4, 3 ), PoolIntArray( 8, 7, 6 ), PoolIntArray( 11, 10, 12 ), PoolIntArray( 12, 10, 9 ), PoolIntArray( 15, 14, 13 ), PoolIntArray( 17, 16, 18 ), PoolIntArray( 18, 16, 19 ), PoolIntArray( 22, 21, 23 ), PoolIntArray( 23, 21, 20 ), PoolIntArray( 23, 20, 25 ), PoolIntArray( 23, 25, 24 ), PoolIntArray( 27, 26, 28 ), PoolIntArray( 28, 26, 29 ), PoolIntArray( 31, 30, 32 ), PoolIntArray( 32, 30, 33 ), PoolIntArray( 36, 35, 34 ), PoolIntArray( 38, 37, 39 ), PoolIntArray( 39, 37, 40 ), PoolIntArray( 40, 37, 41 ), PoolIntArray( 44, 43, 42 ), PoolIntArray( 45, 47, 46 ), PoolIntArray( 50, 49, 48 ), PoolIntArray( 52, 51, 53 ), PoolIntArray( 53, 51, 54 ), PoolIntArray( 56, 55, 57 ), PoolIntArray( 57, 55, 58 ), PoolIntArray( 60, 59, 61 ), PoolIntArray( 61, 59, 62 ), PoolIntArray( 64, 63, 65 ), PoolIntArray( 65, 63, 66 ), PoolIntArray( 66, 63, 67 ), PoolIntArray( 71, 70, 68 ), PoolIntArray( 68, 70, 69 ), PoolIntArray( 74, 73, 72 ), PoolIntArray( 77, 76, 75 ), PoolIntArray( 79, 78, 80 ), PoolIntArray( 80, 78, 81 ), PoolIntArray( 83, 82, 84 ), PoolIntArray( 84, 82, 85 ), PoolIntArray( 87, 86, 88 ), PoolIntArray( 88, 86, 91 ), PoolIntArray( 88, 91, 90 ), PoolIntArray( 88, 90, 89 ), PoolIntArray( 93, 92, 94 ), PoolIntArray( 94, 92, 95 ), PoolIntArray( 97, 96, 98 ), PoolIntArray( 98, 96, 99 ), PoolIntArray( 99, 96, 100 ), PoolIntArray( 100, 96, 101 ), PoolIntArray( 103, 102, 104 ), PoolIntArray( 104, 102, 105 ), PoolIntArray( 105, 102, 106 ), PoolIntArray( 109, 108, 107 ), PoolIntArray( 112, 111, 110 ), PoolIntArray( 114, 113, 115 ), PoolIntArray( 115, 113, 116 ), PoolIntArray( 119, 118, 117 ), PoolIntArray( 123, 122, 120 ), PoolIntArray( 120, 122, 121 ) ]
 
 [node name="Spatial" type="Spatial"]
 
-[node name="CSGCombiner" type="CSGCombiner" parent="."]
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.678603, -0.561832, 0.47312, 0.224144, 0.771811, 0.595035, -0.699469, -0.297746, 0.649685, 0, 0, 0 )
+shadow_enabled = true
+
+[node name="Navigation" type="Navigation" parent="."]
+
+[node name="NavigationMeshInstance" type="NavigationMeshInstance" parent="Navigation"]
+navmesh = SubResource( 1 )
+
+[node name="CSGCombiner" type="CSGCombiner" parent="Navigation/NavigationMeshInstance"]
 use_in_baked_light = true
 use_collision = true
 collision_layer = 6
 collision_mask = 6
 
-[node name="CSGBox" type="CSGBox" parent="CSGCombiner"]
+[node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
 use_in_baked_light = true
-width = 32.0
+width = 81.0
 height = 0.2
-depth = 32.0
+depth = 81.0
 
-[node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox"]
+[node name="CSGBox2" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 11.8739 )
 use_in_baked_light = true
 width = 5.0
 height = 5.0
 depth = 5.0
 
-[node name="CSGBox" type="CSGBox" parent="CSGCombiner/CSGBox/CSGBox"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, -1.4, -0.126118 )
+[node name="CSGBox3" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 1.1, 11.7478 )
 use_in_baked_light = true
 
-[node name="FPSBody" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, 0 )
+[node name="Enemy" parent="Navigation" instance=ExtResource( 2 )]
+transform = Transform( -0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, -0.707107, -30.1, -1.41561e-07, -31.2 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.678603, -0.561832, 0.47312, 0.224144, 0.771811, 0.595035, -0.699469, -0.297746, 0.649685, 0, 0, 0 )
-shadow_enabled = true
+[node name="FPSBody" parent="Navigation" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0 )
