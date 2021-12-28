@@ -9,8 +9,8 @@
 <p>This game is being developed solo by a indie developer that goes by the name "Fun Noober". <br/> </p>
 <p>The engine that Fun Noober went with to develop this game is Godot. Godot is a powerful 3d and 2d engine with simplicity in mind. <br/></p>
 
-<h2>Fun Noober's PC Specs:</h2>
-<p>Proccessor: Intel I5 6400 at 2.70 GHz (4 cores) <br/> Memory: 7.7 GiB <br/> Graphics Card: Geforce GTX 1660 <br/> Operation System: Pop!_OS 21.10 <br/> Disk Space: 2x 250 GiB Storage Devices</p>
+<h2>Fun Noober's PC Specs (Updated):</h2>
+<p>Proccessor: Ryzen 9 (12 cores) <br/> Memory: 62.8 GiB <br/> Graphics Card: RTX 3080 <br/> Operation System: Pop!_OS 21.10 <br/> Disk Space: 1: 256 GiB M.2 Drive, 1: 256 GiB SSD, 1: 1000 GiB HDD Devices</p>
 
 <h2>Contributing Guide:</h2>
 <h3>Reporting Bugs:</h3>
