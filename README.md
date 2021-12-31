@@ -40,3 +40,9 @@
     Texture Creation Software: GIMP <br/>
     Other Recommended Tools: Krita, LMMS, Audacity, Visual Studio Code
 </p>
+<h3>Links:</h3>
+<a href="https://www.youtube.com/c/funnoobercodingforbeginners">Fun Noober</a>
+<a href="https://godotengine.org">Godot</a>
+<a href="https://blender.org">Blender</a>
+<a href="https://gimp.org">GIMP</a>
+<a href="https://krita.org">Krita</a>
