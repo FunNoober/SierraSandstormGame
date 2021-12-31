@@ -8,6 +8,8 @@ export var reload_delay = 5.0
 
 export var recoil = 1.0
 
+export var damage : float = 100
+
 var can_shoot = true
 var is_reloading = false
 
@@ -55,6 +57,8 @@ func shoot():
 	shoot_cast.rotation.z = rand_range(-recoil, recoil) #Applying recoil on the shoot cast
 	if shoot_cast.is_colliding() == true: #Checking if the ray intersects
 		spawn_bullet_hole() #Calling a function that is named spawn_bullet_hole
+		if shoot_cast.get_collider().is_in_group("Enemy"):
+			shoot_cast.get_collider().take_damage(damage)
 	shoot_timer.start() #Starting the shoot timer
 
 func reload_weapon():

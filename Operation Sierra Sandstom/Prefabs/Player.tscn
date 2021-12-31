@@ -45,6 +45,7 @@ max_ammo = 30
 current_ammo = 30
 shoot_delay = 0.1
 recoil = 0.1
+damage = 10.0
 
 [node name="NonUsableWeapons" type="Spatial" parent="Camera/Hand"]
 
