@@ -10,14 +10,6 @@ script = ExtResource( 2 )
 mesh = ExtResource( 1 )
 material/0 = null
 
-[node name="ShootDelay" type="Timer" parent="."]
-
-[node name="ReloadDelay" type="Timer" parent="."]
-
 [node name="ShootCast" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1.2, 2.1 )
 cast_to = Vector3( -100, 0, 0 )
 collision_mask = 5
-
-[connection signal="timeout" from="ShootDelay" to="." method="_on_ShootDelay_timeout"]
-[connection signal="timeout" from="ReloadDelay" to="." method="_on_ReloadDelay_timeout"]

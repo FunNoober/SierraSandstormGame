@@ -16,7 +16,11 @@ export var speed = 10.0
 export var health : float = 100
 export var start_health : float = 100
 
+var pathfinding_reset_delay : float
+export var max_pathfinding_reset_delay : float
+
 func _ready():
+	pathfinding_reset_delay = max_pathfinding_reset_delay
 	player = get_tree().get_root().get_node("Spatial").get_node("Navigation").get_node("FPSBody")
 	nav = get_tree().get_root().get_node("Spatial").get_node("Navigation")
 	enemy_in_true_vision_raycast = $EnemyInTrueVision
@@ -34,6 +38,10 @@ func _physics_process(delta):
 			move_and_slide(dir.normalized() * speed, Vector3.UP)
 
 func _process(delta):	
+	pathfinding_reset_delay -= delta
+	if pathfinding_reset_delay <= 0:
+		reset_pathfinding()
+	
 	if enemy_in_true_vision == true:
 		look_at(player.global_transform.origin, Vector3.UP)
 	if enemy_in_attack == true:
@@ -74,15 +82,19 @@ func _on_Vision_body_exited(body):
 
 
 func _on_Timer_timeout():
+	pass
+		
+func reset_pathfinding():
 	if enemy_in_vision == true:
 		enemy_in_true_vision_raycast.look_at(player.global_transform.origin, Vector3.UP)
-		if enemy_in_true_vision_raycast.get_collider() != null && enemy_in_true_vision_raycast.get_collider().is_in_group("Player"):
-			enemy_in_true_vision = true
-			if enemy_in_true_vision:
-				chase(player.global_transform.origin)
+	if enemy_in_true_vision_raycast.get_collider() != null && enemy_in_true_vision_raycast.get_collider().is_in_group("Player"):
+		enemy_in_true_vision = true
+		if enemy_in_true_vision:
+			chase(player.global_transform.origin)
 	if enemy_in_attack == true:
 		chase(self.global_transform.origin)
 		self.look_at(player.global_transform.origin, Vector3.UP)
+	pathfinding_reset_delay = max_pathfinding_reset_delay
 		
 func take_damage(amount):
 	health -= amount

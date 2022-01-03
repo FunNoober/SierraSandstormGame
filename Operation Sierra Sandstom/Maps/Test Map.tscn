@@ -21,8 +21,8 @@ navmesh = SubResource( 1 )
 [node name="CSGCombiner" type="CSGCombiner" parent="Navigation/NavigationMeshInstance"]
 use_in_baked_light = true
 use_collision = true
-collision_layer = 6
-collision_mask = 6
+collision_layer = 7
+collision_mask = 7
 
 [node name="CSGBox" type="CSGBox" parent="Navigation/NavigationMeshInstance/CSGCombiner"]
 use_in_baked_light = true

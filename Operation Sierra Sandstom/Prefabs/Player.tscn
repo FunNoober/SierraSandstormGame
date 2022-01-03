@@ -32,20 +32,17 @@ far = 250.0
 
 [node name="Hand" type="Spatial" parent="Camera"]
 script = ExtResource( 4 )
-sway_left = Vector3( 0, 0.1, 0 )
-sway_right = Vector3( 0, -0.1, 0 )
-sway_up = Vector3( 0.1, 0, 0 )
-sway_down = Vector3( -0.1, 0, 0 )
+sway_threshold = 1.0
+sway_left = Vector3( 0, 0.5, 0 )
+sway_right = Vector3( 0, -0.5, 0 )
+sway_up = Vector3( 0.5, 0, 0 )
+sway_down = Vector3( -0.5, 0, 0 )
 
 [node name="UsableWeapons" type="Spatial" parent="Camera/Hand"]
 
 [node name="M4A1" parent="Camera/Hand/UsableWeapons" instance=ExtResource( 2 )]
 transform = Transform( -1.66103e-08, 0, -0.38, 0, 0.38, 0, 0.38, 0, -1.66103e-08, 0.8, -0.8, -1.5 )
-max_ammo = 30
-current_ammo = 30
 shoot_delay = 0.1
-recoil = 0.1
-damage = 10.0
 
 [node name="NonUsableWeapons" type="Spatial" parent="Camera/Hand"]
 

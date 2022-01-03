@@ -1,0 +1,89 @@
+Sierra Sanstorm ToDo
+
+There are catergories, these catergories are sperated by dashes. Inside each catergory is a thing to do relating to that catergory. Each item in a catergory is seperated by a comma. A catergory is considered done once everything in that catergory is done.
+
+-Re-Write Weapon System:
+Spawn Bullet Holes,
+Damage To Enemies,
+Ammo Pickup,
+
+-Enemy AI:
+Attack Player,
+Fix Jitter,
+Reload Weapon,
+Enemy Retreat,
+Enemy to Cover,
+
+-Friendly AI:
+Implement,
+Attack Enemy,
+Fix Jitter,
+Reload Weapon,
+Friendly Retreat,
+Freindly to Cover,
+Squad System,
+
+-Vehicles:
+Enemy ground vehicles,
+Friendly ground vehicles,
+Enemy air vehicles,
+Friendly air vehicles,
+Drivable cars,
+
+-Player:
+Minimap,
+Night Vision,
+Aim Down Sights (ADS),
+Breach and Clear System,
+Health System,
+Revive Friendly system,
+Last Stand system,
+
+-Game:
+Main Menu,
+Settings Menu,
+Stats,
+Save System,
+Checkpoint System,
+Survival Mode,
+
+Campaign:
+United States Act 1:
+Mission 1,
+Mission 2,
+Mission 3,
+Mission 4,
+Mission 5,
+Mission 6,
+Mission 7,
+Mission 8,
+United States Act 2:
+Mission 1,
+(Many more to come)
+
+Story for reference:
+
+Operation Sierra Sandstorm is a modern military FPS game set in the Middle East during WW3. This game combines weapons and vehicles from 3 different time periods. This game uses late WW2, Cold War, and modern day technology.
+
+The game is named after the United States’ final effort to push Russians out of the Middle East.
+
+## United States Campaign:
+**Mission 1 : The Beginning**
+A large insurgents base is under assault by the United States. It is the U.S’s job to make sure that base falls. You play as a marine in the first stages of the battle. Your objective is to secure strategic locations in the base with your fellow marines. This camp will provide a forward operating base for the marines in that area.
+**Mission 2 : The Insurgents**
+The United States’ special forces are cleaning house on an insurgent safe house. They need all the intel they can get and hopefully get the insurgent leader. You play as a Navy S.E.A.L against light insurgent resistance. Little do you or the U.S. know but Russian Spetsnaz are in an undercover operation. This leads to multiple dead Spetsnaz and Russia declaring war on the U.S. You are still successful at getting intel but the insurgent leader was able to escape.
+**Mission 3 : Echo 2-1**
+A large United States’ convoy is ambushed by a large number of insurgent forces. You play as an army Ranger that was in the convoy and you assist in defending the convoy until additional U.S forces can arrive. The insurgents are equipped with heavy weapons and BMPs. Your team has MAT-Vs and Strykers. After additional reinforcements arrive, you and your team launch a counter attack to a nearby insurgent camp.
+**Mission 4 : Invasion**
+After the events of the Spetsnaz getting killed at the safehouse, Russia is now launching assaults all across United States’ fronts throughout the Middle East. You play as a marine in this mission. Your squad is designated to protect strategic positions across a coastal city from the Russians. The Russians use BTR-82-As and paratroopers to launch their assault. You must hold out for the first stages of the invasion.
+**Mission 5 : Stranded**
+The United States now has a large problem on their hands. The U.S is now fighting both the insurgents and Russia now. In this mission, you play as a Delta force after your Black Hawk was shot down over Russian airspace. You have to reach a nearby communications outpost to call in the Rangers. The Rangers arrive in their little birds and have a Chinook ready for you.
+**Mission 6 : Green Flares**
+The United States is launching a huge counter assault on multiple Russian controlled cities throughout the Middle East. In this mission you play as a marine in the frontlines. You and your squad have to secure multiple locations in the Middle East city. You secure 1 area and get transported to the next in a Sea Knight. After all primary objectives are secure, you need to pop green flares on the capital building of that city to indicate the city is now under United States control.
+**Mission 7 : Sierra Sandstorm**
+With the aggression that the United States used, it left many U.S. bases vulnerable to attack. The Russians took advantage of this vulnerability and decided to launch assaults on all the United States bases throughout the Middle East. In this mission you play as a Ranger assisting in evacuation efforts. You have to hold your ground until the embassy staff are evacuated. If you fail (which you will) then Operation Sierra Sandstorm will go into effect.
+**Mission 8 : Aftermath**
+This is a cutscene of A-10 Warthogs and other heavy aircraft leveling cities and bases all across the Middle East. This is the suicidal victory by the United States. They won, but lost a lot of lives.
+## United States Campaign Act 2:
+**Mission 1 : Homeland Security**
+Russia, now gaining control over the Middle East, has now decided to launch an all out attack on the continental United States. In this mission, you assist in the evacuation efforts on the East Coast. You have to hold the evac site until all the civilians are evacuated. Once all the civilians are evacuated, you launch a small counter assault on a Russian strategic position.
