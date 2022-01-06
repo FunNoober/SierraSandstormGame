@@ -38,7 +38,7 @@ func _ready():
 	gui = get_parent().get_parent().get_parent().get_parent().get_node("Graphical_User_Interface")
 	ammo_text = gui.get_node("AmmoCounter")
 	prime_cam = get_parent().get_parent().get_parent()
-	current_ammo = reserve_ammo
+	current_ammo = mag_size
 	
 	shoot_cast.translation = prime_cam.translation
 	
@@ -69,7 +69,7 @@ func shoot():
 	ready_to_shoot = false
 	current_ammo -= 1
 	if shoot_cast.is_colliding():
-		print(shoot_cast.get_collider())
+		pass
 
 func reset_shoot(delta):
 	shoot_timer_time -= delta
@@ -80,7 +80,7 @@ func reset_shoot(delta):
 func reset_reload(delta):
 	reload_timer_time -= delta
 	if reload_timer_time <= 0:
-		current_ammo = reserve_ammo
+		current_ammo = mag_size
 		reserve_ammo -= mag_size
 		is_reloading = false
 		reload_timer_time = reload_time

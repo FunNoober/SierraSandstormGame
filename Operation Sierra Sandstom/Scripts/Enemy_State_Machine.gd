@@ -21,7 +21,7 @@ export var max_pathfinding_reset_delay : float
 
 func _ready():
 	pathfinding_reset_delay = max_pathfinding_reset_delay
-	player = get_tree().get_root().get_node("Spatial").get_node("Navigation").get_node("FPSBody")
+	player = get_tree().get_root().get_node("Spatial").get_node("FPSBody")
 	nav = get_tree().get_root().get_node("Spatial").get_node("Navigation")
 	enemy_in_true_vision_raycast = $EnemyInTrueVision
 	health = start_health
@@ -36,12 +36,11 @@ func _physics_process(delta):
 			path_node += 1
 		else:
 			move_and_slide(dir.normalized() * speed, Vector3.UP)
-
-func _process(delta):	
+			
+func _process(delta):
 	pathfinding_reset_delay -= delta
 	if pathfinding_reset_delay <= 0:
 		reset_pathfinding()
-	
 	if enemy_in_true_vision == true:
 		look_at(player.global_transform.origin, Vector3.UP)
 	if enemy_in_attack == true:
@@ -74,23 +73,33 @@ func _on_Vision_body_entered(body):
 
 
 func _on_AttackRadius_body_exited(body):
-	enemy_in_attack = false
+	if body.is_in_group("Player"):
+		enemy_in_attack = false
 
 
 func _on_Vision_body_exited(body):
-	enemy_in_vision = false
+	if body.is_in_group("Player"):
+		enemy_in_vision = false
 
 
 func _on_Timer_timeout():
 	pass
 		
 func reset_pathfinding():
+	if path_node < path.size():
+		var dir = (path[path_node] - global_transform.origin)
+		if dir.length() < 1:
+			path_node += 1
+		else:
+			move_and_slide(dir.normalized() * speed, Vector3.UP)
+	
 	if enemy_in_vision == true:
 		enemy_in_true_vision_raycast.look_at(player.global_transform.origin, Vector3.UP)
 	if enemy_in_true_vision_raycast.get_collider() != null && enemy_in_true_vision_raycast.get_collider().is_in_group("Player"):
 		enemy_in_true_vision = true
 		if enemy_in_true_vision:
 			chase(player.global_transform.origin)
+		
 	if enemy_in_attack == true:
 		chase(self.global_transform.origin)
 		self.look_at(player.global_transform.origin, Vector3.UP)
