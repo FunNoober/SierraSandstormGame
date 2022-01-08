@@ -16,11 +16,13 @@ export var speed = 10.0
 export var health : float = 100
 export var start_health : float = 100
 
-var pathfinding_reset_delay : float
-export var max_pathfinding_reset_delay : float
+export var damage : float
+onready var shoot_cast = $ShootCast
+export var shoot_delay : float
+var shoot_timer_time : float
+var ready_to_shoot : bool = true
 
 func _ready():
-	pathfinding_reset_delay = max_pathfinding_reset_delay
 	player = get_tree().get_root().get_node("Spatial").get_node("FPSBody")
 	nav = get_tree().get_root().get_node("Spatial").get_node("Navigation")
 	enemy_in_true_vision_raycast = $EnemyInTrueVision
@@ -38,13 +40,17 @@ func _physics_process(delta):
 			move_and_slide(dir.normalized() * speed, Vector3.UP)
 			
 func _process(delta):
-	pathfinding_reset_delay -= delta
-	if pathfinding_reset_delay <= 0:
-		reset_pathfinding()
+	if ready_to_shoot == false:
+		reset_shoot(delta)
+	
+	#pathfinding_reset_delay -= delta
+	reset_pathfinding()
+	#if pathfinding_reset_delay <= 0:
+	#	reset_pathfinding()
 	if enemy_in_true_vision == true:
 		look_at(player.global_transform.origin, Vector3.UP)
-	if enemy_in_attack == true:
-		pass
+	if enemy_in_attack == true and ready_to_shoot == true:
+		attack()
 	if enemy_in_attack == false and enemy_in_vision == false:
 		pass
 		
@@ -60,7 +66,16 @@ func chase(target_pos):
 	
 	
 func attack():
-	pass
+	ready_to_shoot = false
+	if shoot_cast.is_colliding() == true:
+		if shoot_cast.get_collider().is_in_group("Player"):
+			shoot_cast.get_collider().take_damage(damage)
+			
+func reset_shoot(delta):
+	shoot_timer_time -= delta
+	if shoot_timer_time <= 0:
+		ready_to_shoot = true
+		shoot_timer_time = shoot_delay
 
 func _on_AttackRadius_body_entered(body):
 	if body.is_in_group("Player"):
@@ -80,10 +95,6 @@ func _on_AttackRadius_body_exited(body):
 func _on_Vision_body_exited(body):
 	if body.is_in_group("Player"):
 		enemy_in_vision = false
-
-
-func _on_Timer_timeout():
-	pass
 		
 func reset_pathfinding():
 	if path_node < path.size():
@@ -103,7 +114,6 @@ func reset_pathfinding():
 	if enemy_in_attack == true:
 		chase(self.global_transform.origin)
 		self.look_at(player.global_transform.origin, Vector3.UP)
-	pathfinding_reset_delay = max_pathfinding_reset_delay
 		
 func take_damage(amount):
 	health -= amount

@@ -44,7 +44,16 @@ sway_down = Vector3( -0.5, 0, 0 )
 transform = Transform( -1.66103e-08, 0, -0.38, 0, 0.38, 0, 0.38, 0, -1.66103e-08, 0.8, -0.8, -1.5 )
 reserve_ammo = 120
 shoot_delay = 0.1
+shake = Vector2( 0.1, 0.1 )
 
 [node name="NonUsableWeapons" type="Spatial" parent="Camera/Hand"]
 
 [node name="Graphical_User_Interface" parent="." instance=ExtResource( 3 )]
+
+[node name="DamageOverlayTimer" type="Timer" parent="."]
+
+[node name="ResetCamTime" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="DamageOverlayTimer" to="." method="_on_DamageOverlayTimer_timeout"]
+[connection signal="timeout" from="ResetCamTime" to="." method="_on_ResetCamTime_timeout"]

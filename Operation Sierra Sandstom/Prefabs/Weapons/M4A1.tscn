@@ -7,6 +7,9 @@
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 2 )
+damage = 25.0
+weapon_accuracy = Vector2( 0.1, 0.1 )
+weapon_name = "M4A1 Full Auto Assault Rifle"
 
 [node name="Weapon" type="MeshInstance" parent="."]
 transform = Transform( -2, -1.74846e-07, 7.64274e-15, 0, -8.74228e-08, -2, 1.74846e-07, -2, 8.74228e-08, 0, 0, 0 )
@@ -21,4 +24,3 @@ material/0 = ExtResource( 3 )
 enabled = true
 cast_to = Vector3( -100, 0, 0 )
 collision_mask = 5
-collide_with_areas = true

@@ -1,11 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Graphical_User_Interface.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Textures/damage-overlay.png" type="Texture" id=2]
 
 [node name="Graphical_User_Interface" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DamageOverlay" type="TextureRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -18,6 +29,9 @@ anchor_bottom = 1.0
 margin_left = -102.0
 margin_top = -40.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AmmoCounter" type="Label" parent="."]
 anchor_left = 1.0
@@ -29,6 +43,38 @@ margin_top = -90.0
 text = "5000/5000"
 align = 2
 valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WeaponText" type="Label" parent="HBoxContainer"]
+margin_right = 638.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Weapon:"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthText" type="Label" parent="HBoxContainer"]
+margin_left = 642.0
+margin_right = 1280.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Health: 100/100"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

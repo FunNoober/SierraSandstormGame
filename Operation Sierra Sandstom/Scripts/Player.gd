@@ -18,6 +18,8 @@ var MOUSE_SENSITIVITY = 0.09
 export var start_health : float = 100
 var current_health = 100.0
 
+var script_delta
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #Making the mouse no longer visible and making it not move out of the window
 	current_health = start_health
@@ -28,10 +30,12 @@ func _physics_process(delta):
 	handle_stances(delta)
 	
 func _process(delta):
+	$Graphical_User_Interface/HBoxContainer/HealthText.text = "Health: " + str(current_health) + "/" + str(start_health)
 	if current_health <= 0:
 		die()
 	
 func process_input(delta):
+	script_delta = delta
 	dir = Vector3() #We want to reset dir everytime so speed does not add up
 	var cam_xform = camera.get_global_transform() #Getting the global transform of the camera node and then assigning a variable to it
 	var input_movement_vector = Vector2() #Creating a new Vector 3 for handling movement
@@ -92,7 +96,7 @@ func handle_stances(delta):
 		MAX_SPEED = TRUE_MAX_SPEED
 		
 	if Input.is_action_pressed("move_prone"):
-		self.scale.y = lerp(self.scale.y, 0.2, delta*2) #Lerping to a smaller scale
+		self.scale.y = lerp(self.scale.y, 0.002, delta*2) #Lerping to a smaller scale
 		MAX_SPEED = 1
 	else:
 		self.scale.y = lerp(self.scale.y, 1, delta*2) #Lerping to a smaller scale
@@ -106,8 +110,25 @@ func _input(event):
 		
 func take_damage(amount):
 	current_health -= amount
+	$Graphical_User_Interface/DamageOverlay.show()
+	$DamageOverlayTimer.start()
 	if current_health <= 0:
 		die()
 	
 func die():
 	get_tree().reload_current_scene()
+
+
+func _on_DamageOverlayTimer_timeout():
+	$Graphical_User_Interface/DamageOverlay.hide()
+
+func shake(x, y):
+	$Camera.translation.x += rand_range(-x, x)
+	$Camera.translation.y += rand_range(-y, y)
+	$ResetCamTime.start()
+	
+func reset_shake():
+	$Camera.translation = Vector3(0,2.9,0)
+
+func _on_ResetCamTime_timeout():
+	reset_shake()

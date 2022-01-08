@@ -6,6 +6,9 @@ export var mag_size : int = 30
 
 export var shoot_delay : float = 1.0
 export var reload_time : float = 2.0
+export var damage : float
+export var weapon_accuracy = Vector2(0.0, 0.0)
+export var shake = Vector2(0,0)
 var shoot_timer_time : float
 var reload_timer_time : float
 
@@ -14,9 +17,14 @@ var ready_to_shoot : bool = true
 
 var gui
 var ammo_text
+var weapon_text
 var prime_cam
 
+onready var bullet_hole = load("res://Prefabs/Bullet_Hole.tscn")
+
 onready var shoot_cast : RayCast = $ShootCast
+
+export var weapon_name : String
 
 func can_reload():
 	return reserve_ammo > 0
@@ -37,6 +45,7 @@ func no_more_ammo():
 func _ready():
 	gui = get_parent().get_parent().get_parent().get_parent().get_node("Graphical_User_Interface")
 	ammo_text = gui.get_node("AmmoCounter")
+	weapon_text = gui.get_node("HBoxContainer/WeaponText")
 	prime_cam = get_parent().get_parent().get_parent()
 	current_ammo = mag_size
 	
@@ -47,6 +56,7 @@ func _ready():
 	print(can_reload())
 	
 func _process(delta):
+	weapon_text.text = "Weapon: " + weapon_name
 	shoot_cast.translation = prime_cam.translation
 	
 	if is_reloading == false:
@@ -67,9 +77,14 @@ func _process(delta):
 		
 func shoot():
 	ready_to_shoot = false
+	get_parent().get_parent().get_parent().get_parent().shake(shake.x, shake.y)
 	current_ammo -= 1
+	shoot_cast.rotation.z = rand_range(-weapon_accuracy.x, weapon_accuracy.x)
+	shoot_cast.rotation.y = rand_range(-weapon_accuracy.y, weapon_accuracy.y)
 	if shoot_cast.is_colliding():
-		pass
+		spawn_bullet_hole()
+		if shoot_cast.get_collider().is_in_group("Enemy"):
+			shoot_cast.get_collider().take_damage(damage)
 
 func reset_shoot(delta):
 	shoot_timer_time -= delta
@@ -88,3 +103,17 @@ func reset_reload(delta):
 func reload_weapon():
 	is_reloading = true
 	
+func spawn_bullet_hole():
+	var new_bullet_hole = bullet_hole.instance()
+	shoot_cast.get_collider().add_child(new_bullet_hole)
+	new_bullet_hole.translation = shoot_cast.get_collision_point()
+	
+	var surface_dir_up = Vector3(0,1,0)
+	var surface_dir_down = Vector3(0,-1,0)
+	
+	if shoot_cast.get_collision_normal() == surface_dir_up:
+		new_bullet_hole.look_at(shoot_cast.get_collision_point() + shoot_cast.get_collision_normal(), Vector3.RIGHT)
+	elif shoot_cast.get_collision_normal() == surface_dir_down:
+		new_bullet_hole.look_at(shoot_cast.get_collision_point() + shoot_cast.get_collision_normal(), Vector3.RIGHT)
+	else:
+		new_bullet_hole.look_at(shoot_cast.get_collision_point() + shoot_cast.get_collision_normal(), Vector3.DOWN)
