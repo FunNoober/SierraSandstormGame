@@ -20,6 +20,8 @@ var current_health = 100.0
 
 var script_delta
 
+var is_paused = false
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #Making the mouse no longer visible and making it not move out of the window
 	current_health = start_health
@@ -31,6 +33,8 @@ func _physics_process(delta):
 	
 func _process(delta):
 	$Graphical_User_Interface/HBoxContainer/HealthText.text = "Health: " + str(current_health) + "/" + str(start_health)
+	if current_health <= 25:
+		$Graphical_User_Interface/HBoxContainer/HealthText.modulate = Color(255, 0, 0)
 	if current_health <= 0:
 		die()
 	
@@ -59,10 +63,7 @@ func process_input(delta):
 			velocity.y = JUMP_FORCE #Adding the jump force to the velocity y
 	
 	if Input.is_action_just_released("ui_cancel"): #Checking for the Escape key
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE: #Checking the mouse mode if it is visible and not captured
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) #Setting it to captured if visible
-		else: #If the if statement condition is not met then do this
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) #Setting the mouse mode to visible
+		pause_behaviour()
 			
 func process_movement(delta):
 	dir.y = 0 #Resseting the direction on the y
@@ -132,3 +133,17 @@ func reset_shake():
 
 func _on_ResetCamTime_timeout():
 	reset_shake()
+
+func pause_behaviour():
+	if is_paused == true:
+		Engine.time_scale = 1
+		is_paused = false
+		$Graphical_User_Interface/PauseMenu.hide()
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		return
+	else:
+		Engine.time_scale = 0
+		is_paused = true
+		$Graphical_User_Interface/PauseMenu.show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		return

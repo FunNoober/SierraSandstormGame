@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Operation Sierra Sandstom"
-run/main_scene="res://Maps/Test Map.tscn"
+run/main_scene="res://Maps/Main Menu.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -19,7 +19,7 @@ config/icon="res://icon.png"
 window/size/width=1280
 window/size/height=720
 window/stretch/mode="viewport"
-window/stretch/aspect="keep_width"
+window/stretch/aspect="expand"
 
 [input]
 

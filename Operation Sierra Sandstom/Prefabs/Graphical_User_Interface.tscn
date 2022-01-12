@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Graphical_User_Interface.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Textures/damage-overlay.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Themes/oss_primary.tres" type="Theme" id=3]
 
 [node name="Graphical_User_Interface" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = ExtResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -21,32 +23,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -102.0
-margin_top = -40.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AmmoCounter" type="Label" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -256.0
-margin_top = -90.0
-text = "5000/5000"
-align = 2
-valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 margin_bottom = 50.0
@@ -55,7 +31,7 @@ __meta__ = {
 }
 
 [node name="WeaponText" type="Label" parent="HBoxContainer"]
-margin_right = 638.0
+margin_right = 424.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -66,8 +42,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="AmmoCounter" type="Label" parent="HBoxContainer"]
+margin_left = 428.0
+margin_right = 852.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 7
+text = "5000/5000"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HealthText" type="Label" parent="HBoxContainer"]
-margin_left = 642.0
+margin_left = 856.0
 margin_right = 1280.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
@@ -75,6 +64,53 @@ size_flags_vertical = 3
 text = "Health: 100/100"
 align = 1
 valign = 1
+
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Background" type="ColorRect" parent="PauseMenu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.498039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="PauseMenu"]
+anchor_bottom = 1.0
+margin_right = 198.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Resume" type="Button" parent="PauseMenu/Buttons"]
+margin_right = 198.0
+margin_bottom = 237.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Resume"
+
+[node name="MainMenu" type="Button" parent="PauseMenu/Buttons"]
+margin_top = 241.0
+margin_right = 198.0
+margin_bottom = 478.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Main Menu"
+
+[node name="SaveandQuit" type="Button" parent="PauseMenu/Buttons"]
+margin_top = 482.0
+margin_right = 198.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Save + Quit"
+
+[connection signal="button_down" from="PauseMenu/Buttons/Resume" to="." method="_on_Resume_button_down"]
+[connection signal="button_down" from="PauseMenu/Buttons/MainMenu" to="." method="_on_MainMenu_button_down"]
+[connection signal="button_down" from="PauseMenu/Buttons/SaveandQuit" to="." method="_on_SaveandQuit_button_down"]

@@ -44,7 +44,7 @@ func no_more_ammo():
 		
 func _ready():
 	gui = get_parent().get_parent().get_parent().get_parent().get_node("Graphical_User_Interface")
-	ammo_text = gui.get_node("AmmoCounter")
+	ammo_text = gui.get_node("HBoxContainer/AmmoCounter")
 	weapon_text = gui.get_node("HBoxContainer/WeaponText")
 	prime_cam = get_parent().get_parent().get_parent()
 	current_ammo = mag_size
@@ -60,7 +60,7 @@ func _process(delta):
 	shoot_cast.translation = prime_cam.translation
 	
 	if is_reloading == false:
-		ammo_text.text = str(str(current_ammo) + "/" + str(reserve_ammo))
+		ammo_text.text = "Ammo: " + str(str(current_ammo) + "/" + str(reserve_ammo))
 	elif is_reloading == true:
 		ammo_text.text = str("RELOADING...")
 		reset_reload(delta)
@@ -77,6 +77,8 @@ func _process(delta):
 		
 func shoot():
 	ready_to_shoot = false
+	$MuzzleFlash.show()
+	$MuzzleTimer.start(0.1)
 	get_parent().get_parent().get_parent().get_parent().shake(shake.x, shake.y)
 	current_ammo -= 1
 	shoot_cast.rotation.z = rand_range(-weapon_accuracy.x, weapon_accuracy.x)
@@ -117,3 +119,7 @@ func spawn_bullet_hole():
 		new_bullet_hole.look_at(shoot_cast.get_collision_point() + shoot_cast.get_collision_normal(), Vector3.RIGHT)
 	else:
 		new_bullet_hole.look_at(shoot_cast.get_collision_point() + shoot_cast.get_collision_normal(), Vector3.DOWN)
+
+
+func _on_MuzzleTimer_timeout():
+	$MuzzleFlash.hide()

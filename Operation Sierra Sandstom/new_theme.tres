@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=2]
+
+[sub_resource type="BitmapFont" id=1]
+
+[resource]
+/fonts/text_color = SubResource( 1 )

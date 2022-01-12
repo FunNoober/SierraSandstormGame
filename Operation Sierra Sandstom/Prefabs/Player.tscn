@@ -42,9 +42,6 @@ sway_down = Vector3( -0.5, 0, 0 )
 
 [node name="M4A1" parent="Camera/Hand/UsableWeapons" instance=ExtResource( 2 )]
 transform = Transform( -1.66103e-08, 0, -0.38, 0, 0.38, 0, 0.38, 0, -1.66103e-08, 0.8, -0.8, -1.5 )
-reserve_ammo = 120
-shoot_delay = 0.1
-shake = Vector2( 0.1, 0.1 )
 
 [node name="NonUsableWeapons" type="Spatial" parent="Camera/Hand"]
 

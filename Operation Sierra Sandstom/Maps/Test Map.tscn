@@ -16,10 +16,17 @@ background_sky = SubResource( 2 )
 background_color = Color( 0.411765, 0.172549, 0.172549, 1 )
 background_energy = 0.0
 ambient_light_color = Color( 0.431373, 0.560784, 0.631373, 1 )
+ambient_light_energy = 0.1
 fog_depth_begin = 1.0
 fog_depth_end = 15.0
 fog_depth_curve = 0.707107
 fog_transmit_enabled = true
+tonemap_mode = 3
+glow_intensity = 0.1
+glow_strength = 0.74
+glow_bloom = 1.0
+glow_high_quality = true
+adjustment_brightness = 1.07
 
 [node name="Spatial" type="Spatial"]
 
