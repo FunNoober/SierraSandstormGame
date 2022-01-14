@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/M4A1 Remastered.obj-4ffb498b6aba496ea8069e2842de859a.mesh"
+
+[deps]
+
+files=[ "res://.import/M4A1 Remastered.obj-4ffb498b6aba496ea8069e2842de859a.mesh" ]
+
+source_file="res://Resources/3d Models/M4A1 Assault Rifle/M4A1 Remastered.obj"
+dest_files=[ "res://.import/M4A1 Remastered.obj-4ffb498b6aba496ea8069e2842de859a.mesh", "res://.import/M4A1 Remastered.obj-4ffb498b6aba496ea8069e2842de859a.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

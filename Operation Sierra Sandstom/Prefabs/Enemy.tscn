@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Enemy_State_Machine.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Materials/Color Palette.tres" type="Material" id=2]
-[ext_resource path="res://Resources/3d Models/AK47/AK47 Assault Rifle.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Resources/3d Models/AK47 Assault Rifle/AK47 Assault Rifle.obj" type="ArrayMesh" id=3]
 
 [sub_resource type="CapsuleMesh" id=1]
 mid_height = 2.0

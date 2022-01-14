@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/MP5 SMG.obj-9a20d94c6c6f8551b7235c5c4403a5bf.mesh"
+
+[deps]
+
+files=[ "res://.import/MP5 SMG.obj-9a20d94c6c6f8551b7235c5c4403a5bf.mesh" ]
+
+source_file="res://Resources/3d Models/MP5 SMG/MP5 SMG.obj"
+dest_files=[ "res://.import/MP5 SMG.obj-9a20d94c6c6f8551b7235c5c4403a5bf.mesh", "res://.import/MP5 SMG.obj-9a20d94c6c6f8551b7235c5c4403a5bf.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

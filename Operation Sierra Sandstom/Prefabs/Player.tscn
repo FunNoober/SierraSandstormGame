@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Prefabs/Weapons/M4A1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Prefabs/Graphical_User_Interface.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scripts/Hands.gd" type="Script" id=4]
+[ext_resource path="res://Prefabs/Weapons/MP5 SMG.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scripts/WeaponSwitch.gd" type="Script" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 2.0
@@ -39,9 +41,13 @@ sway_up = Vector3( 0.5, 0, 0 )
 sway_down = Vector3( -0.5, 0, 0 )
 
 [node name="UsableWeapons" type="Spatial" parent="Camera/Hand"]
+script = ExtResource( 6 )
 
 [node name="M4A1" parent="Camera/Hand/UsableWeapons" instance=ExtResource( 2 )]
 transform = Transform( -1.66103e-08, 0, -0.38, 0, 0.38, 0, 0.38, 0, -1.66103e-08, 0.8, -0.8, -1.5 )
+
+[node name="MP5SMG" parent="Camera/Hand/UsableWeapons" instance=ExtResource( 5 )]
+transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 0.784188, -0.824384, -1 )
 
 [node name="NonUsableWeapons" type="Spatial" parent="Camera/Hand"]
 
