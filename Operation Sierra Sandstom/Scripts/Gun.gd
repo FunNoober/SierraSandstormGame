@@ -7,8 +7,14 @@ export var mag_size : int = 30
 export var shoot_delay : float = 1.0
 export var reload_time : float = 2.0
 export var damage : float
+
+var currect_accuracy = Vector2()
 export var weapon_accuracy = Vector2(0.0, 0.0)
+export var ads_weapon_accuracy = Vector2(0.0, 0.0)
+
+var current_shake = Vector2()
 export var shake = Vector2(0,0)
+export var ads_shake = Vector2(0,0)
 var shoot_timer_time : float
 var reload_timer_time : float
 
@@ -59,6 +65,15 @@ func _process(delta):
 	weapon_text.text = "Weapon: " + weapon_name
 	shoot_cast.translation = prime_cam.translation
 	
+	if Input.is_action_pressed("action_ads"):
+		prime_cam.fov = lerp(prime_cam.fov, 45, delta * 10)
+		currect_accuracy = ads_weapon_accuracy
+		current_shake = ads_shake
+	else:
+		currect_accuracy = weapon_accuracy
+		current_shake = ads_shake
+		prime_cam.fov = lerp(prime_cam.fov, 90, delta * 10)
+	
 	if is_reloading == false:
 		ammo_text.text = "Ammo: " + str(str(current_ammo) + "/" + str(reserve_ammo))
 	elif is_reloading == true:
@@ -75,14 +90,15 @@ func _process(delta):
 	if ready_to_shoot == false:
 		reset_shoot(delta)
 		
+		
 func shoot():
 	ready_to_shoot = false
 	$MuzzleFlash.show()
 	$MuzzleTimer.start(0.1)
-	get_parent().get_parent().get_parent().get_parent().shake(shake.x, shake.y)
+	get_parent().get_parent().get_parent().get_parent().shake(current_shake.x, current_shake.y)
 	current_ammo -= 1
-	shoot_cast.rotation.z = rand_range(-weapon_accuracy.x, weapon_accuracy.x)
-	shoot_cast.rotation.y = rand_range(-weapon_accuracy.y, weapon_accuracy.y)
+	shoot_cast.rotation.z = rand_range(-currect_accuracy.x, currect_accuracy.x)
+	shoot_cast.rotation.y = rand_range(-currect_accuracy.y, currect_accuracy.y)
 	if shoot_cast.is_colliding():
 		spawn_bullet_hole()
 		if shoot_cast.get_collider().is_in_group("Enemy"):

@@ -1,8 +1,8 @@
-# Blender MTL File: 'M4A1 Remastered.blend'
+# Blender MTL File: 'BTR82A Vehicle.blend'
 # Material Count: 1
 
-newmtl M4A1
-Ns 225.000000
+newmtl BTR
+Ns 323.999994
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000

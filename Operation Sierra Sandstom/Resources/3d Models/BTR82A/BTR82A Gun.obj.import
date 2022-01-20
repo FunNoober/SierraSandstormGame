@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/BTR82A Gun.obj-186407a950f2a08cc5aaec59012c0a3d.mesh"
+
+[deps]
+
+files=[ "res://.import/BTR82A Gun.obj-186407a950f2a08cc5aaec59012c0a3d.mesh" ]
+
+source_file="res://Resources/3d Models/BTR82A/BTR82A Gun.obj"
+dest_files=[ "res://.import/BTR82A Gun.obj-186407a950f2a08cc5aaec59012c0a3d.mesh", "res://.import/BTR82A Gun.obj-186407a950f2a08cc5aaec59012c0a3d.mesh" ]
+
+[params]
+
+generate_tangents=false
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=false
+optimize_mesh_flags=0

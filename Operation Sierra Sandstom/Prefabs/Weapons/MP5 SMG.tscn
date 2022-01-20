@@ -18,11 +18,14 @@ emission_on_uv2 = false
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 2 )
-reserve_ammo = 120
-shoot_delay = 0.01
+reserve_ammo = 60
+current_ammo = 20
+mag_size = 20
+shoot_delay = 0.07
 reload_time = 4.0
-damage = 10.0
-weapon_accuracy = Vector2( 0.3, 0.3 )
+damage = 5.0
+weapon_accuracy = Vector2( 0.8, 0.8 )
+ads_weapon_accuracy = Vector2( 0.1, 0.1 )
 shake = Vector2( 0.01, 0.01 )
 weapon_name = "MP5 Full Auto Submachine Gun"
 

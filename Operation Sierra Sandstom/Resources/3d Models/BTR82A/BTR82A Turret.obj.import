@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/BTR82A Turret.obj-6ea2c7d5f6bfac0c40948ea743159405.mesh"
+
+[deps]
+
+files=[ "res://.import/BTR82A Turret.obj-6ea2c7d5f6bfac0c40948ea743159405.mesh" ]
+
+source_file="res://Resources/3d Models/BTR82A/BTR82A Turret.obj"
+dest_files=[ "res://.import/BTR82A Turret.obj-6ea2c7d5f6bfac0c40948ea743159405.mesh", "res://.import/BTR82A Turret.obj-6ea2c7d5f6bfac0c40948ea743159405.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

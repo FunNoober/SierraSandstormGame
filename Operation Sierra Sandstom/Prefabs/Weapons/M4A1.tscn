@@ -22,7 +22,9 @@ reserve_ammo = 120
 shoot_delay = 0.1
 damage = 25.0
 weapon_accuracy = Vector2( 0.1, 0.1 )
+ads_weapon_accuracy = Vector2( 0.05, 0.05 )
 shake = Vector2( 0.1, 0.1 )
+ads_shake = Vector2( 0.05, 0.05 )
 weapon_name = "M4A1 Full Auto Assault Rifle"
 
 [node name="Weapon" type="MeshInstance" parent="."]

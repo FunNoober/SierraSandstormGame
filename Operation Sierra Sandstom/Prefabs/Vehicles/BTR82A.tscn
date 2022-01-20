@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Resources/3d Models/BTR82A/BTR82A Vehicle.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://Resources/Materials/Color Palette.tres" type="Material" id=2]
+[ext_resource path="res://Resources/3d Models/BTR82A/BTR82A Gun.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://Resources/3d Models/BTR82A/BTR82A Turret.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://Scripts/Vehicle_State_Machine.gd" type="Script" id=5]
+
+[sub_resource type="BoxShape" id=4]
+extents = Vector3( 4.4, 1.8, 1.7 )
+
+[sub_resource type="SphereShape" id=5]
+radius = 12.0
+
+[node name="BTR82A" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4, 0, -34.7 )
+script = ExtResource( 5 )
+
+[node name="Vehicle" type="MeshInstance" parent="."]
+transform = Transform( 1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 0, 0 )
+mesh = ExtResource( 1 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+
+[node name="TurretHolder" type="Spatial" parent="Vehicle"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 2.3, 0 )
+
+[node name="Turret" type="MeshInstance" parent="Vehicle/TurretHolder"]
+mesh = ExtResource( 4 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+
+[node name="GunHolder" type="Spatial" parent="Vehicle/TurretHolder/Turret"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0 )
+
+[node name="Gun" type="MeshInstance" parent="Vehicle/TurretHolder/Turret/GunHolder"]
+mesh = ExtResource( 3 )
+skeleton = NodePath("../../../../../..")
+material/0 = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 0, 0 )
+shape = SubResource( 4 )
+
+[node name="VisionArea" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="VisionArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0 )
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="VisionArea" to="." method="_on_VisionArea_body_entered"]
