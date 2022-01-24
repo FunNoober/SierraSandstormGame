@@ -11,9 +11,9 @@
 height = 2.0
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 1, 0.1, 1 )
+extents = Vector3( 0.5, 0.1, 0.5 )
 
-[node name="FPSBody" type="KinematicBody" groups=["Player"]]
+[node name="FPSBody" type="KinematicBody" groups=["Friendly", "Player"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource( 1 )
@@ -28,6 +28,8 @@ shape = SubResource( 2 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 0 )
+cull_mask = 1
+current = true
 fov = 90.0
 near = 0.01
 far = 250.0
@@ -50,6 +52,25 @@ transform = Transform( -1.66103e-08, 0, -0.38, 0, 0.38, 0, 0.38, 0, -1.66103e-08
 transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 0.784188, -0.824384, -1 )
 
 [node name="NonUsableWeapons" type="Spatial" parent="Camera/Hand"]
+
+[node name="ViewportContainer" type="ViewportContainer" parent="Camera"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="Camera/ViewportContainer"]
+size = Vector2( 1280, 720 )
+transparent_bg = true
+handle_input_locally = false
+msaa = 4
+render_target_update_mode = 3
+
+[node name="GunCam" type="Camera" parent="Camera/ViewportContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 0 )
+cull_mask = 2
+fov = 90.0
 
 [node name="Graphical_User_Interface" parent="." instance=ExtResource( 3 )]
 

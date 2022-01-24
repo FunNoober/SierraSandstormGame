@@ -59,7 +59,6 @@ func _ready():
 	
 	shoot_timer_time = shoot_delay
 	reload_timer_time = reload_time
-	print(can_reload())
 	
 func _process(delta):
 	weapon_text.text = "Weapon: " + weapon_name
@@ -71,7 +70,7 @@ func _process(delta):
 		current_shake = ads_shake
 	else:
 		currect_accuracy = weapon_accuracy
-		current_shake = ads_shake
+		current_shake = shake
 		prime_cam.fov = lerp(prime_cam.fov, 90, delta * 10)
 	
 	if is_reloading == false:

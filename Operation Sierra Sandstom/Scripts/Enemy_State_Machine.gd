@@ -4,7 +4,7 @@ var enemy_in_vision : bool
 var enemy_in_attack : bool
 var enemy_in_true_vision
 
-var player : KinematicBody
+var first_sighted_enemy : KinematicBody
 var nav
 var enemy_in_true_vision_raycast
 
@@ -23,7 +23,6 @@ var shoot_timer_time : float
 var ready_to_shoot : bool = true
 
 func _ready():
-	player = get_tree().get_root().get_node("Spatial").get_node("FPSBody")
 	nav = get_tree().get_root().get_node("Spatial").get_node("Navigation")
 	enemy_in_true_vision_raycast = $EnemyInTrueVision
 	health = start_health
@@ -48,7 +47,7 @@ func _process(delta):
 	#if pathfinding_reset_delay <= 0:
 	#	reset_pathfinding()
 	if enemy_in_true_vision == true:
-		look_at(player.global_transform.origin, Vector3.UP)
+		look_at(first_sighted_enemy.global_transform.origin, Vector3.UP)
 	if enemy_in_attack == true and ready_to_shoot == true:
 		attack()
 	if enemy_in_attack == false and enemy_in_vision == false:
@@ -68,7 +67,7 @@ func chase(target_pos):
 func attack():
 	ready_to_shoot = false
 	if shoot_cast.is_colliding() == true:
-		if shoot_cast.get_collider().is_in_group("Player"):
+		if shoot_cast.get_collider().is_in_group("Friendly"):
 			shoot_cast.get_collider().take_damage(damage)
 			
 func reset_shoot(delta):
@@ -78,22 +77,23 @@ func reset_shoot(delta):
 		shoot_timer_time = shoot_delay
 
 func _on_AttackRadius_body_entered(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Friendly"):
 		enemy_in_attack = true
 
 
 func _on_Vision_body_entered(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Friendly"):
 		enemy_in_vision = true
+		first_sighted_enemy = body
 
 
 func _on_AttackRadius_body_exited(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Friendly"):
 		enemy_in_attack = false
 
 
 func _on_Vision_body_exited(body):
-	if body.is_in_group("Player"):
+	if body.is_in_group("Friendly"):
 		enemy_in_vision = false
 		
 func reset_pathfinding():
@@ -105,15 +105,15 @@ func reset_pathfinding():
 			move_and_slide(dir.normalized() * speed, Vector3.UP)
 	
 	if enemy_in_vision == true:
-		enemy_in_true_vision_raycast.look_at(player.global_transform.origin, Vector3.UP)
+		enemy_in_true_vision_raycast.look_at(first_sighted_enemy.global_transform.origin, Vector3.UP)
 	if enemy_in_true_vision_raycast.get_collider() != null && enemy_in_true_vision_raycast.get_collider().is_in_group("Player"):
 		enemy_in_true_vision = true
 		if enemy_in_true_vision:
-			chase(player.global_transform.origin)
+			chase(first_sighted_enemy.global_transform.origin)
 		
 	if enemy_in_attack == true:
 		chase(self.global_transform.origin)
-		self.look_at(player.global_transform.origin, Vector3.UP)
+		self.look_at(first_sighted_enemy.global_transform.origin, Vector3.UP)
 		
 func take_damage(amount):
 	health -= amount

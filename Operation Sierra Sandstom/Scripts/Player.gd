@@ -66,6 +66,10 @@ func process_input(delta):
 		pause_behaviour()
 			
 func process_movement(delta):
+	$Camera/ViewportContainer/Viewport/GunCam.global_transform = camera.global_transform
+	$Camera/ViewportContainer/Viewport/GunCam.fov = camera.fov
+	
+	
 	dir.y = 0 #Resseting the direction on the y
 	dir = dir.normalized() #Normalzing the dir
 	

@@ -1,16 +1,21 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Resources/3d Models/BTR82A/BTR82A Vehicle.obj" type="ArrayMesh" id=1]
 [ext_resource path="res://Resources/Materials/Color Palette.tres" type="Material" id=2]
 [ext_resource path="res://Resources/3d Models/BTR82A/BTR82A Gun.obj" type="ArrayMesh" id=3]
 [ext_resource path="res://Resources/3d Models/BTR82A/BTR82A Turret.obj" type="ArrayMesh" id=4]
 [ext_resource path="res://Scripts/Vehicle_State_Machine.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Enemy_Turret_Shoot_Handler.gd" type="Script" id=6]
+
+[sub_resource type="PlaneMesh" id=5]
+size = Vector2( 1, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_unshaded = true
+albedo_color = Color( 1, 0.729412, 0, 1 )
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 4.4, 1.8, 1.7 )
-
-[sub_resource type="SphereShape" id=5]
-radius = 12.0
 
 [node name="BTR82A" type="KinematicBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -13.4, 0, -34.7 )
@@ -23,9 +28,10 @@ skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 
 [node name="TurretHolder" type="Spatial" parent="Vehicle"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 2.3, 0 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.2, 2.3, 0 )
 
 [node name="Turret" type="MeshInstance" parent="Vehicle/TurretHolder"]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0 )
 mesh = ExtResource( 4 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
@@ -38,14 +44,49 @@ mesh = ExtResource( 3 )
 skeleton = NodePath("../../../../../..")
 material/0 = ExtResource( 2 )
 
+[node name="ShootHandler" type="Spatial" parent="Vehicle/TurretHolder/Turret/GunHolder/Gun"]
+script = ExtResource( 6 )
+damage = 25.0
+
+[node name="ShootTimer" type="Timer" parent="Vehicle/TurretHolder/Turret/GunHolder/Gun/ShootHandler"]
+
+[node name="ShootCast" type="RayCast" parent="Vehicle/TurretHolder/Turret/GunHolder/Gun/ShootHandler"]
+transform = Transform( 1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, -3.37143, 0, 0 )
+enabled = true
+cast_to = Vector3( -1000, 0, 0 )
+collision_mask = 3
+
+[node name="MuzzleFlash" type="Spatial" parent="Vehicle/TurretHolder/Turret/GunHolder/Gun/ShootHandler"]
+visible = false
+
+[node name="Effect" type="MeshInstance" parent="Vehicle/TurretHolder/Turret/GunHolder/Gun/ShootHandler/MuzzleFlash"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -3.2, 0, 0 )
+cast_shadow = 0
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
+
+[node name="OmniLight" type="OmniLight" parent="Vehicle/TurretHolder/Turret/GunHolder/Gun/ShootHandler/MuzzleFlash"]
+transform = Transform( 0.571429, 0, 0, 0, 0.571429, 0, 0, 0, 0.571429, -3.77143, 0, 0 )
+light_color = Color( 1, 0.72549, 0, 1 )
+light_energy = 15.0
+light_indirect_energy = 0.005
+shadow_enabled = true
+omni_range = 15.0
+
+[node name="MuzzleTimer" type="Timer" parent="Vehicle/TurretHolder/Turret/GunHolder/Gun/ShootHandler/MuzzleFlash"]
+wait_time = 0.1
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1.75, 0, 0, 0, 1.75, 0, 0, 0, 1.75, 0, 0, 0 )
 shape = SubResource( 4 )
 
 [node name="VisionArea" type="Area" parent="."]
 
-[node name="CollisionShape" type="CollisionShape" parent="VisionArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0 )
-shape = SubResource( 5 )
+[node name="CollisionPolygon" type="CollisionPolygon" parent="VisionArea"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -59, 2.57897e-06, 3.8147e-06 )
+depth = 10.0
+polygon = PoolVector2Array( 25, 0, -25, 0, 0, 50 )
 
+[connection signal="timeout" from="Vehicle/TurretHolder/Turret/GunHolder/Gun/ShootHandler/ShootTimer" to="Vehicle/TurretHolder/Turret/GunHolder/Gun/ShootHandler" method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="Vehicle/TurretHolder/Turret/GunHolder/Gun/ShootHandler/MuzzleFlash/MuzzleTimer" to="Vehicle/TurretHolder/Turret/GunHolder/Gun/ShootHandler" method="_on_MuzzleTimer_timeout"]
 [connection signal="body_entered" from="VisionArea" to="." method="_on_VisionArea_body_entered"]

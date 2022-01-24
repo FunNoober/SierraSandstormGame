@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/JTV Utility Car Front Door.obj-79edffe94c050df7a3f6d0c28049ae9b.mesh"
+
+[deps]
+
+files=[ "res://.import/JTV Utility Car Front Door.obj-79edffe94c050df7a3f6d0c28049ae9b.mesh" ]
+
+source_file="res://Resources/3d Models/JTV Utility Car/JTV Utility Car Front Door.obj"
+dest_files=[ "res://.import/JTV Utility Car Front Door.obj-79edffe94c050df7a3f6d0c28049ae9b.mesh", "res://.import/JTV Utility Car Front Door.obj-79edffe94c050df7a3f6d0c28049ae9b.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
