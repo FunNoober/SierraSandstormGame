@@ -1,17 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Graphical_User_Interface.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Textures/damage-overlay.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Themes/oss_primary.tres" type="Theme" id=3]
+[ext_resource path="res://Resources/Textures/crosshair.png" type="Texture" id=4]
 
 [node name="Graphical_User_Interface" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 3 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DamageOverlay" type="TextureRect" parent="."]
 visible = false
@@ -31,7 +29,7 @@ __meta__ = {
 }
 
 [node name="WeaponText" type="Label" parent="HBoxContainer"]
-margin_right = 424.0
+margin_right = 425.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -43,7 +41,7 @@ __meta__ = {
 }
 
 [node name="AmmoCounter" type="Label" parent="HBoxContainer"]
-margin_left = 428.0
+margin_left = 427.0
 margin_right = 852.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
@@ -56,7 +54,7 @@ __meta__ = {
 }
 
 [node name="HealthText" type="Label" parent="HBoxContainer"]
-margin_left = 856.0
+margin_left = 854.0
 margin_right = 1280.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
@@ -110,6 +108,18 @@ margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Save + Quit"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -18.0
+margin_top = -18.0
+margin_right = 18.0
+margin_bottom = 18.0
+texture = ExtResource( 4 )
+expand = true
 
 [connection signal="button_down" from="PauseMenu/Buttons/Resume" to="." method="_on_Resume_button_down"]
 [connection signal="button_down" from="PauseMenu/Buttons/MainMenu" to="." method="_on_MainMenu_button_down"]

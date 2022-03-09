@@ -14,6 +14,10 @@ config/name="Operation Sierra Sandstom"
 run/main_scene="res://Maps/Main Menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+MissionSelectionHandler="*res://Scripts/MissionSelectionHandler.gd"
+
 [display]
 
 window/size/width=1280

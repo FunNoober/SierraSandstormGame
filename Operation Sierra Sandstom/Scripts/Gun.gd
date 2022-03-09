@@ -102,6 +102,8 @@ func shoot():
 		spawn_bullet_hole()
 		if shoot_cast.get_collider().is_in_group("Enemy"):
 			shoot_cast.get_collider().take_damage(damage)
+		if shoot_cast.get_collider().is_in_group("PopUpTarget"):
+			shoot_cast.get_collider().get_parent().get_parent().get_parent().get_parent().get_parent().get_parent().pop_down()
 
 func reset_shoot(delta):
 	shoot_timer_time -= delta

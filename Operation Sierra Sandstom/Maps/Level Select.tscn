@@ -1,0 +1,77 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/LevelSelectButton.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Themes/oss_primary.tres" type="Theme" id=2]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.0784314, 0.0745098, 0.0745098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="Rows" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Row1" type="HBoxContainer" parent="ScrollContainer/Rows"]
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Column" type="VBoxContainer" parent="ScrollContainer/Rows/Row1"]
+margin_right = 639.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="ScrollContainer/Rows/Row1/Column"]
+margin_right = 639.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Play Proto Level"
+script = ExtResource( 1 )
+mission_path = "res://Maps/Test Map.tscn"
+mission_name = "Test Map"
+
+[node name="Column2" type="VBoxContainer" parent="ScrollContainer/Rows/Row1"]
+margin_left = 641.0
+margin_right = 1280.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="ScrollContainer/Rows/Row1/Column2"]
+margin_right = 639.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Play Training Level"
+script = ExtResource( 1 )
+mission_path = "res://Maps/TrainingMap.tscn"
+mission_name = "Training Map"
+
+[connection signal="pressed" from="ScrollContainer/Rows/Row1/Column/Button" to="ScrollContainer/Rows/Row1/Column/Button" method="_on_Button_pressed"]
+[connection signal="pressed" from="ScrollContainer/Rows/Row1/Column2/Button" to="ScrollContainer/Rows/Row1/Column2/Button" method="_on_Button_pressed"]
