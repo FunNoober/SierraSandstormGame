@@ -40,6 +40,11 @@
     Texture Creation Software: GIMP <br/>
     Other Recommended Tools: Krita, LMMS, Audacity, Visual Studio Code
 </p>
+
+<h2>Credits:</h2>
+<p>FPS Movement Code by Juan Linietsky, Ariel Manzur and the Godot community</p>
+<p>Roboto Font by the Google Fonts team</p>
+
 <h3>Links:</h3>
 <a href="https://www.youtube.com/c/funnoobercodingforbeginners">Fun Noober</a>
 <a href="https://godotengine.org">Godot</a>
