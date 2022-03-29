@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Weapons/WeaponStats.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Gun.gd" type="Script" id=2]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 0.4, 0.4 )
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0, 0, 0, 1 )
+emission_enabled = true
+emission = Color( 1, 0.772549, 0, 1 )
+emission_energy = 2.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[node name="Gun" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="VFX" type="Spatial" parent="."]
+
+[node name="CSGBox" type="CSGBox" parent="VFX"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4 )
+width = 0.2
+height = 0.2
+depth = 1.0
+
+[node name="CSGBox2" type="CSGBox" parent="VFX"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.3, -0.7 )
+width = 0.1
+height = 0.1
+depth = 0.4
+
+[node name="MuzzleFlash" type="MeshInstance" parent="VFX"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.1 )
+visible = false
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
+
+[node name="WeaponStats" type="Node" parent="."]
+script = ExtResource( 1 )
+fire_rate = 0.1
+fire_range = 100.0
