@@ -44,6 +44,7 @@
 <h2>Credits:</h2>
 <p>FPS Movement Code by Juan Linietsky, Ariel Manzur and the Godot community</p>
 <p>Roboto Font by the Google Fonts team</p>
+<p>Arma 3, Call to Arms, Men of War Assault Squad, Call of Duty Modern Warfare 2, and Call of Duty Modern Warfare 3 for Project inspiration.</p>
 
 <h3>Links:</h3>
 <a href="https://www.youtube.com/c/funnoobercodingforbeginners">Fun Noober</a>
