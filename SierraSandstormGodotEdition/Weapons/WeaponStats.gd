@@ -5,3 +5,4 @@ export var mag_size : int
 export var reserve_ammo : int
 export var fire_range : float
 export var accuracy : Vector2
+export var reload_time : float
