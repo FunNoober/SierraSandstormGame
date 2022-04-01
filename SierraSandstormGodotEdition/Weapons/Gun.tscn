@@ -40,4 +40,6 @@ material/0 = SubResource( 2 )
 [node name="WeaponStats" type="Node" parent="."]
 script = ExtResource( 1 )
 fire_rate = 0.1
+mag_size = 30
+reserve_ammo = 90
 fire_range = 100.0

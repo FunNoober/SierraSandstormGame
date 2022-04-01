@@ -22,6 +22,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health = 100
 	FpsApi.shoot_cast = $CameraHolder/Camera/ShootCast
+	FpsApi.player = self
 	
 func _process(delta):
 	if health <= 0:

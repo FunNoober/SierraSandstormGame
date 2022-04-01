@@ -6,16 +6,18 @@ var current_muzzle_time = 0
 
 var current_ammo
 
+func _ready() -> void:
+	current_ammo = stats.mag_size
+
 func _process(delta):
-	if current_fire_time > 0:
-		current_fire_time -= delta
-		
-	if current_muzzle_time > 0:
-		current_fire_time -= delta
+	current_fire_time = FpsApi.countdown(current_fire_time, delta)	
+	current_muzzle_time = FpsApi.countdown(current_muzzle_time, delta)
 	if current_muzzle_time <= 0:
 		$VFX/MuzzleFlash.hide()
 	
-	if Input.is_action_pressed("shoot") and current_fire_time <= 0:
+	if FpsApi.is_pressed_hold("shoot") and current_fire_time <= 0:
+		current_ammo -= 1
+		print(current_ammo)
 		current_fire_time = stats.fire_rate
 		$VFX/MuzzleFlash.show()
 		current_fire_time = 0.25

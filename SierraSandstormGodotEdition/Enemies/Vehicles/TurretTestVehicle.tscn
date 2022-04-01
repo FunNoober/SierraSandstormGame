@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Enemies/Vehicles/TurretVehicle.gd" type="Script" id=1]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="PrismMesh" id=2]
+
+[sub_resource type="CylinderMesh" id=3]
+
+[node name="TurretTestVehicle" type="Spatial"]
+script = ExtResource( 1 )
+accuracy = 1.0
+
+[node name="Body" type="MeshInstance" parent="."]
+transform = Transform( 2.4, 0, 0, 0, 1.6, 0, 0, 0, 4, 0, 0, 0 )
+mesh = SubResource( 1 )
+skeleton = NodePath("")
+material/0 = null
+
+[node name="TurretBasePivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
+
+[node name="TurretBase" type="MeshInstance" parent="TurretBasePivot"]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="TurretGunPivot" type="Spatial" parent="TurretBasePivot/TurretBase"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.61651e-08, 0, -0.3 )
+
+[node name="TurretGun" type="MeshInstance" parent="TurretBasePivot/TurretBase/TurretGunPivot"]
+transform = Transform( 0.36, 0, 0, 0, -1.57361e-08, -0.36, 0, 1.8144, -7.93099e-08, 2.18557e-07, 0, -1.4 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="PlayerPos" type="Position3D" parent="."]
