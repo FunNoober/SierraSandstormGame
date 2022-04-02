@@ -20,11 +20,13 @@ shape = SubResource( 1 )
 [node name="Camera" type="Camera" parent="CameraHolder"]
 
 [node name="Hands" type="Spatial" parent="CameraHolder/Camera"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, -0.234, -1.473 )
 
 [node name="Gun" parent="CameraHolder/Camera/Hands" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, -0.5, 2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="ShootCast" type="RayCast" parent="CameraHolder/Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -100 )
+
+[node name="CrouchTween" type="Tween" parent="."]

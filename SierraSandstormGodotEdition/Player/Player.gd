@@ -18,6 +18,8 @@ const MAX_SLOPE_ANGLE = 40
 var health
 var time = 0.0
 
+var is_crouched : bool
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health = 100
@@ -44,13 +46,11 @@ func process_input(delta):
 		input_mv_vec.y -= 1
 	if Input.is_action_pressed("mv_right"):
 		input_mv_vec.x += 1
-		#cam_hold.rotation_degrees.z = lerp(cam_hold.rotation_degrees.z, -3.6, 2 * delta)
 	if Input.is_action_pressed("mv_left"):
 		input_mv_vec.x -= 1
-		#cam_hold.rotation_degrees.z = lerp(cam_hold.rotation_degrees.z, 3.6, 2 * delta)
 		
-	#if Input.is_action_pressed("mv_left") == false or Input.is_action_pressed("mv_right") == false:
-		#cam_hold.rotation_degrees.z = lerp(cam_hold.rotation_degrees.z, 0, 2 * delta)
+	if Input.is_action_just_pressed("crouch"):
+		crouch()
 		
 	input_mv_vec = input_mv_vec.normalized()
 	
@@ -92,3 +92,15 @@ func _input(event):
 		cam_rot.x = clamp(cam_rot.x, -70, 70)
 		cam_rot.y = 180
 		cam_hold.rotation_degrees = cam_rot
+
+func crouch():
+	if is_crouched == true:
+		$BodyCollision.shape.height = $CrouchTween.interpolate_property($BodyCollision.shape, "height", $BodyCollision.shape.height, 3, 0.1, Tween.TRANS_LINEAR)
+		$CrouchTween.start()
+		is_crouched = false
+		return
+	if is_crouched == false:
+		$BodyCollision.shape.height = $CrouchTween.interpolate_property($BodyCollision.shape, "height", $BodyCollision.shape.height, 1.5, 0.1, Tween.TRANS_LINEAR)
+		$CrouchTween.start()
+		is_crouched = true
+		return

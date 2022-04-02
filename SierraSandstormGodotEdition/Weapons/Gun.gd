@@ -27,13 +27,15 @@ func _process(delta):
 	if current_muzzle_time <= 0:
 		$VFX/MuzzleFlash.hide()
 	
-	
 	if FpsApi.is_pressed_hold("shoot") and current_fire_time <= 0 and can_shoot:
 		current_ammo -= 1
 		current_fire_time = stats.fire_rate
 		$VFX/MuzzleFlash.show()
+		$AnimationPlayer.play("recoil")
 		current_fire_time = 0.25
-		FpsApi.shoot(stats.fire_range, stats.accuracy)
+		FpsApi.shoot(stats.fire_range)
+	else:
+		$AnimationPlayer.play("RESET")
 
 func reload():
 	stats.reserve_ammo -= stats.mag_size

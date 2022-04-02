@@ -1,4 +1,4 @@
-extends Spatial
+extends KinematicBody
 
 onready var player_pos = get_node("PlayerPos")
 onready var turret_base_pivot = get_node("TurretBasePivot")

@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Enemies/Vehicles/TurretVehicle.gd" type="Script" id=1]
 
 [sub_resource type="CubeMesh" id=1]
 
+[sub_resource type="ConcavePolygonShape" id=4]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
 [sub_resource type="PrismMesh" id=2]
 
 [sub_resource type="CylinderMesh" id=3]
 
-[node name="TurretTestVehicle" type="Spatial"]
+[node name="TurretTestVehicle" type="KinematicBody"]
 script = ExtResource( 1 )
 accuracy = 1.0
 
@@ -17,6 +20,10 @@ transform = Transform( 2.4, 0, 0, 0, 1.6, 0, 0, 0, 4, 0, 0, 0 )
 mesh = SubResource( 1 )
 skeleton = NodePath("")
 material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 2.4, 0, 0, 0, 1.6, 0, 0, 0, 4, 0, 0, 0 )
+shape = SubResource( 4 )
 
 [node name="TurretBasePivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0 )
