@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemies/EnemyVisionCast.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/Vehicles/TurretVehicle.gd" type="Script" id=2]
+
+[node name="KinematicBody" type="KinematicBody"]
+script = ExtResource( 2 )
+accuracy = 5.0
+
+[node name="BodyMesh" type="MeshInstance" parent="."]
+
+[node name="BodyCollision" type="CollisionShape" parent="."]
+
+[node name="TurretBasePivot" type="Spatial" parent="."]
+
+[node name="Turret" type="MeshInstance" parent="TurretBasePivot"]
+
+[node name="TurretGunPivot" type="Spatial" parent="TurretBasePivot/Turret"]
+
+[node name="TurretGun" type="MeshInstance" parent="TurretBasePivot/Turret/TurretGunPivot"]
+
+[node name="ShootCast" type="RayCast" parent="TurretBasePivot/Turret/TurretGunPivot/TurretGun"]
+
+[node name="PlayerPos" type="Position3D" parent="."]
+
+[node name="VisionCasts" type="Spatial" parent="."]
+
+[node name="RayCast" type="RayCast" parent="VisionCasts"]
+enabled = true
+cast_to = Vector3( 0, 0, 100 )
+script = ExtResource( 1 )

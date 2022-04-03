@@ -6,7 +6,7 @@
 [sub_resource type="CapsuleShape" id=1]
 height = 3.0
 
-[node name="Player" type="KinematicBody"]
+[node name="Player" type="KinematicBody" groups=["Player"]]
 script = ExtResource( 1 )
 jump_speed = 6
 max_speed = 10.0
@@ -23,7 +23,6 @@ shape = SubResource( 1 )
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, -0.234, -1.473 )
 
 [node name="Gun" parent="CameraHolder/Camera/Hands" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="ShootCast" type="RayCast" parent="CameraHolder/Camera"]
 enabled = true

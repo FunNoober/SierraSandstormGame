@@ -34,8 +34,8 @@ func _process(delta):
 		$AnimationPlayer.play("recoil")
 		current_fire_time = 0.25
 		FpsApi.shoot(stats.fire_range)
-	else:
-		$AnimationPlayer.play("RESET")
+#	else:
+#		$AnimationPlayer.play("RESET")
 
 func reload():
 	stats.reserve_ammo -= stats.mag_size
