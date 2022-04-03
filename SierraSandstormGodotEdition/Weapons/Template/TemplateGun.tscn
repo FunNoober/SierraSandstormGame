@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Weapons/Template/WeaponStats.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Template/Gun.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "recoil"
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Visuals" type="Spatial" parent="."]
+
+[node name="MuzzleFlash" type="Spatial" parent="Visuals"]
+
+[node name="WeaponStats" type="Node" parent="."]
+script = ExtResource( 1 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Container" type="MarginContainer" parent="HUD"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -546.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Container"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1004.0
+margin_bottom = 34.0
+
+[node name="AmmoCounter" type="Label" parent="HUD/Container/HBoxContainer"]
+margin_right = 53.0
+margin_bottom = 14.0
+text = "100/100"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/recoil = SubResource( 1 )

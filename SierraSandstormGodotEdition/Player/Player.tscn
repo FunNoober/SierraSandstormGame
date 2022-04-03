@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Weapons/Gun.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Weapons/Pistols/BasePistol.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 3.0
@@ -22,7 +22,7 @@ shape = SubResource( 1 )
 [node name="Hands" type="Spatial" parent="CameraHolder/Camera"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, -0.234, -1.473 )
 
-[node name="Gun" parent="CameraHolder/Camera/Hands" instance=ExtResource( 2 )]
+[node name="BasePistol" parent="CameraHolder/Camera/Hands" instance=ExtResource( 2 )]
 
 [node name="ShootCast" type="RayCast" parent="CameraHolder/Camera"]
 enabled = true
