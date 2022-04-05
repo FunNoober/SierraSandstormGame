@@ -1,10 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Weapons/Template/WeaponStats.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/Template/Gun.gd" type="Script" id=2]
-
-[sub_resource type="Animation" id=1]
-resource_name = "recoil"
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 2 )
@@ -40,6 +37,3 @@ margin_bottom = 34.0
 margin_right = 53.0
 margin_bottom = 14.0
 text = "100/100"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/recoil = SubResource( 1 )

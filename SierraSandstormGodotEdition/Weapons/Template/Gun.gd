@@ -58,11 +58,8 @@ func _process(delta):
 		current_ammo -= 1
 		current_fire_time = stats.fire_rate
 		$Visuals/MuzzleFlash.show()
-		$AnimationPlayer.play("recoil")
 		current_fire_time = 0.25
 		FpsApi.shoot(stats.fire_range)
-#	else:
-#		$AnimationPlayer.play("RESET")
 
 func reload():
 	stats.reserve_ammo -= stats.mag_size

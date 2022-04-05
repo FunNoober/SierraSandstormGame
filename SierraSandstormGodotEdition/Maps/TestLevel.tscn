@@ -16,3 +16,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0 )
 
 [node name="PrototypeTurretVehicle" parent="." instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.759443, 1.05, 11.8756 )
+map_name = "Spatial"

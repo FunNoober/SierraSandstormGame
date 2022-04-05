@@ -22,7 +22,7 @@ var is_crouched : bool
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	health = 100
+	health = 100.0
 	FpsApi.shoot_cast = $CameraHolder/Camera/ShootCast
 	FpsApi.player = self
 	
@@ -104,3 +104,8 @@ func crouch():
 		$CrouchTween.start()
 		is_crouched = true
 		return
+
+func take_damage(amount):
+	health -= amount
+	if health <= 0:
+		get_tree().reload_current_scene()

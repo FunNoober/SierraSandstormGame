@@ -29,3 +29,6 @@ accuracy = 5.0
 enabled = true
 cast_to = Vector3( 0, 0, 100 )
 script = ExtResource( 1 )
+
+[node name="ShootTimer" type="Timer" parent="."]
+one_shot = true
