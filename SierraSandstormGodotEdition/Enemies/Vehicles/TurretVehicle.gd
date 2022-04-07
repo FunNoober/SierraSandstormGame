@@ -9,8 +9,8 @@ onready var turret_base_pivot = get_node("TurretBasePivot")
 onready var turret_gun_pivot = get_node("TurretBasePivot/Turret/TurretGunPivot")
 onready var player = get_tree().get_root().get_node(map_name).get_node("Player")
 
-var has_seen_player
-var can_shoot = true
+var has_seen_player : bool
+var can_shoot : bool = true
 
 func _ready() -> void:
 	for child in $VisionCasts.get_children():

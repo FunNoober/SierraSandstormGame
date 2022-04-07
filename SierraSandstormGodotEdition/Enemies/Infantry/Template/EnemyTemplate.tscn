@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Enemies/Infantry/EnemyInfantry.gd" type="Script" id=2]
+
+[node name="EnemyTemplate" type="KinematicBody"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Gun" type="MeshInstance" parent="."]
+
+[node name="ShootCast" type="RayCast" parent="Gun"]
+enabled = true
+cast_to = Vector3( 0, 0, 100 )
+
+[node name="VisionCasts" type="Spatial" parent="."]
+
+[node name="PlayerPosition3D" type="Position3D" parent="."]
+
+[node name="FindPlayer" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="FindPlayer"]
+
+[connection signal="body_entered" from="FindPlayer" to="." method="_on_FindPlayer_body_entered"]
