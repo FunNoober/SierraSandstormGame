@@ -1,9 +1,6 @@
 <h2>What Is This?</h2>
-<p>Operation Sierra Sandstorm is a first person shooter game set in the not so distant future. In this timeline, tensions between
-    the United States and Russia are still high from the Cold War. Both the United States and Russia are stationed in the Middle East
-    fighting insurgents. The United States is sending Navy SEALs on a operation to get intel from the insurgents. They do not know that
-    Russian Spetsnaz are under cover though. This leads to the death of those Russians and the start of World War 3.
-</p>
+<p>Operation Sierra Sandstorm is a first person shooter game set in the not so distant future.</p>
+<a href="https://github.com/FunNoober/OperationSierraSandstorm/blob/main/STORIES.md">Stories</a>
 
 <h2>Information About This Game:</h2>
 <p>This game is being developed solo by a indie developer that goes by the name "Fun Noober". <br/> </p>
