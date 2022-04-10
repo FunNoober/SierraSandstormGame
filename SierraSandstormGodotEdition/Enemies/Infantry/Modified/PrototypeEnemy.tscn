@@ -15,23 +15,25 @@ height = 2.0
 radius = 102.0
 
 [node name="PrototypeEnemy" instance=ExtResource( 1 )]
+speed = 100.0
+defensive = false
 
 [node name="MeshInstance" type="MeshInstance" parent="." index="0"]
-transform = Transform( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0 )
+transform = Transform( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 2, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="CollisionShape" parent="." index="1"]
-transform = Transform( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0, 0 )
+transform = Transform( -1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 2, 0 )
 shape = SubResource( 2 )
 
 [node name="Gun" parent="." index="3"]
-transform = Transform( -0.195969, 0, -7.75606e-08, 0, 0.195969, 0, 1.71321e-08, 0, -0.88719, 0.597512, -0.00642276, -1.01141 )
+transform = Transform( -0.195969, 0, -7.75606e-08, 0, 0.195969, 0, 1.71321e-08, 0, -0.88719, 0.597512, 1.99358, -1.01141 )
 mesh = SubResource( 3 )
 material/0 = null
 
 [node name="VisionCasts" parent="." index="4"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2, 0 )
 
 [node name="VisionCast" type="RayCast" parent="VisionCasts" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45995, 1.36441 )
@@ -94,10 +96,10 @@ cast_to = Vector3( 0, 0, 100 )
 script = ExtResource( 2 )
 
 [node name="PlayerPosition3D" parent="." index="5"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2, 0 )
 
 [node name="FindPlayer" parent="." index="6"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2, 0 )
 
 [node name="CollisionShape" parent="FindPlayer" index="0"]
 shape = SubResource( 4 )

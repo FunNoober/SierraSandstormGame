@@ -7,7 +7,6 @@ var dir = Vector3()
 onready var cam : Node = get_node("CameraHolder/Camera")
 onready var cam_hold : Node = get_node("CameraHolder")
 var vel = Vector3()
-
 export var GRAVITY = -9
 
 const ACCEL = 20
@@ -20,11 +19,14 @@ var time = 0.0
 
 var is_crouched : bool
 
+signal player_spawned(player)
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health = 100.0
 	FpsApi.shoot_cast = $CameraHolder/Camera/ShootCast
 	FpsApi.player = self
+	emit_signal("player_spawned", self)
 	
 func _process(delta):
 	if health <= 0:
