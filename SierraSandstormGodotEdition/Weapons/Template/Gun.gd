@@ -1,3 +1,4 @@
+class_name Firearm
 extends Spatial
 
 onready var stats = get_node("WeaponStats")

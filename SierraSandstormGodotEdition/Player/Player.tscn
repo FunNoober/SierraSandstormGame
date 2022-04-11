@@ -10,6 +10,7 @@ height = 3.0
 script = ExtResource( 1 )
 jump_speed = 6
 max_speed = 10.0
+loadout = [ ExtResource( 2 ) ]
 
 [node name="BodyCollision" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5, 0 )
@@ -23,10 +24,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 [node name="Hands" type="Spatial" parent="CameraHolder/Camera"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, -0.234, -1.473 )
 
-[node name="BasePistol" parent="CameraHolder/Camera/Hands" instance=ExtResource( 2 )]
-
 [node name="ShootCast" type="RayCast" parent="CameraHolder/Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -100 )
 
 [node name="CrouchTween" type="Tween" parent="."]
+
+[node name="LeanTween" type="Tween" parent="."]
+
+[node name="LeanTweenRot" type="Tween" parent="."]

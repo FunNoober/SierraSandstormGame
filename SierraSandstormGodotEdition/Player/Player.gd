@@ -1,13 +1,14 @@
 extends KinematicBody
 
-
 export var jump_speed = 10
 export var max_speed = 20.0
-var dir = Vector3()
+export var GRAVITY = -9
+export (Array, PackedScene) var loadout
+
 onready var cam : Node = get_node("CameraHolder/Camera")
 onready var cam_hold : Node = get_node("CameraHolder")
-var vel = Vector3()
-export var GRAVITY = -9
+onready var lean_tween : Node = get_node("LeanTween")
+onready var lean_tween_rot : Node = get_node("LeanTweenRot")
 
 const ACCEL = 20
 const DEACCEL = 20
@@ -16,17 +17,35 @@ const MAX_SLOPE_ANGLE = 40
 
 var health
 var time = 0.0
-
 var is_crouched : bool
+var is_leaning : bool
+var dir = Vector3()
+var vel = Vector3()
+var cam_rot
 
 signal player_spawned(player)
 
 func _ready():
+	#Setting the camera rotation on start
+	cam_rot = cam_hold.rotation_degrees
+	cam_rot.x = clamp(cam_rot.x, -70, 70)
+	cam_rot.y = 180
+	cam_hold.rotation_degrees = cam_rot
+	#End
+	
+	#Setting default values
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health = 100.0
 	FpsApi.shoot_cast = $CameraHolder/Camera/ShootCast
 	FpsApi.player = self
+	#End
+	
 	emit_signal("player_spawned", self)
+	#Spawining in the starting weapon
+	for gun in loadout:
+		var v = gun.instance()
+		$CameraHolder/Camera/Hands.add_child(v)
+	#End
 	
 func _process(delta):
 	if health <= 0:
@@ -53,17 +72,39 @@ func process_input(delta):
 		
 	if Input.is_action_just_pressed("crouch"):
 		crouch()
-		
-	input_mv_vec = input_mv_vec.normalized()
 	
+	#Leaning behavior and input
+	if Input.is_action_just_pressed("lean_left"):
+		if is_leaning == false:
+			lean_left()
+			is_leaning = true
+		else:
+			reset_lean()
+			is_leaning = false
+	if Input.is_action_just_pressed("lean_right"):
+		if is_leaning == false:
+			lean_right()
+			is_leaning = true
+		else:
+			reset_lean()
+			is_leaning = false
+	#End
+		
+	#Normalizing to prevent moving faster while holding down 2 keys at once
+	input_mv_vec = input_mv_vec.normalized()
+	#End
+	
+	#Some magic to get the relative rotation
 	dir += -cam_xform.basis.z * input_mv_vec.y
 	dir += cam_xform.basis.x * input_mv_vec.x
+	#End
 	
 	if is_on_floor():
 		if Input.is_action_just_pressed("mv_jump"):
 			vel.y = jump_speed
 	
 func process_movement(delta):
+	#I don't know what the below code does, just copied it from the Godot Docs
 	dir.y = 0
 	dir = dir.normalized()
 	vel.y += delta * GRAVITY
@@ -84,30 +125,73 @@ func process_movement(delta):
 	vel.x = hvel.x
 	vel.z = hvel.z
 	vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
+	#End
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		cam_hold.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg2rad(event.relative.x * MOUSE_SENSITIVITY * -1))
 		
-		var cam_rot = cam_hold.rotation_degrees
+		cam_rot = cam_hold.rotation_degrees
 		cam_rot.x = clamp(cam_rot.x, -70, 70)
 		cam_rot.y = 180
 		cam_hold.rotation_degrees = cam_rot
 
 func crouch():
 	if is_crouched == true:
+		#Handling crouching behaviour
 		$BodyCollision.shape.height = $CrouchTween.interpolate_property($BodyCollision.shape, "height", $BodyCollision.shape.height, 3, 0.1, Tween.TRANS_LINEAR)
 		$CrouchTween.start()
 		is_crouched = false
+		#End
+		#Returning to prevent infinite loop
 		return
+		#End
 	if is_crouched == false:
+		#Handling un-crouching behaviour
 		$BodyCollision.shape.height = $CrouchTween.interpolate_property($BodyCollision.shape, "height", $BodyCollision.shape.height, 1.5, 0.1, Tween.TRANS_LINEAR)
 		$CrouchTween.start()
 		is_crouched = true
+		#End
+		#Returning to prevent infinite loop
 		return
+		#End
+
+func lean_left():
+	lean_camera(1, 7.5)
+	
+func lean_right():
+	lean_camera(-1, -7.5)
+	
+func reset_lean():
+	lean_camera(0, 0)
+	
+func lean_camera(mv_amount, rot_amount):
+	#Moving The Camera When Leaning
+	lean_tween.interpolate_property(cam_hold, 
+	"translation:x", 
+	cam_hold.translation.x, 
+	mv_amount, 
+	0.1, 
+	Tween.TRANS_LINEAR)
+	#End
+	
+	#Rotation The Camera When Leaning
+	lean_tween_rot.interpolate_property(cam_hold, 
+	"rotation_degrees:z", 
+	cam_hold.rotation_degrees.z, 
+	rot_amount, 
+	0.1, 
+	Tween.TRANS_LINEAR)
+	#End
+	
+	#Starting the tweens
+	lean_tween.start()
+	lean_tween_rot.start()
+	#End
 
 func take_damage(amount):
 	health -= amount
+	#TODO: Add hurt user interface to let the player know when they are hurt
 	if health <= 0:
 		get_tree().reload_current_scene()
