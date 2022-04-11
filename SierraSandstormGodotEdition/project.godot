@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Sierra Sandstorm Godot Edition"
-run/main_scene="res://Maps/TestLevel.tscn"
+run/main_scene="res://Maps/Scenes/TestingGround/TestingGround.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -84,4 +84,7 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/shadow_atlas/quadrant_3_subdiv=6
+quality/filters/msaa=1
+quality/filters/use_fxaa=true
 environment/default_environment="res://default_env.tres"

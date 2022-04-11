@@ -1,8 +1,8 @@
 extends KinematicBody
 
-export var jump_speed = 10
-export var max_speed = 20.0
-export var GRAVITY = -9
+export var jump_speed = 6
+export var max_speed = 10.0
+export var crouch_speed = 3.0
 export (Array, PackedScene) var loadout
 
 onready var cam : Node = get_node("CameraHolder/Camera")
@@ -14,6 +14,7 @@ const ACCEL = 20
 const DEACCEL = 20
 const MOUSE_SENSITIVITY = 1
 const MAX_SLOPE_ANGLE = 40
+const GRAVITY = -9
 
 var health
 var time = 0.0
@@ -22,10 +23,12 @@ var is_leaning : bool
 var dir = Vector3()
 var vel = Vector3()
 var cam_rot
+var current_speed
 
 signal player_spawned(player)
 
 func _ready():
+	current_speed = max_speed
 	#Setting the camera rotation on start
 	cam_rot = cam_hold.rotation_degrees
 	cam_rot.x = clamp(cam_rot.x, -70, 70)
@@ -56,6 +59,11 @@ func _physics_process(delta):
 	process_movement(delta)
 
 func process_input(delta):
+	if is_crouched or is_leaning:
+		current_speed = crouch_speed
+	else:
+		current_speed = max_speed
+	
 	dir = Vector3()
 	var cam_xform = cam.get_global_transform()
 	
@@ -113,7 +121,7 @@ func process_movement(delta):
 	hvel.y = 0
 	
 	var target = dir
-	target *= max_speed
+	target *= current_speed
 	
 	var accel
 	if dir.dot(hvel) > 0:
@@ -139,7 +147,7 @@ func _input(event):
 
 func crouch():
 	if is_crouched == true:
-		#Handling crouching behaviour
+		#Handling un-crouching behaviour
 		$BodyCollision.shape.height = $CrouchTween.interpolate_property($BodyCollision.shape, "height", $BodyCollision.shape.height, 3, 0.1, Tween.TRANS_LINEAR)
 		$CrouchTween.start()
 		is_crouched = false
@@ -148,7 +156,7 @@ func crouch():
 		return
 		#End
 	if is_crouched == false:
-		#Handling un-crouching behaviour
+		#Handling crouching behaviour
 		$BodyCollision.shape.height = $CrouchTween.interpolate_property($BodyCollision.shape, "height", $BodyCollision.shape.height, 1.5, 0.1, Tween.TRANS_LINEAR)
 		$CrouchTween.start()
 		is_crouched = true

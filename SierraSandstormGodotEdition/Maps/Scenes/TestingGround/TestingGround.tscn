@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Maps/3d Models/SierraSandstormTestMap/SierraSandstormTestMap.tscn" type="PackedScene" id=2]
+
+[node name="TestingGround" type="Spatial"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
+
+[node name="SierraSandstormTestMap" parent="." instance=ExtResource( 2 )]
+
+[node name="Lights" type="Spatial" parent="."]
+
+[node name="OmniLight" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 42 )
+light_energy = 5.0
+omni_range = 10.0
+
+[node name="OmniLight2" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 64 )
+light_energy = 5.0
+omni_range = 10.0
+
+[node name="OmniLight3" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 92 )
+light_energy = 5.0
+omni_range = 10.0
+
+[node name="OmniLight4" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 2, 64 )
+light_energy = 5.0
+omni_range = 10.0
+
+[node name="OmniLight5" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 2, 64 )
+light_energy = 5.0
+omni_range = 10.0
+
+[node name="OmniLight6" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -82, 2, 64 )
+light_energy = 5.0
+omni_range = 10.0
+
+[node name="OmniLight7" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 116 )
+light_energy = 5.0
+omni_range = 10.0
+
+[node name="OmniLight8" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, 2, 116 )
+light_energy = 5.0
+omni_range = 10.0
+
+[node name="OmniLight9" type="OmniLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, 2, 56 )
+light_energy = 5.0
+omni_range = 10.0
