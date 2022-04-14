@@ -1,6 +1,7 @@
 extends KinematicBody
 
-export var jump_speed = 6
+export var max_jump_speed = 6
+export var crouch_jump_speed = 2
 export var max_speed = 10.0
 export var crouch_speed = 3.0
 export (Array, PackedScene) var loadout
@@ -25,6 +26,7 @@ var dir = Vector3()
 var vel = Vector3()
 var cam_rot
 var current_speed
+var jump_speed
 
 signal player_spawned(player)
 
@@ -65,8 +67,10 @@ func _physics_process(delta):
 func process_input(delta):
 	if is_crouched or is_leaning:
 		current_speed = crouch_speed
+		jump_speed = crouch_jump_speed
 	else:
 		current_speed = max_speed
+		jump_speed = max_jump_speed
 	
 	dir = Vector3()
 	var cam_xform = cam.get_global_transform()
@@ -150,7 +154,8 @@ func _input(event):
 		cam_hold.rotation_degrees = cam_rot
 
 func take_damage(amount):
-	health -= amount
+	if Cheats.cheats.god_mode == false:
+		health -= amount
 	#TODO: Add hurt user interface to let the player know when they are hurt
 	if health <= 0:
 		get_tree().reload_current_scene()

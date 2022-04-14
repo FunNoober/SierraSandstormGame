@@ -56,7 +56,8 @@ func _process(delta):
 		$Visuals/MuzzleFlash.hide()
 	
 	if FpsApi.is_pressed_hold("shoot") and current_fire_time <= 0 and can_shoot:
-		current_ammo -= 1
+		if Cheats.cheats.infinite_ammo == false:
+			current_ammo -= 1
 		current_fire_time = stats.fire_rate
 		$Visuals/MuzzleFlash.show()
 		current_fire_time = 0.25

@@ -27,6 +27,7 @@ config/icon="res://icon.png"
 [autoload]
 
 FpsApi="*res://FPS_API.gd"
+Cheats="*res://Globals/Cheats.gd"
 
 [input]
 
