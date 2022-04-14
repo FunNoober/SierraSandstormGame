@@ -1,12 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/Pistols/BasePistol.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/MovementNodes/CrouchNode.gd" type="Script" id=3]
+[ext_resource path="res://Player/MovementNodes/LeanNode.gd" type="Script" id=4]
+[ext_resource path="res://Player/MovementNodes/FlashLight.gd" type="Script" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 3.0
 
-[node name="Player" type="KinematicBody" groups=["Player"]]
+[node name="Player" type="KinematicBody" groups=["Actor", "Player"]]
 script = ExtResource( 1 )
 loadout = [ ExtResource( 2 ) ]
 
@@ -18,6 +21,7 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 
 [node name="Camera" type="Camera" parent="CameraHolder"]
+near = 0.01
 far = 1000.0
 
 [node name="Hands" type="Spatial" parent="CameraHolder/Camera"]
@@ -27,8 +31,22 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, 
 enabled = true
 cast_to = Vector3( 0, 0, -100 )
 
+[node name="FlashLight" type="SpotLight" parent="CameraHolder"]
+light_energy = 3.0
+spot_range = 15.0
+spot_angle = 24.0
+
 [node name="CrouchTween" type="Tween" parent="."]
 
 [node name="LeanTween" type="Tween" parent="."]
 
 [node name="LeanTweenRot" type="Tween" parent="."]
+
+[node name="CrouchNode" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="LeanNode" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="FlashLight" type="Node" parent="."]
+script = ExtResource( 5 )

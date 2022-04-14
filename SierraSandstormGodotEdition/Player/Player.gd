@@ -20,6 +20,7 @@ var health
 var time = 0.0
 var is_crouched : bool
 var is_leaning : bool
+var flash_enabled : bool
 var dir = Vector3()
 var vel = Vector3()
 var cam_rot
@@ -51,6 +52,9 @@ func _ready():
 	#End
 	
 func _process(delta):
+	if Input.is_action_just_pressed("flash_light"):
+		flash_enabled = $FlashLight.flash_light(flash_enabled, $CameraHolder/FlashLight)
+	
 	if health <= 0:
 		get_tree().reload_current_scene()
 
@@ -79,22 +83,22 @@ func process_input(delta):
 		input_mv_vec.x -= 1
 		
 	if Input.is_action_just_pressed("crouch"):
-		crouch()
+		is_crouched = $CrouchNode.crouch(is_crouched, $BodyCollision, $CrouchTween)
 	
 	#Leaning behavior and input
 	if Input.is_action_just_pressed("lean_left"):
 		if is_leaning == false:
-			lean_left()
+			$LeanNode.lean_left(lean_tween, lean_tween_rot, cam_hold)
 			is_leaning = true
 		else:
-			reset_lean()
+			$LeanNode.reset_lean(lean_tween, lean_tween_rot, cam_hold)
 			is_leaning = false
 	if Input.is_action_just_pressed("lean_right"):
 		if is_leaning == false:
-			lean_right()
+			$LeanNode.lean_right(lean_tween, lean_tween_rot, cam_hold)
 			is_leaning = true
 		else:
-			reset_lean()
+			$LeanNode.reset_lean(lean_tween, lean_tween_rot, cam_hold)
 			is_leaning = false
 	#End
 		
@@ -144,59 +148,6 @@ func _input(event):
 		cam_rot.x = clamp(cam_rot.x, -70, 70)
 		cam_rot.y = 180
 		cam_hold.rotation_degrees = cam_rot
-
-func crouch():
-	if is_crouched == true:
-		#Handling un-crouching behaviour
-		$BodyCollision.shape.height = $CrouchTween.interpolate_property($BodyCollision.shape, "height", $BodyCollision.shape.height, 3, 0.1, Tween.TRANS_LINEAR)
-		$CrouchTween.start()
-		is_crouched = false
-		#End
-		#Returning to prevent infinite loop
-		return
-		#End
-	if is_crouched == false:
-		#Handling crouching behaviour
-		$BodyCollision.shape.height = $CrouchTween.interpolate_property($BodyCollision.shape, "height", $BodyCollision.shape.height, 1.5, 0.1, Tween.TRANS_LINEAR)
-		$CrouchTween.start()
-		is_crouched = true
-		#End
-		#Returning to prevent infinite loop
-		return
-		#End
-
-func lean_left():
-	lean_camera(1, 7.5)
-	
-func lean_right():
-	lean_camera(-1, -7.5)
-	
-func reset_lean():
-	lean_camera(0, 0)
-	
-func lean_camera(mv_amount, rot_amount):
-	#Moving The Camera When Leaning
-	lean_tween.interpolate_property(cam_hold, 
-	"translation:x", 
-	cam_hold.translation.x, 
-	mv_amount, 
-	0.1, 
-	Tween.TRANS_LINEAR)
-	#End
-	
-	#Rotation The Camera When Leaning
-	lean_tween_rot.interpolate_property(cam_hold, 
-	"rotation_degrees:z", 
-	cam_hold.rotation_degrees.z, 
-	rot_amount, 
-	0.1, 
-	Tween.TRANS_LINEAR)
-	#End
-	
-	#Starting the tweens
-	lean_tween.start()
-	lean_tween_rot.start()
-	#End
 
 func take_damage(amount):
 	health -= amount

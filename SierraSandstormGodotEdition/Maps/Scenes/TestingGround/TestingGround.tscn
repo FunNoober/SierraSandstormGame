@@ -6,7 +6,7 @@
 [node name="TestingGround" type="Spatial"]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8, 0 )
 
 [node name="SierraSandstormTestMap" parent="." instance=ExtResource( 2 )]
 
@@ -15,6 +15,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0 )
 [node name="OmniLight" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 42 )
 light_energy = 5.0
+shadow_bias = 10.0
 omni_range = 10.0
 
 [node name="OmniLight2" type="OmniLight" parent="Lights"]
