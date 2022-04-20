@@ -1,7 +1,46 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Weapons/Template/WeaponStats.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/Template/Gun.gd" type="Script" id=2]
+
+[sub_resource type="SpatialMaterial" id=4]
+flags_transparent = true
+flags_unshaded = true
+vertex_color_use_as_albedo = true
+params_blend_mode = 1
+params_billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id=5]
+max_value = 200.0
+_data = [ Vector2( 0, 200 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0869565, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3( 0, 0, 10 )
+spread = 15.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 58.82
+angle = 180.0
+angle_random = 0.5
+scale = 1.2
+scale_curve = SubResource( 8 )
+color = Color( 1, 0.572549, 0, 1 )
+anim_speed_curve = SubResource( 6 )
+
+[sub_resource type="QuadMesh" id=3]
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 2 )
@@ -37,3 +76,11 @@ margin_bottom = 34.0
 margin_right = 53.0
 margin_bottom = 14.0
 text = "100/100"
+
+[node name="MuzzleParticles" type="Particles" parent="."]
+material_override = SubResource( 4 )
+emitting = false
+lifetime = 0.1
+one_shot = true
+process_material = SubResource( 9 )
+draw_pass_1 = SubResource( 3 )

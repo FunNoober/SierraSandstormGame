@@ -10,6 +10,7 @@ onready var cam : Node = get_node("CameraHolder/Camera")
 onready var cam_hold : Node = get_node("CameraHolder")
 onready var lean_tween : Node = get_node("LeanTween")
 onready var lean_tween_rot : Node = get_node("LeanTweenRot")
+onready var original_hand_pos = $CameraHolder/Camera/Hands.translation
 
 const ACCEL = 20
 const DEACCEL = 20
@@ -17,18 +18,21 @@ const MOUSE_SENSITIVITY = 1
 const MAX_SLOPE_ANGLE = 40
 const GRAVITY = -9
 
-var health
+var health : int = 100
 var time = 0.0
 var is_crouched : bool
 var is_leaning : bool
 var flash_enabled : bool
+var is_aiming : bool
 var dir = Vector3()
 var vel = Vector3()
 var cam_rot
 var current_speed
 var jump_speed
 
+
 signal player_spawned(player)
+signal hurt
 
 func _ready():
 	current_speed = max_speed
@@ -65,7 +69,7 @@ func _physics_process(delta):
 	process_movement(delta)
 
 func process_input(delta):
-	if is_crouched or is_leaning:
+	if is_crouched or is_leaning or is_aiming:
 		current_speed = crouch_speed
 		jump_speed = crouch_jump_speed
 	else:
@@ -85,6 +89,20 @@ func process_input(delta):
 		input_mv_vec.x += 1
 	if Input.is_action_pressed("mv_left"):
 		input_mv_vec.x -= 1
+	if Input.is_action_just_pressed("ads"):
+		if is_aiming == true:
+			is_aiming = false
+			$AimTween.interpolate_property($CameraHolder/Camera/Hands, 'translation', $CameraHolder/Camera/AimPosition.translation, original_hand_pos, 1)
+			$AimTween.start()
+			$CameraHolder/Camera.fov = 90
+			return
+		if is_aiming == false:
+			is_aiming = true
+			$AimTween.interpolate_property($CameraHolder/Camera/Hands, 'translation', original_hand_pos, $CameraHolder/Camera/AimPosition.translation, 1)
+			$AimTween.start()
+			$CameraHolder/Camera.fov = 50
+			return
+		
 		
 	if Input.is_action_just_pressed("crouch"):
 		is_crouched = $CrouchNode.crouch(is_crouched, $BodyCollision, $CrouchTween)
@@ -156,6 +174,6 @@ func _input(event):
 func take_damage(amount):
 	if Cheats.cheats.god_mode == false:
 		health -= amount
-	#TODO: Add hurt user interface to let the player know when they are hurt
+		emit_signal("hurt")
 	if health <= 0:
 		get_tree().reload_current_scene()

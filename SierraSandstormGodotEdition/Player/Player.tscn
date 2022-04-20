@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/Pistols/BasePistol.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/MovementNodes/CrouchNode.gd" type="Script" id=3]
 [ext_resource path="res://Player/MovementNodes/LeanNode.gd" type="Script" id=4]
 [ext_resource path="res://Player/MovementNodes/FlashLight.gd" type="Script" id=5]
+[ext_resource path="res://Prefabs/Interface.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 3.0
@@ -21,15 +22,19 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 
 [node name="Camera" type="Camera" parent="CameraHolder"]
+fov = 90.0
 near = 0.01
 far = 1000.0
 
 [node name="Hands" type="Spatial" parent="CameraHolder/Camera"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, -0.234, -1.473 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, -0.334, -1.073 )
 
 [node name="ShootCast" type="RayCast" parent="CameraHolder/Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -100 )
+
+[node name="AimPosition" type="Spatial" parent="CameraHolder/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1 )
 
 [node name="FlashLight" type="SpotLight" parent="CameraHolder"]
 light_energy = 3.0
@@ -42,6 +47,8 @@ spot_angle = 24.0
 
 [node name="LeanTweenRot" type="Tween" parent="."]
 
+[node name="AimTween" type="Tween" parent="."]
+
 [node name="CrouchNode" type="Node" parent="."]
 script = ExtResource( 3 )
 
@@ -50,3 +57,5 @@ script = ExtResource( 4 )
 
 [node name="FlashLight" type="Node" parent="."]
 script = ExtResource( 5 )
+
+[node name="Interface" parent="." instance=ExtResource( 6 )]

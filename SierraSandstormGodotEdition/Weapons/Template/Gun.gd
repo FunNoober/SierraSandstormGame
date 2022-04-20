@@ -60,6 +60,7 @@ func _process(delta):
 			current_ammo -= 1
 		current_fire_time = stats.fire_rate
 		$Visuals/MuzzleFlash.show()
+		$MuzzleParticles.emitting = true
 		current_fire_time = 0.25
 		FpsApi.shoot(stats.fire_range)
 
