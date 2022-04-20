@@ -29,6 +29,7 @@ var vel = Vector3()
 var cam_rot
 var current_speed
 var jump_speed
+var current_delta : float
 
 
 signal player_spawned(player)
@@ -54,6 +55,7 @@ func _ready():
 	#Spawining in the starting weapon
 	for gun in loadout:
 		var v = gun.instance()
+		v.connect('shot', self, 'shake_camera')
 		$CameraHolder/Camera/Hands.add_child(v)
 	#End
 	
@@ -63,6 +65,7 @@ func _process(delta):
 	
 	if health <= 0:
 		get_tree().reload_current_scene()
+	current_delta = delta
 
 func _physics_process(delta):
 	process_input(delta)
@@ -81,14 +84,10 @@ func process_input(delta):
 	
 	var input_mv_vec = Vector2()
 	
-	if Input.is_action_pressed("mv_forward"):
-		input_mv_vec.y += 1
-	if Input.is_action_pressed("mv_back"):
-		input_mv_vec.y -= 1
-	if Input.is_action_pressed("mv_right"):
-		input_mv_vec.x += 1
-	if Input.is_action_pressed("mv_left"):
-		input_mv_vec.x -= 1
+	if Input.is_action_pressed("mv_forward") or Input.is_action_pressed("mv_back"):
+		input_mv_vec.y += Input.get_axis("mv_back", "mv_forward")
+	if Input.is_action_pressed("mv_right") or Input.is_action_pressed("mv_left"):
+		input_mv_vec.x +=  Input.get_axis("mv_left", "mv_right")
 	if Input.is_action_just_pressed("ads"):
 		if is_aiming == true:
 			is_aiming = false
@@ -177,3 +176,10 @@ func take_damage(amount):
 		emit_signal("hurt")
 	if health <= 0:
 		get_tree().reload_current_scene()
+		
+func shake_camera(t, f, a):
+	var cur_dur = 0.0
+	cur_dur += current_delta
+	if cur_dur <= t:
+		$CameraHolder.rotation_degrees.y += rand_range(cos(current_delta * f) * a, -cos(current_delta * f) * a)
+		$CameraHolder.rotation_degrees.x += rand_range(cos(current_delta * f) * a, -cos(current_delta * f) * a)

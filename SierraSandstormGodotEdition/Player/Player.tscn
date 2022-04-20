@@ -37,6 +37,7 @@ cast_to = Vector3( 0, 0, -100 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1 )
 
 [node name="FlashLight" type="SpotLight" parent="CameraHolder"]
+visible = false
 light_energy = 3.0
 spot_range = 15.0
 spot_angle = 24.0

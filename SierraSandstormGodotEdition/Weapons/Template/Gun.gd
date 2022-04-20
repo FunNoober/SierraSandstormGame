@@ -4,11 +4,16 @@ extends Spatial
 onready var stats = get_node("WeaponStats")
 export var weapon_name : String
 export var moddable : bool
+export var shake_time : float
+export var shake_amplitude : float
+export var shake_frequency : float
 var current_fire_time = 0
 var current_muzzle_time = 0
 
 var current_ammo
 var can_shoot = true
+
+signal shot(t, s, f)
 
 func _ready() -> void:
 	$ReloadTimer.connect("timeout", self, 'reload')
@@ -63,6 +68,7 @@ func _process(delta):
 		$MuzzleParticles.emitting = true
 		current_fire_time = 0.25
 		FpsApi.shoot(stats.fire_range)
+		emit_signal("shot", shake_time, shake_amplitude, shake_frequency)
 
 func reload():
 	stats.reserve_ammo -= stats.mag_size

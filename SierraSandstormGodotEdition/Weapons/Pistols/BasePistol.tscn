@@ -15,6 +15,9 @@ emission_on_uv2 = false
 [sub_resource type="CubeMesh" id=1]
 
 [node name="BasePistol" instance=ExtResource( 1 )]
+shake_time = 0.1
+shake_amplitude = 1.0
+shake_frequency = 1.0
 
 [node name="MuzzleFlash" parent="Visuals" index="0"]
 visible = false
