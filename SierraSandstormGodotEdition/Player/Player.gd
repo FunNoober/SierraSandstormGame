@@ -55,7 +55,6 @@ func _ready():
 	#Spawining in the starting weapon
 	for gun in loadout:
 		var v = gun.instance()
-		v.connect('shot', self, 'shake_camera')
 		$CameraHolder/Camera/Hands.add_child(v)
 	#End
 	
@@ -176,10 +175,3 @@ func take_damage(amount):
 		emit_signal("hurt")
 	if health <= 0:
 		get_tree().reload_current_scene()
-		
-func shake_camera(t, f, a):
-	var cur_dur = 0.0
-	cur_dur += current_delta
-	if cur_dur <= t:
-		$CameraHolder.rotation_degrees.y += rand_range(cos(current_delta * f) * a, -cos(current_delta * f) * a)
-		$CameraHolder.rotation_degrees.x += rand_range(cos(current_delta * f) * a, -cos(current_delta * f) * a)

@@ -30,6 +30,7 @@ far = 1000.0
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, -0.334, -1.073 )
 
 [node name="ShootCast" type="RayCast" parent="CameraHolder/Camera"]
+visible = false
 enabled = true
 cast_to = Vector3( 0, 0, -100 )
 

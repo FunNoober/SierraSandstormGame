@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemies/Infantry/Template/EnemyTemplate.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CapsuleMesh" id=1]
+mid_height = 2.0
+
+[node name="EnemyTemplate" instance=ExtResource( 1 )]
+look_speed = 1.0
+
+[node name="MeshInstance" type="MeshInstance" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = null

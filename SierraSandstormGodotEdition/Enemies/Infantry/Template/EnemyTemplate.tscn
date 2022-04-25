@@ -1,27 +1,33 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Enemies/Infantry/EnemyInfantry.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 2.0
 
 [node name="EnemyTemplate" type="KinematicBody"]
 script = ExtResource( 2 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="BodyCollision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 1 )
 
 [node name="ShootTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Gun" type="MeshInstance" parent="."]
+[node name="PlayerPos" type="Position3D" parent="."]
 
-[node name="ShootCast" type="RayCast" parent="Gun"]
+[node name="BroadVisionCheck" type="Area" parent="."]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -1 )
+
+[node name="CollisionPolygon" type="CollisionPolygon" parent="BroadVisionCheck"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+depth = 2.0
+polygon = PoolVector2Array( -5, 10, 5, 10, 0, 0 )
+
+[node name="VisionCast" type="RayCast" parent="."]
 enabled = true
-cast_to = Vector3( 0, 0, 100 )
+cast_to = Vector3( 0, 0, -100 )
 
-[node name="VisionCasts" type="Spatial" parent="."]
-
-[node name="PlayerPosition3D" type="Position3D" parent="."]
-
-[node name="FindPlayer" type="Area" parent="."]
-
-[node name="CollisionShape" type="CollisionShape" parent="FindPlayer"]
-
-[connection signal="body_entered" from="FindPlayer" to="." method="_on_FindPlayer_body_entered"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="body_entered" from="BroadVisionCheck" to="." method="_on_BroadVisionCheck_body_entered"]

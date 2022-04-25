@@ -1,40 +1,34 @@
 extends KinematicBody
 
-export var speed : float
-export var defensive : bool = true
+export var mov_speed : float
+export var look_speed : float
 
-var can_shoot : bool = true
-var seen_player : bool = false
+onready var player_pos = get_node("PlayerPos")
+onready var vision_cast = get_node("VisionCast")
+
+var can_shoot : bool
+var seen_player : bool
 var player : KinematicBody
 
-#Path finding stuff
-var path = []
-var path_node = 0
-var velocity = Vector2.ZERO
+enum TYPE {defensive, offensive}
+export(TYPE) var type = TYPE.defensive
 
-func _ready() -> void:
-	can_shoot = true
-	for child in $VisionCasts.get_children():
-		child.connect("visible", self, "see_player")
-		
 func _process(delta: float) -> void:
-	if player != null and seen_player == true:
-		$PlayerPosition3D.translation = lerp($PlayerPosition3D.translation, player.translation, delta * 5)
-		$PlayerPosition3D.translation.y = player.translation.y + 1.5
-		look_at_player()
-		if defensive:
-			pass
-	
-func see_player():
-	seen_player = true
+	if player != null:
+		$VisionCast.look_at(player.translation, Vector3.UP)
+	if $VisionCast.is_colliding() && $VisionCast.get_collider().is_in_group("Player"):
+		seen_player = true
+		
+	if seen_player:
+		$PlayerPos.translation = lerp($PlayerPos.translation, player.translation, look_speed * delta)
+		look_at($PlayerPos.translation, Vector3.UP)
+		self.rotation_degrees.x = 0
+		
 
-func _on_FindPlayer_body_entered(body: Node) -> void:
+func _on_ShootTimer_timeout() -> void:
+	pass # Replace with function body.
+
+
+func _on_BroadVisionCheck_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		player = body
-
-func look_at_player():
-	$Gun.look_at($PlayerPosition3D.translation, Vector3.UP)
-	self.look_at($PlayerPosition3D.translation, Vector3.UP)
-			
-	self.rotation.x = 0
-	self.rotation.z = 0
