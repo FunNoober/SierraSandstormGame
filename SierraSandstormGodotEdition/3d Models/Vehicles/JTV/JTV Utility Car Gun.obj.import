@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/JTV Utility Car Gun.obj-6c5780fb41e39edb2bc880f853ba3a8c.mesh"
+
+[deps]
+
+files=[ "res://.import/JTV Utility Car Gun.obj-6c5780fb41e39edb2bc880f853ba3a8c.mesh" ]
+
+source_file="res://3d Models/Vehicles/JTV/JTV Utility Car Gun.obj"
+dest_files=[ "res://.import/JTV Utility Car Gun.obj-6c5780fb41e39edb2bc880f853ba3a8c.mesh", "res://.import/JTV Utility Car Gun.obj-6c5780fb41e39edb2bc880f853ba3a8c.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

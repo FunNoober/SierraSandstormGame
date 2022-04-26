@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/SierraSandstormTestMap.obj-70a889a1dad0fdf71127073aa14d4167.mesh"
+
+[deps]
+
+files=[ "res://.import/SierraSandstormTestMap.obj-70a889a1dad0fdf71127073aa14d4167.mesh" ]
+
+source_file="res://Maps/3d Models/SierraSandstormTestMap/SierraSandstormTestMap.obj"
+dest_files=[ "res://.import/SierraSandstormTestMap.obj-70a889a1dad0fdf71127073aa14d4167.mesh", "res://.import/SierraSandstormTestMap.obj-70a889a1dad0fdf71127073aa14d4167.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
