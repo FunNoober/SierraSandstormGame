@@ -61,3 +61,11 @@ script = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="Interface" parent="." instance=ExtResource( 6 )]
+
+[node name="Position3D" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+
+[node name="FloorCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+enabled = true
+cast_to = Vector3( 0, -1.2, 0 )

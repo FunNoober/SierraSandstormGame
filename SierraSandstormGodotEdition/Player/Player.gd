@@ -2,7 +2,7 @@ extends KinematicBody
 
 export var max_jump_speed = 6
 export var crouch_jump_speed = 2
-export var max_speed = 10.0
+export var max_speed = 5
 export var crouch_speed = 3.0
 export (Array, PackedScene) var loadout
 
@@ -13,7 +13,7 @@ onready var lean_tween_rot : Node = get_node("LeanTweenRot")
 onready var original_hand_pos = $CameraHolder/Camera/Hands.translation
 
 const ACCEL = 20
-const DEACCEL = 20
+const DEACCEL = 10
 const MOUSE_SENSITIVITY = 1
 const MAX_SLOPE_ANGLE = 40
 const GRAVITY = -9
@@ -37,26 +37,20 @@ signal hurt
 
 func _ready():
 	current_speed = max_speed
-	#Setting the camera rotation on start
 	cam_rot = cam_hold.rotation_degrees
 	cam_rot.x = clamp(cam_rot.x, -70, 70)
 	cam_rot.y = 180
 	cam_hold.rotation_degrees = cam_rot
-	#End
 	
-	#Setting default values
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	health = 100.0
 	FpsApi.shoot_cast = $CameraHolder/Camera/ShootCast
 	FpsApi.player = self
-	#End
 	
 	emit_signal("player_spawned", self)
-	#Spawining in the starting weapon
 	for gun in loadout:
 		var v = gun.instance()
 		$CameraHolder/Camera/Hands.add_child(v)
-	#End
 	
 func _process(delta):
 	if Input.is_action_just_pressed("flash_light"):
@@ -83,10 +77,12 @@ func process_input(delta):
 	
 	var input_mv_vec = Vector2()
 	
-	if Input.is_action_pressed("mv_forward") or Input.is_action_pressed("mv_back"):
-		input_mv_vec.y += Input.get_axis("mv_back", "mv_forward")
-	if Input.is_action_pressed("mv_right") or Input.is_action_pressed("mv_left"):
-		input_mv_vec.x +=  Input.get_axis("mv_left", "mv_right")
+	if $FloorCast.is_colliding():
+		if Input.is_action_pressed("mv_forward") or Input.is_action_pressed("mv_back"):
+			input_mv_vec.y += Input.get_axis("mv_back", "mv_forward")
+		if Input.is_action_pressed("mv_right") or Input.is_action_pressed("mv_left"):
+			input_mv_vec.x +=  Input.get_axis("mv_left", "mv_right")
+			
 	if Input.is_action_just_pressed("ads"):
 		if is_aiming == true:
 			is_aiming = false
@@ -105,7 +101,6 @@ func process_input(delta):
 	if Input.is_action_just_pressed("crouch"):
 		is_crouched = $CrouchNode.crouch(is_crouched, $BodyCollision, $CrouchTween)
 	
-	#Leaning behavior and input
 	if Input.is_action_just_pressed("lean_left"):
 		if is_leaning == false:
 			$LeanNode.lean_left(lean_tween, lean_tween_rot, cam_hold)
@@ -120,23 +115,17 @@ func process_input(delta):
 		else:
 			$LeanNode.reset_lean(lean_tween, lean_tween_rot, cam_hold)
 			is_leaning = false
-	#End
 		
-	#Normalizing to prevent moving faster while holding down 2 keys at once
 	input_mv_vec = input_mv_vec.normalized()
-	#End
 	
-	#Some magic to get the relative rotation
 	dir += -cam_xform.basis.z * input_mv_vec.y
 	dir += cam_xform.basis.x * input_mv_vec.x
-	#End
 	
-	if is_on_floor():
+	if $FloorCast.is_colliding():
 		if Input.is_action_just_pressed("mv_jump"):
 			vel.y = jump_speed
 	
 func process_movement(delta):
-	#I don't know what the below code does, just copied it from the Godot Docs
 	dir.y = 0
 	dir = dir.normalized()
 	vel.y += delta * GRAVITY
@@ -157,7 +146,6 @@ func process_movement(delta):
 	vel.x = hvel.x
 	vel.z = hvel.z
 	vel = move_and_slide(vel, Vector3(0, 1, 0), 0.05, 4, deg2rad(MAX_SLOPE_ANGLE))
-	#End
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
