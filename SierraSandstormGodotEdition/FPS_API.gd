@@ -2,6 +2,12 @@ extends Node
 
 var shoot_cast
 var player
+var time : float
+var cur_delta : float
+
+func _process(delta: float) -> void:
+	time += delta
+	cur_delta = delta
 
 func shoot(ray_range : float):
 	var shoot_cast_collider

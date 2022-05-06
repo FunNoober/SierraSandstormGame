@@ -2,6 +2,7 @@ extends KinematicBody
 
 export var mov_speed : float = 10
 export var look_speed : float = 5
+export var damage : float = 10
 
 onready var player_pos = get_node("PlayerPos")
 onready var vision_cast = get_node("VisionCast")
@@ -21,6 +22,9 @@ var vel = Vector3.ZERO
 enum TYPE {defensive, offensive}
 export(TYPE) var type = TYPE.defensive
 
+func _ready() -> void:
+	can_shoot = true
+
 func _process(delta: float) -> void:
 	if should_pathfind and is_currently_pathfinding == false:
 		$PathResetTimer.start()
@@ -36,11 +40,15 @@ func _process(delta: float) -> void:
 		look_at($PlayerPos.translation, Vector3.UP)
 		$Weapon.look_at(player_center, Vector3.UP)
 		self.rotation_degrees.x = 0
+		if can_shoot == true:
+			shoot()
+		
 		if type == TYPE.offensive:
 			move_to_target()
 		if global_transform.origin.distance_to(player.global_transform.origin) < 15:
 			should_pathfind = false
 			path = []
+			
 		else:
 			should_pathfind = true
 			
@@ -57,9 +65,16 @@ func get_target_path(target_pos):
 	path = nav.get_simple_path(translation, target_pos)
 	cur_path_i = 0
 	is_currently_pathfinding = false
+	
+func shoot():
+	if $Weapon/ShootCast.is_colliding() and $Weapon/ShootCast.get_collider().is_in_group("Player"):
+		$Weapon/ShootCast.get_collider().take_damage(damage)
+	$Weapon/ShootParticles.emitting = true
+	can_shoot = false
+	$ShootTimer.start()
 
 func _on_ShootTimer_timeout() -> void:
-	pass # Replace with function body.
+	can_shoot = true
 
 func _on_BroadVisionCheck_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):

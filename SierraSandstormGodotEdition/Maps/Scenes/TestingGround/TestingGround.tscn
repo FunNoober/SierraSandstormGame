@@ -19,7 +19,7 @@ data = PoolVector3Array( -2, -2, 2, -2, 1, 2, -3, -2, 2, -3, -2, 2, -2, 1, 2, -3
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8, 0 )
-max_speed = 50
+max_speed = 25
 
 [node name="Lights" type="Spatial" parent="."]
 

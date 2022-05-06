@@ -1,6 +1,6 @@
 extends KinematicBody
 
-export var max_jump_speed = 6
+export var max_jump_speed = 3
 export var crouch_jump_speed = 2
 export var max_speed = 5
 export var crouch_speed = 3.0
@@ -19,7 +19,6 @@ const MAX_SLOPE_ANGLE = 40
 const GRAVITY = -9
 
 var health : int = 100
-var time = 0.0
 var is_crouched : bool
 var is_leaning : bool
 var flash_enabled : bool
@@ -29,7 +28,6 @@ var vel = Vector3()
 var cam_rot
 var current_speed
 var jump_speed
-var current_delta : float
 
 
 signal player_spawned(player)
@@ -58,11 +56,15 @@ func _process(delta):
 	
 	if health <= 0:
 		get_tree().reload_current_scene()
-	current_delta = delta
+	if Cheats.cheats.fast_mode == true:
+		max_speed = 35
+		crouch_speed = 35
 
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
+	var movement = cos(FpsApi.time+.01)*.1
+	$CameraHolder/Camera/Hands.translation.y = movement + -0.334
 
 func process_input(delta):
 	if is_crouched or is_leaning or is_aiming:
