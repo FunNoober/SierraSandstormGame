@@ -44,3 +44,5 @@ reserve_ammo = 30
 fire_range = 100.0
 reload_time = 1.0
 max_accuracy = 10.0
+recoil = 0.01
+return_time = 1.0

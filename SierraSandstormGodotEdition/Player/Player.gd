@@ -5,6 +5,8 @@ export var crouch_jump_speed = 2
 export var max_speed = 5
 export var crouch_speed = 3.0
 export (Array, PackedScene) var loadout
+export var sway_amplitude : float = 0.01
+export var sway_frequency : float = 0.01
 
 onready var cam : Node = get_node("CameraHolder/Camera")
 onready var cam_hold : Node = get_node("CameraHolder")
@@ -48,6 +50,7 @@ func _ready():
 	emit_signal("player_spawned", self)
 	for gun in loadout:
 		var v = gun.instance()
+		v.connect("shot", self, "shot")
 		$CameraHolder/Camera/Hands.add_child(v)
 	
 func _process(delta):
@@ -63,7 +66,8 @@ func _process(delta):
 func _physics_process(delta):
 	process_input(delta)
 	process_movement(delta)
-	var movement = cos(FpsApi.time+.01)*.1
+	
+	var movement = cos(FpsApi.time+sway_frequency)*sway_amplitude
 	$CameraHolder/Camera/Hands.translation.y = movement + -0.334
 
 func process_input(delta):
@@ -165,3 +169,31 @@ func take_damage(amount):
 		emit_signal("hurt")
 	if health <= 0:
 		get_tree().reload_current_scene()
+		
+func shot(recoil, return_time):
+	$CameraHolder/Camera/Hands.translation.z += recoil
+	var cam_hold_rot_x_before_recoil = $CameraHolder.rotation_degrees.x
+	$CameraHolder.rotation_degrees.x += recoil * 100
+	
+	var weapon_tween = Tween.new()
+	var camera_tween = Tween.new()
+	add_child(weapon_tween)
+	add_child(camera_tween)
+	weapon_tween.interpolate_property(
+		$CameraHolder/Camera/Hands,
+		"translation:z",
+		$CameraHolder/Camera/Hands.translation.z,
+		original_hand_pos.z,
+		return_time
+	)
+	camera_tween.interpolate_property(
+		$CameraHolder,
+		"rotation_degrees:x",
+		$CameraHolder.rotation_degrees.x,
+		cam_hold_rot_x_before_recoil,
+		return_time
+	)
+	weapon_tween.start()
+	camera_tween.start()
+	yield(weapon_tween, "tween_all_completed")
+	weapon_tween.queue_free()

@@ -13,13 +13,16 @@ var current_muzzle_time = 0
 var current_ammo
 var can_shoot = true
 
+signal shot(recoil_amount, return_time)
+
 func _ready() -> void:
 	$ReloadTimer.connect("timeout", self, 'reload')
 	var stats_dic = {
 		'starting_ammo' : stats.reserve_ammo,
 		'mag_size' : stats.mag_size,
 		'reload_time' : stats.reload_time,
-		'fire_rate' : stats.fire_rate
+		'fire_rate' : stats.fire_rate,
+		'recoil' : stats.recoil
 	}
 	
 	current_ammo = stats.mag_size
@@ -33,8 +36,9 @@ func _ready() -> void:
 			stats_dic = c_a_d
 			stats.reserve_ammo = stats_dic.starting_ammo
 			stats.mag_size = stats_dic.mag_size
-			stats.reload_time = stats.reload_time
-			stats.fire_rate = stats.fire_rate
+			stats.reload_time = stats_dic.reload_time
+			stats.fire_rate = stats_dic.fire_rate
+			stats.recoil = stats_dic.recoil
 		else:
 			var f = File.new()
 			f.open("user://" + weapon_name + ".json", File.WRITE)
@@ -66,6 +70,7 @@ func _process(delta):
 		$MuzzleParticles.emitting = true
 		current_fire_time = 0.25
 		FpsApi.shoot(stats.fire_range)
+		emit_signal("shot", stats.recoil, stats.return_time)
 
 func reload():
 	stats.reserve_ammo -= stats.mag_size

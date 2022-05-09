@@ -51,6 +51,8 @@ spot_angle = 24.0
 
 [node name="AimTween" type="Tween" parent="."]
 
+[node name="WeaponReturnTween" type="Tween" parent="."]
+
 [node name="CrouchNode" type="Node" parent="."]
 script = ExtResource( 3 )
 
