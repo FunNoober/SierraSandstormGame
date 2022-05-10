@@ -29,6 +29,13 @@ config/icon="res://icon.png"
 FpsApi="*res://FPS_API.gd"
 Cheats="*res://Globals/Cheats.gd"
 
+[importer_defaults]
+
+ogg_vorbis={
+"loop": false,
+"loop_offset": 0
+}
+
 [input]
 
 mv_forward={

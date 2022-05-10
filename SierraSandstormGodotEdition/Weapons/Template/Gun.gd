@@ -62,15 +62,17 @@ func _process(delta):
 	if current_muzzle_time <= 0:
 		$Visuals/MuzzleFlash.hide()
 	
-	if FpsApi.is_pressed_hold("shoot") and current_fire_time <= 0 and can_shoot:
+	if FpsApi.is_pressed_hold("shoot") and can_shoot:
 		if Cheats.cheats.infinite_ammo == false:
 			current_ammo -= 1
-		current_fire_time = stats.fire_rate
+		#$ShootTimer.start(stats.fire_rate)
+		#can_shoot = false
 		$Visuals/MuzzleFlash.show()
 		$MuzzleParticles.emitting = true
 		current_fire_time = 0.25
 		FpsApi.shoot(stats.fire_range)
 		emit_signal("shot", stats.recoil, stats.return_time)
+		$AudioStreamPlayer.playing = true
 
 func reload():
 	stats.reserve_ammo -= stats.mag_size
@@ -82,3 +84,7 @@ func can_reload():
 		return false
 	else:
 		return true
+
+
+func _on_ShootTimer_timeout() -> void:
+	can_shoot = true
