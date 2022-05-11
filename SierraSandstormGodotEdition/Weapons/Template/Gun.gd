@@ -4,11 +4,6 @@ extends Spatial
 onready var stats = get_node("WeaponStats")
 export var weapon_name : String
 export var moddable : bool
-export var shake_time : float
-export var shake_amplitude : float
-export var shake_frequency : float
-var current_fire_time = 0
-var current_muzzle_time = 0
 
 var current_ammo
 var can_shoot = true
@@ -56,23 +51,20 @@ func _process(delta):
 		if can_reload():
 			$ReloadTimer.wait_time = stats.reload_time
 			$ReloadTimer.start()
-
-	current_fire_time = FpsApi.countdown(current_fire_time, delta)	
-	current_muzzle_time = FpsApi.countdown(current_muzzle_time, delta)
-	if current_muzzle_time <= 0:
-		$Visuals/MuzzleFlash.hide()
 	
 	if FpsApi.is_pressed_hold("shoot") and can_shoot:
 		if Cheats.cheats.infinite_ammo == false:
 			current_ammo -= 1
-		#$ShootTimer.start(stats.fire_rate)
-		#can_shoot = false
+		$ShootTimer.start(stats.fire_rate)
 		$Visuals/MuzzleFlash.show()
+		$MuzzleFlashTimer.start()
 		$MuzzleParticles.emitting = true
-		current_fire_time = 0.25
-		FpsApi.shoot(stats.fire_range)
-		emit_signal("shot", stats.recoil, stats.return_time)
 		$AudioStreamPlayer.playing = true
+		
+		can_shoot = false
+		FpsApi.throw_ray(stats.fire_range)
+		emit_signal("shot", stats.recoil, stats.return_time)
+		
 
 func reload():
 	stats.reserve_ammo -= stats.mag_size
@@ -84,7 +76,10 @@ func can_reload():
 		return false
 	else:
 		return true
-
-
+		
 func _on_ShootTimer_timeout() -> void:
 	can_shoot = true
+
+
+func _on_MuzzleFlashTimer_timeout() -> void:
+	$Visuals/MuzzleFlash.hide()

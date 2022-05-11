@@ -59,6 +59,10 @@ one_shot = true
 [node name="ReloadTimer" type="Timer" parent="."]
 one_shot = true
 
+[node name="MuzzleFlashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Container" type="MarginContainer" parent="HUD"]
@@ -93,3 +97,4 @@ draw_pass_1 = SubResource( 3 )
 stream = ExtResource( 3 )
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="MuzzleFlashTimer" to="." method="_on_MuzzleFlashTimer_timeout"]

@@ -173,27 +173,10 @@ func take_damage(amount):
 func shot(recoil, return_time):
 	$CameraHolder/Camera/Hands.translation.z += recoil
 	var cam_hold_rot_x_before_recoil = $CameraHolder.rotation_degrees.x
-	$CameraHolder.rotation_degrees.x += recoil * 100
+	$CameraHolder.rotation_degrees.x += recoil * 10
+	
 	
 	var weapon_tween = Tween.new()
-	var camera_tween = Tween.new()
-	add_child(weapon_tween)
-	add_child(camera_tween)
-	weapon_tween.interpolate_property(
-		$CameraHolder/Camera/Hands,
-		"translation:z",
-		$CameraHolder/Camera/Hands.translation.z,
-		original_hand_pos.z,
-		return_time
-	)
-	camera_tween.interpolate_property(
-		$CameraHolder,
-		"rotation_degrees:x",
-		$CameraHolder.rotation_degrees.x,
-		cam_hold_rot_x_before_recoil,
-		return_time
-	)
-	weapon_tween.start()
-	camera_tween.start()
-	yield(weapon_tween, "tween_all_completed")
-	weapon_tween.queue_free()
+	var cam_tween = Tween.new()
+	FpsApi.create_tween($CameraHolder/Camera/Hands, 'translation:z', $CameraHolder/Camera/Hands.translation.z, original_hand_pos.z, return_time, true, weapon_tween)
+	FpsApi.create_tween($CameraHolder, 'rotation_degrees:x', $CameraHolder.rotation_degrees.x, cam_hold_rot_x_before_recoil, return_time, true, cam_tween)
