@@ -1,6 +1,6 @@
 <h2>What Is This?</h2>
 <p>Operation Sierra Sandstorm is a first person shooter game set in the not so distant future.</p>
-<a href="https://github.com/FunNoober/OperationSierraSandstorm/blob/main/STORIES.md">Stories</a>
+<a href="https://github.com/FunNoober/OperationSierraSandstorm/blob/main/Story%20Information/STORIES.md">Stories</a>
 
 <h2>Information About This Game:</h2>
 <p>This game is being developed solo by a indie developer that goes by the name "Fun Noober". <br/> </p>
