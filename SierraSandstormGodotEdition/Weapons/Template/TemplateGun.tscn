@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Weapons/Template/WeaponStats.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/Template/Gun.gd" type="Script" id=2]
-[ext_resource path="res://Sound Effects/Weapons/gun001_shoot_sound.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Sound Effects/Weapons/gun001_shoot_sound.ogg" type="AudioStream" id=3]
 
 [sub_resource type="SpatialMaterial" id=4]
 flags_transparent = true

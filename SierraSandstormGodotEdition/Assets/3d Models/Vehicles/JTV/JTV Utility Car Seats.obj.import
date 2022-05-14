@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/JTV Utility Car Seats.obj-5f9cec46824f9c1048d862d597686407.mesh"
+
+[deps]
+
+files=[ "res://.import/JTV Utility Car Seats.obj-5f9cec46824f9c1048d862d597686407.mesh" ]
+
+source_file="res://Assets/3d Models/Vehicles/JTV/JTV Utility Car Seats.obj"
+dest_files=[ "res://.import/JTV Utility Car Seats.obj-5f9cec46824f9c1048d862d597686407.mesh", "res://.import/JTV Utility Car Seats.obj-5f9cec46824f9c1048d862d597686407.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

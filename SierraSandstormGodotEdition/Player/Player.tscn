@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
-[ext_resource path="res://Weapons/Pistols/BasePistol.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Weapons/AssaultRifles/M4A1AssaultRifle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Player/MovementNodes/CrouchNode.gd" type="Script" id=3]
 [ext_resource path="res://Player/MovementNodes/LeanNode.gd" type="Script" id=4]
 [ext_resource path="res://Player/MovementNodes/FlashLight.gd" type="Script" id=5]

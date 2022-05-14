@@ -12,6 +12,7 @@ var can_shoot : bool
 var seen_player : bool
 var should_pathfind : bool
 var is_currently_pathfinding : bool
+var health : int = 100
 var player : KinematicBody
 
 var path = []
@@ -24,6 +25,7 @@ export(TYPE) var type = TYPE.defensive
 
 func _ready() -> void:
 	can_shoot = true
+	health = 100
 
 func _process(delta: float) -> void:
 	if should_pathfind and is_currently_pathfinding == false:
@@ -83,3 +85,13 @@ func _on_BroadVisionCheck_body_entered(body: Node) -> void:
 func _on_PathResetTimer_timeout() -> void:
 	if seen_player:
 		get_target_path(player.global_transform.origin)
+
+func take_damage(amount):
+	health -= amount
+	print("ouch")
+	if health <= 0:
+		die()
+
+func die():
+	queue_free()
+	#TODO: add falling animation or ragdolling

@@ -51,8 +51,9 @@ func _process(delta):
 		if can_reload():
 			$ReloadTimer.wait_time = stats.reload_time
 			$ReloadTimer.start()
+			$Visuals/WeaponModel/AnimationPlayer.play("Reloadanimation")
 	
-	if FpsApi.is_pressed_hold("shoot") and can_shoot:
+	if Input.is_action_pressed("shoot") and can_shoot:
 		if Cheats.cheats.infinite_ammo == false:
 			current_ammo -= 1
 		$ShootTimer.start(stats.fire_rate)
@@ -61,8 +62,11 @@ func _process(delta):
 		$MuzzleParticles.emitting = true
 		$AudioStreamPlayer.playing = true
 		
+		
 		can_shoot = false
-		FpsApi.throw_ray(stats.fire_range)
+		var coll = FpsApi.throw_ray(stats.fire_range)
+		if coll != null and coll.is_in_group("Enemy"):
+			coll.take_damage(stats.damage)
 		emit_signal("shot", stats.recoil, stats.return_time)
 		
 
@@ -79,7 +83,6 @@ func can_reload():
 		
 func _on_ShootTimer_timeout() -> void:
 	can_shoot = true
-
 
 func _on_MuzzleFlashTimer_timeout() -> void:
 	$Visuals/MuzzleFlash.hide()

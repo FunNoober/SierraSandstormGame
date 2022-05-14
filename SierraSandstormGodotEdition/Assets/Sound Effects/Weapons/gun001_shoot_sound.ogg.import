@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/gun001_shoot_sound.ogg-a9647c67ca13d5c4cbe3222cf64a06da.oggstr"
+
+[deps]
+
+source_file="res://Assets/Sound Effects/Weapons/gun001_shoot_sound.ogg"
+dest_files=[ "res://.import/gun001_shoot_sound.ogg-a9647c67ca13d5c4cbe3222cf64a06da.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

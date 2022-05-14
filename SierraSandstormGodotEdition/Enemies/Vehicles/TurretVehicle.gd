@@ -1,6 +1,5 @@
 extends KinematicBody
 
-export var map_name : String
 export var accuracy : float
 export var damage : float
 

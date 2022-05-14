@@ -8,3 +8,4 @@ export var reload_time : float
 export var max_accuracy : float
 export var recoil : float
 export var return_time : float
+export var damage : float

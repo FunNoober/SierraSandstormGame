@@ -3,7 +3,7 @@
 [ext_resource path="res://Enemies/EnemyVisionCast.gd" type="Script" id=1]
 [ext_resource path="res://Enemies/Vehicles/TurretVehicle.gd" type="Script" id=2]
 
-[node name="KinematicBody" type="KinematicBody"]
+[node name="KinematicBody" type="KinematicBody" groups=["Actor", "Enemy_Armour"]]
 script = ExtResource( 2 )
 accuracy = 5.0
 

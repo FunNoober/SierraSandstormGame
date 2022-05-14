@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Weapons/Template/TemplateGun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/3d Models/Weapons/M4A1.glb" type="PackedScene" id=2]
+
+[sub_resource type="PlaneMesh" id=2]
+size = Vector2( 0.5, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=3]
+emission_enabled = true
+emission = Color( 0.992157, 1, 0, 1 )
+emission_energy = 3.0
+emission_operator = 0
+emission_on_uv2 = false
+
+[node name="BasePistol" instance=ExtResource( 1 )]
+
+[node name="MuzzleFlash" parent="Visuals" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
+visible = false
+
+[node name="MeshInstance" type="MeshInstance" parent="Visuals/MuzzleFlash" index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.6 )
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[node name="WeaponModel" parent="Visuals" index="1" instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.3, 0.3 )
+
+[node name="WeaponStats" parent="." index="1"]
+fire_rate = 0.1
+mag_size = 10
+reserve_ammo = 30
+fire_range = 100.0
+reload_time = 2.083
+max_accuracy = 10.0
+recoil = 0.01
+return_time = 1.0
+damage = 25.0
+
+[node name="ReloadTimer" parent="." index="3"]
+wait_time = 0.1
