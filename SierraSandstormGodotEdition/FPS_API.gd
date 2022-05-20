@@ -34,3 +34,7 @@ func create_tween(object, property, start, end, time : float, destroy_on_finish 
 	
 	if destroy_on_finish == true:
 		tween_node.queue_free()
+
+func move_on_sine(object_value, sine, additional_values):
+	object_value = sine + additional_values
+	return object_value

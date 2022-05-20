@@ -1,19 +1,21 @@
 extends KinematicBody
 
+export var group_mask = "Player"
+
 export var mov_speed : float = 10
 export var look_speed : float = 5
 export var damage : float = 10
 
-onready var player_pos = get_node("PlayerPos")
+onready var enemy_pos = get_node("EnemyPos")
 onready var vision_cast = get_node("VisionCast")
 onready var nav = get_parent()
 
 var can_shoot : bool
-var seen_player : bool
+var seen_enemy : bool
 var should_pathfind : bool
 var is_currently_pathfinding : bool
 var health : int = 100
-var player : KinematicBody
+var enemy : KinematicBody
 
 var path = []
 var cur_path_i = 0
@@ -31,15 +33,15 @@ func _process(delta: float) -> void:
 	if should_pathfind and is_currently_pathfinding == false:
 		$PathResetTimer.start()
 		is_currently_pathfinding = true
-	if player != null:
-		$VisionCast.look_at(player.translation, Vector3.UP)
-	if $VisionCast.is_colliding() && $VisionCast.get_collider().is_in_group("Player"):
-		seen_player = true
+	if enemy != null and is_instance_valid(enemy):
+		$VisionCast.look_at(enemy.translation, Vector3.UP)
+	if $VisionCast.is_colliding() && $VisionCast.get_collider().name.find(group_mask) != -1:
+		seen_enemy = true
 		
-	if seen_player:
-		$PlayerPos.translation = lerp($PlayerPos.translation, player.global_transform.origin, look_speed * delta)
-		var player_center = Vector3($PlayerPos.translation.x, $PlayerPos.translation.y + 1.5, $PlayerPos.translation.z)
-		look_at($PlayerPos.translation, Vector3.UP)
+	if seen_enemy and enemy != null and is_instance_valid(enemy):
+		$EnemyPos.translation = lerp($EnemyPos.translation, enemy.global_transform.origin, look_speed * delta)
+		var player_center = Vector3($EnemyPos.translation.x, $EnemyPos.translation.y + 1.5, $EnemyPos.translation.z)
+		look_at($EnemyPos.translation, Vector3.UP)
 		$Weapon.look_at(player_center, Vector3.UP)
 		self.rotation_degrees.x = 0
 		if can_shoot == true:
@@ -47,7 +49,7 @@ func _process(delta: float) -> void:
 		
 		if type == TYPE.offensive:
 			move_to_target()
-		if global_transform.origin.distance_to(player.global_transform.origin) < 15:
+		if global_transform.origin.distance_to(enemy.global_transform.origin) < 15:
 			should_pathfind = false
 			path = []
 			
@@ -64,12 +66,15 @@ func move_to_target():
 			move_and_slide(dir.normalized() * mov_speed, Vector3.UP)
 		
 func get_target_path(target_pos):
-	path = nav.get_simple_path(translation, target_pos)
+	var new_pos = target_pos
+	new_pos.x = target_pos.x + rand_range(-2, 2)
+	new_pos.z = target_pos.z + rand_range(-2, 2)
+	path = nav.get_simple_path(translation, new_pos)
 	cur_path_i = 0
 	is_currently_pathfinding = false
 	
 func shoot():
-	if $Weapon/ShootCast.is_colliding() and $Weapon/ShootCast.get_collider().is_in_group("Player"):
+	if $Weapon/ShootCast.is_colliding() and $Weapon/ShootCast.get_collider().name.find(group_mask) != -1:
 		$Weapon/ShootCast.get_collider().take_damage(damage)
 	$Weapon/ShootParticles.emitting = true
 	can_shoot = false
@@ -79,12 +84,12 @@ func _on_ShootTimer_timeout() -> void:
 	can_shoot = true
 
 func _on_BroadVisionCheck_body_entered(body: Node) -> void:
-	if body.is_in_group("Player"):
-		player = body
+	if body.name.find(group_mask) != -1:
+		enemy = body
 
 func _on_PathResetTimer_timeout() -> void:
-	if seen_player:
-		get_target_path(player.global_transform.origin)
+	if seen_enemy and is_instance_valid(enemy):
+		get_target_path(enemy.global_transform.origin)
 
 func take_damage(amount):
 	health -= amount

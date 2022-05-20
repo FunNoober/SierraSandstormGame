@@ -12,14 +12,15 @@ onready var cam : Node = get_node("CameraHolder/Camera")
 onready var cam_hold : Node = get_node("CameraHolder")
 onready var lean_tween : Node = get_node("LeanTween")
 onready var lean_tween_rot : Node = get_node("LeanTweenRot")
-onready var original_hand_pos = $CameraHolder/Camera/Hands.translation
+onready var hands = get_node("CameraHolder/Camera/Hands")
+onready var original_hand_pos = hands.translation
 
 const ACCEL = 20
 const DEACCEL = 10
-const MOUSE_SENSITIVITY = 1
 const MAX_SLOPE_ANGLE = 40
 const GRAVITY = -9
 
+var MOUSE_SENSITIVITY = 1.0
 var health : int = 100
 var is_crouched : bool
 var is_leaning : bool
@@ -51,7 +52,7 @@ func _ready():
 	for gun in loadout:
 		var v = gun.instance()
 		v.connect("shot", self, "shot")
-		$CameraHolder/Camera/Hands.add_child(v)
+		hands.add_child(v)
 	
 func _process(delta):
 	if Input.is_action_just_pressed("flash_light"):
@@ -68,7 +69,12 @@ func _physics_process(delta):
 	process_movement(delta)
 	
 	var movement = cos(FpsApi.time+sway_frequency)*sway_amplitude
-	$CameraHolder/Camera/Hands.translation.y = movement + -0.334
+	hands.translation.y = FpsApi.move_on_sine(hands.translation.y, movement, -0.334)
+	$CameraHolder/Camera/ShootCast.translation.x = hands.translation.x
+	if is_aiming == false:
+		hands.translation.x = FpsApi.move_on_sine(hands.translation.y, movement, 0.539)
+	else:
+		hands.translation.x = FpsApi.move_on_sine(hands.translation.y, movement, 0)
 
 func process_input(delta):
 	if is_crouched or is_leaning or is_aiming:
@@ -77,6 +83,11 @@ func process_input(delta):
 	else:
 		current_speed = max_speed
 		jump_speed = max_jump_speed
+		
+	if is_leaning:
+		MOUSE_SENSITIVITY = 0.5
+	else:
+		MOUSE_SENSITIVITY = 1
 	
 	dir = Vector3()
 	var cam_xform = cam.get_global_transform()
@@ -92,13 +103,13 @@ func process_input(delta):
 	if Input.is_action_just_pressed("ads"):
 		if is_aiming == true:
 			is_aiming = false
-			$AimTween.interpolate_property($CameraHolder/Camera/Hands, 'translation', $CameraHolder/Camera/AimPosition.translation, original_hand_pos, 1)
+			$AimTween.interpolate_property(hands, 'translation', $CameraHolder/Camera/AimPosition.translation, original_hand_pos, 1)
 			$AimTween.start()
 			$CameraHolder/Camera.fov = 90
 			return
 		if is_aiming == false:
 			is_aiming = true
-			$AimTween.interpolate_property($CameraHolder/Camera/Hands, 'translation', original_hand_pos, $CameraHolder/Camera/AimPosition.translation, 1)
+			$AimTween.interpolate_property(hands, 'translation', original_hand_pos, $CameraHolder/Camera/AimPosition.translation, 1)
 			$AimTween.start()
 			$CameraHolder/Camera.fov = 50
 			return
@@ -129,7 +140,10 @@ func process_input(delta):
 	
 	if $FloorCast.is_colliding():
 		if Input.is_action_just_pressed("mv_jump"):
-			vel.y = jump_speed
+			if Cheats.cheats.super_jump == false:
+				vel.y = jump_speed
+			else:
+				vel.y = 20
 	
 func process_movement(delta):
 	dir.y = 0
@@ -171,12 +185,12 @@ func take_damage(amount):
 		get_tree().reload_current_scene()
 		
 func shot(recoil, return_time):
-	$CameraHolder/Camera/Hands.translation.z += recoil
+	hands.translation.z += recoil
 	var cam_hold_rot_x_before_recoil = $CameraHolder.rotation_degrees.x
-	$CameraHolder.rotation_degrees.x += recoil * 10
+	$CameraHolder.rotation_degrees.x += recoil * 50
 	
 	
 	var weapon_tween = Tween.new()
-	var cam_tween = Tween.new()
-	FpsApi.create_tween($CameraHolder/Camera/Hands, 'translation:z', $CameraHolder/Camera/Hands.translation.z, original_hand_pos.z, return_time, true, weapon_tween)
-	FpsApi.create_tween($CameraHolder, 'rotation_degrees:x', $CameraHolder.rotation_degrees.x, cam_hold_rot_x_before_recoil, return_time, true, cam_tween)
+	#var cam_tween = Tween.new()
+	FpsApi.create_tween(hands, 'translation:z', hands.translation.z, original_hand_pos.z, return_time, true, weapon_tween)
+	#FpsApi.create_tween($CameraHolder, 'rotation_degrees:x', $CameraHolder.rotation_degrees.x, cam_hold_rot_x_before_recoil, return_time, true, cam_tween)

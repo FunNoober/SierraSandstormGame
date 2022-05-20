@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://AI/AIInfantryBase.gd" type="Script" id=1]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 2.0
+
+[node name="FriendlyTemplate" type="KinematicBody"]
+script = ExtResource( 1 )
+group_mask = "Enemy"
+
+[node name="BodyCollision" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="PathResetTimer" type="Timer" parent="."]
+
+[node name="EnemyPos" type="Position3D" parent="."]
+
+[node name="BroadVisionCheck" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionPolygon" parent="BroadVisionCheck"]
+
+[node name="VisionCast" type="RayCast" parent="."]
+
+[connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
+[connection signal="timeout" from="PathResetTimer" to="." method="_on_PathResetTimer_timeout"]
+[connection signal="body_entered" from="BroadVisionCheck" to="." method="_on_BroadVisionCheck_body_entered"]

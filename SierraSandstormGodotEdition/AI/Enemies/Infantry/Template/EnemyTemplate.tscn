@@ -1,12 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Enemies/Infantry/EnemyInfantry.gd" type="Script" id=2]
+[ext_resource path="res://AI/AIInfantryBase.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 2.0
 
 [node name="EnemyTemplate" type="KinematicBody" groups=["Actor", "Enemy"]]
-script = ExtResource( 2 )
+script = ExtResource( 1 )
+group_mask = "Friendly"
 
 [node name="BodyCollision" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2, 0 )
@@ -18,7 +19,7 @@ one_shot = true
 [node name="PathResetTimer" type="Timer" parent="."]
 autostart = true
 
-[node name="PlayerPos" type="Position3D" parent="."]
+[node name="EnemyPos" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="BroadVisionCheck" type="Area" parent="."]
