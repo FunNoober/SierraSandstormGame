@@ -106,18 +106,18 @@ GitHub is a code distribution software developed by Microsoft. GitHub is based o
 ## Real World Objects and Brands in Game:
 
 ### Weapons:
+Name: Type Here (Based on Real Weapon Here)
+M5A2: Fully Automatic Assault Rifle (M4A1)
 
-M4A1: Fully Automatic Assault Rifle
+M32: 3 Round Burst Assault Rifle (M16)
 
-M16: 3 Round Burst Assault Rifle
+AK-58: Fully Automatic Assault Rifle (AK-47)
 
-AK-47: Fully Automatic Assault Rifle
+AZ Zal : Fully Automatic Suppressed Assault Rifle (AS Val)
 
-AS Val : Fully Automatic Suppressed Assault Rifle
+MP50 : Fully Automatic Sub Machine Gun (MP5)
 
-MP5: Fully Automatic Sub Machine Gun
-
-UMP-45 : Fully Automatic Sub Machine Gun
+UMP-90 : Fully Automatic Sub Machine Gun (UMP-45)
 
 M249 SAW: Fully Automatic Light Machine Gun
 
