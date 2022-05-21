@@ -12,6 +12,7 @@ height = 3.0
 
 [node name="Player" type="KinematicBody" groups=["Actor", "Player"]]
 script = ExtResource( 1 )
+max_speed = 1
 loadout = [ ExtResource( 2 ) ]
 
 [node name="BodyCollision" type="CollisionShape" parent="."]

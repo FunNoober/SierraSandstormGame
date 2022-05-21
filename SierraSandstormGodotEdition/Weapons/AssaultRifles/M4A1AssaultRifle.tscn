@@ -37,7 +37,7 @@ fire_range = 100.0
 reload_time = 2.083
 max_accuracy = 10.0
 recoil = 0.01
-return_time = 1.0
+return_time = 5.0
 damage = 25.0
 
 [node name="ReloadTimer" parent="." index="3"]

@@ -20,7 +20,7 @@ const DEACCEL = 10
 const MAX_SLOPE_ANGLE = 40
 const GRAVITY = -9
 
-var MOUSE_SENSITIVITY = 1.0
+var MOUSE_SENSITIVITY : float = 1.0 
 var health : int = 100
 var is_crouched : bool
 var is_leaning : bool
@@ -185,12 +185,13 @@ func take_damage(amount):
 		get_tree().reload_current_scene()
 		
 func shot(recoil, return_time):
+	MOUSE_SENSITIVITY = 0.05
 	hands.translation.z += recoil
 	var cam_hold_rot_x_before_recoil = $CameraHolder.rotation_degrees.x
 	$CameraHolder.rotation_degrees.x += recoil * 50
 	
 	
 	var weapon_tween = Tween.new()
-	#var cam_tween = Tween.new()
 	FpsApi.create_tween(hands, 'translation:z', hands.translation.z, original_hand_pos.z, return_time, true, weapon_tween)
-	#FpsApi.create_tween($CameraHolder, 'rotation_degrees:x', $CameraHolder.rotation_degrees.x, cam_hold_rot_x_before_recoil, return_time, true, cam_tween)
+	yield(get_tree().create_timer(return_time), "timeout")
+	MOUSE_SENSITIVITY = 1
