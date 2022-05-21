@@ -43,8 +43,9 @@ damage = 25.0
 [node name="ReloadTimer" parent="." index="3"]
 wait_time = 0.1
 
-[node name="Container" parent="HUD" index="0"]
-visible = false
+[node name="AmmoCounter" parent="HUD/Container/HBoxContainer" index="0"]
+margin_right = 37.0
+text = "90/30"
 
 [node name="MuzzleParticles" parent="." index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.7 )

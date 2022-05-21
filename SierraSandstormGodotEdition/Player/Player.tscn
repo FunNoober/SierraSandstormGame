@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/AssaultRifles/M4A1AssaultRifle.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Player/MovementNodes/LeanNode.gd" type="Script" id=4]
 [ext_resource path="res://Player/MovementNodes/FlashLight.gd" type="Script" id=5]
 [ext_resource path="res://Prefabs/Interface.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Weapons/AssaultRifles/AK47AssaultRifle.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Player/WeaponSwitcher.gd" type="Script" id=8]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 3.0
@@ -13,7 +15,7 @@ height = 3.0
 [node name="Player" type="KinematicBody" groups=["Actor", "Player"]]
 script = ExtResource( 1 )
 max_speed = 1
-loadout = [ ExtResource( 2 ) ]
+loadout = [ ExtResource( 2 ), ExtResource( 7 ) ]
 
 [node name="BodyCollision" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.5, 0 )
@@ -29,6 +31,7 @@ far = 1000.0
 
 [node name="Hands" type="Spatial" parent="CameraHolder/Camera"]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, -0.334, -1.073 )
+script = ExtResource( 8 )
 
 [node name="ShootCast" type="RayCast" parent="CameraHolder/Camera"]
 visible = false

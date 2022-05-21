@@ -49,10 +49,14 @@ func _ready():
 	FpsApi.player = self
 	
 	emit_signal("player_spawned", self)
-	for gun in loadout:
-		var v = gun.instance()
+	for i in len(loadout):
+		var v = loadout[i].instance()
 		v.connect("shot", self, "shot")
 		hands.add_child(v)
+		v.set_process(false)
+		v.hide()
+		$CameraHolder/Camera/Hands.switch_weapon()
+		
 	
 func _process(delta):
 	if Input.is_action_just_pressed("flash_light"):
