@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Weapons/AssaultRifles/M4A1AssaultRifle.tscn" type="PackedScene" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Prefabs/Interface.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Weapons/AssaultRifles/AK47AssaultRifle.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/WeaponSwitcher.gd" type="Script" id=8]
+[ext_resource path="res://Player/MovementNodes/AimNode.gd" type="Script" id=9]
+[ext_resource path="res://Player/FloorCheckNode.gd" type="Script" id=10]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 3.0
@@ -34,7 +36,6 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, 
 script = ExtResource( 8 )
 
 [node name="ShootCast" type="RayCast" parent="CameraHolder/Camera"]
-visible = false
 enabled = true
 cast_to = Vector3( 0, 0, -100 )
 
@@ -65,6 +66,12 @@ script = ExtResource( 4 )
 
 [node name="FlashLight" type="Node" parent="."]
 script = ExtResource( 5 )
+
+[node name="AimNode" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="FloorCheckNode" type="Node" parent="."]
+script = ExtResource( 10 )
 
 [node name="Interface" parent="." instance=ExtResource( 6 )]
 visible = false

@@ -8,7 +8,7 @@ export var moddable : bool
 var current_ammo
 var can_shoot = true
 
-signal shot(recoil_amount, return_time)
+signal shot(recoil_amount, return_time, accuracy, accuracy_ads)
 
 func _ready() -> void:
 	$ReloadTimer.connect("timeout", self, 'reload')
@@ -68,7 +68,8 @@ func _process(delta):
 		var coll = FpsApi.throw_ray(stats.fire_range)
 		if coll != null and coll.is_in_group("Enemy"):
 			coll.take_damage(stats.damage)
-		emit_signal("shot", stats.recoil, stats.return_time)
+		emit_signal("shot", stats.recoil, stats.return_time, stats.accuracy_normal, stats.accuracy_ads)
+
 		
 
 func reload():

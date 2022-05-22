@@ -74,7 +74,7 @@ func _physics_process(delta):
 	
 	var movement = cos(FpsApi.time+sway_frequency)*sway_amplitude
 	hands.translation.y = FpsApi.move_on_sine(hands.translation.y, movement, -0.334)
-	$CameraHolder/Camera/ShootCast.translation.x = hands.translation.x
+	#$CameraHolder/Camera/ShootCast.translation.x = hands.translation.x
 	if is_aiming == false:
 		hands.translation.x = FpsApi.move_on_sine(hands.translation.y, movement, 0.539)
 	else:
@@ -98,56 +98,17 @@ func process_input(delta):
 	
 	var input_mv_vec = Vector2()
 	
-	if $FloorCast.is_colliding():
-		if Input.is_action_pressed("mv_forward") or Input.is_action_pressed("mv_back"):
-			input_mv_vec.y += Input.get_axis("mv_back", "mv_forward")
-		if Input.is_action_pressed("mv_right") or Input.is_action_pressed("mv_left"):
-			input_mv_vec.x +=  Input.get_axis("mv_left", "mv_right")
-			
-	if Input.is_action_just_pressed("ads"):
-		if is_aiming == true:
-			is_aiming = false
-			$AimTween.interpolate_property(hands, 'translation', $CameraHolder/Camera/AimPosition.translation, original_hand_pos, 1)
-			$AimTween.start()
-			$CameraHolder/Camera.fov = 90
-			return
-		if is_aiming == false:
-			is_aiming = true
-			$AimTween.interpolate_property(hands, 'translation', original_hand_pos, $CameraHolder/Camera/AimPosition.translation, 1)
-			$AimTween.start()
-			$CameraHolder/Camera.fov = 50
-			return
-		
-		
-	if Input.is_action_just_pressed("crouch"):
-		is_crouched = $CrouchNode.crouch(is_crouched, $BodyCollision, $CrouchTween)
-	
-	if Input.is_action_just_pressed("lean_left"):
-		if is_leaning == false:
-			$LeanNode.lean_left(lean_tween, lean_tween_rot, cam_hold)
-			is_leaning = true
-		else:
-			$LeanNode.reset_lean(lean_tween, lean_tween_rot, cam_hold)
-			is_leaning = false
-	if Input.is_action_just_pressed("lean_right"):
-		if is_leaning == false:
-			$LeanNode.lean_right(lean_tween, lean_tween_rot, cam_hold)
-			is_leaning = true
-		else:
-			$LeanNode.reset_lean(lean_tween, lean_tween_rot, cam_hold)
-			is_leaning = false
+	input_mv_vec = $FloorCheckNode.move($FloorCast, input_mv_vec)			
+	is_aiming = $AimNode.aim_down_sights(is_aiming, $AimTween, $CameraHolder/Camera, $CameraHolder/Camera/Hands, original_hand_pos, $CameraHolder/Camera/AimPosition)		
+	is_crouched = $CrouchNode.crouch(is_crouched, $BodyCollision, $CrouchTween)
+	is_leaning = $LeanNode.lean(is_leaning, $LeanTween, $LeanTweenRot, $CameraHolder)
 		
 	input_mv_vec = input_mv_vec.normalized()
 	
 	dir += -cam_xform.basis.z * input_mv_vec.y
 	dir += cam_xform.basis.x * input_mv_vec.x
 	
-	if $FloorCast.is_colliding():
-		if Input.is_action_just_pressed("mv_jump"):
-			if Cheats.cheats.super_jump == false:
-				vel.y = jump_speed
-			else:
-				vel.y = 20
+	vel.y = $FloorCheckNode.jump($FloorCast, vel, jump_speed)
 	
 func process_movement(delta):
 	dir.y = 0
@@ -188,12 +149,18 @@ func take_damage(amount):
 	if health <= 0:
 		get_tree().reload_current_scene()
 		
-func shot(recoil, return_time):
+func shot(recoil, return_time, accuracy, accuracy_ads):
 	MOUSE_SENSITIVITY = 0.05
 	hands.translation.z += recoil
 	var cam_hold_rot_x_before_recoil = $CameraHolder.rotation_degrees.x
 	$CameraHolder.rotation_degrees.x += recoil * 50
-	
+	if is_aiming == true:
+		$CameraHolder/Camera/ShootCast.rotation_degrees.x = rand_range(-accuracy_ads.x, accuracy_ads.x)
+		$CameraHolder/Camera/ShootCast.rotation_degrees.y = rand_range(-accuracy_ads.y, accuracy_ads.y)
+	else:
+		$CameraHolder/Camera/ShootCast.rotation_degrees.x = rand_range(-accuracy.x, accuracy.x)
+		$CameraHolder/Camera/ShootCast.rotation_degrees.y = rand_range(-accuracy.y, accuracy.y)
+		
 	
 	var weapon_tween = Tween.new()
 	FpsApi.create_tween(hands, 'translation:z', hands.translation.z, original_hand_pos.z, return_time, true, weapon_tween)

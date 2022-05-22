@@ -30,15 +30,8 @@ material/0 = SubResource( 3 )
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.3, 0.3 )
 
 [node name="WeaponStats" parent="." index="1"]
-fire_rate = 0.1
-mag_size = 30
-reserve_ammo = 90
-fire_range = 100.0
-reload_time = 2.083
-max_accuracy = 10.0
-recoil = 0.01
-return_time = 5.0
-damage = 25.0
+accuracy_ads = Vector2( 1, 1 )
+accuracy_normal = Vector2( 15, 15 )
 
 [node name="ReloadTimer" parent="." index="3"]
 wait_time = 0.1
