@@ -1,11 +1,15 @@
 ### Introduction
 Sierra Sandstorm is a tactical modern first person shooter game being developed in the Godot game engine. This project is completely free and open source so if you want to, you can contribute to the project directly. Sierra Sandstorm is still in very early alpha with features being added, updated, and removed all the time!
 
+## Features
+
 ### Tactical Features
 As mentioned previously, Sierra Sandstorm is a tactical first person shooter. I feel calling it tactical is a little to generous though. There are basic features such as leaning, crouching, and aiming down your sights, but I wish to add many more features in the future that would make this a truly free tactical experience.
 
 ### Gameplay Features
 A lot of the tactical and gameplay features overlap. So I will skip the ones mentioned previously. There are various gameplay features such as, vehicles, enemies, friendlies, reloading, and much more to come in the future!
+
+## Assets
 
 ### Assets And Other 3rd Party Items Used
 I, Fun Noober, do not like using assets in development. I prefer to do everything from scratch in my game engine. I feel this makes gameplay more genuine and unique compared to something like an asset flip. No assets are used in development.
@@ -27,3 +31,32 @@ There is various fighting at multiple bases and cities in the Middle East betwee
 Russia, now gaining an advantage over the United States, decide to lead an assault on the United States homeland. Russia starts conquering United States fortifications until they reached New York. The forces of the United States were able to slow down the Russians but the Russians had overwhelming firepower. When Russia took New York, a joint special forces operation led an assault on the Russian base there. This allowed the United States to set up a beach head and start funneling in troops from the West over to the East. When the Russian fortifications were destroyed, the troops in the area requested a broken arrow. The Russian top brass took this a step further and decided to nuke every NATO country off the map.
 
 **CLASSIFIED**
+
+## Not So Important Things
+
+### Roadmap
+- [ ] Better Vehicle Vision System
+- [ ] Even more weapons
+- [ ] Enemy 3d Models
+- [ ] Friendly 3d Models
+- [ ] Friendly Vehicle AI
+- [ ] Drivable Vehicles
+- [ ] Turrets
+- [ ] Single Player Campaign
+- [ ] Survival Mode
+- [ ] Spec Ops Mode
+
+### Links
+[Sierra Sandstorm Itch.io (Not Out)](https://fun-noober.itch.io/sierra-sandstorm) \
+[Devlogs](https://www.youtube.com/watch?v=J0nBiPZCtWo&list=PLjDpJJsBWbBAQmIEVkBy4RtNVwWrEG0_R&index=7) \
+[Fun Noober's Youtube](https://www.youtube.com/c/funnoobercodingforbeginners) \
+[Fun Noober's Twitter](https://twitter.com/fun_noober) \
+[Planning Software](https://github.com/FunNoober/Project-BRD)
+
+### Project Inspiration
+- Arma 3 (Bohemia Interactive)
+- Men of War (Digialmindsoft)
+- Call to Arms (Digitalmindsoft)
+- Call of Duty Modern Warfare 2 (Infinity Ward)
+- Call of Duty Modern Warfare 3 (Infinity Ward, Sledgehammer Games)
+- Ready or Not (VOID Interactive)
