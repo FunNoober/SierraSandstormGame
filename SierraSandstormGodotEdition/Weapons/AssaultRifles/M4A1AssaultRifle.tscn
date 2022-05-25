@@ -8,26 +8,25 @@ size = Vector2( 0.5, 0.5 )
 
 [sub_resource type="SpatialMaterial" id=3]
 emission_enabled = true
-emission = Color( 0.992157, 1, 0, 1 )
-emission_energy = 3.0
+emission = Color( 1, 0.72549, 0, 1 )
+emission_energy = 1.0
 emission_operator = 0
 emission_on_uv2 = false
 
 [node name="M4A1AssaultRifle" instance=ExtResource( 1 )]
-weapon_name = "M4A1"
-moddable = true
+weapon_name = "M5A2"
 
 [node name="MuzzleFlash" parent="Visuals" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2 )
 visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Visuals/MuzzleFlash" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0.6 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.266717, 0.53579 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
 [node name="WeaponModel" parent="Visuals" index="1" instance=ExtResource( 2 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.3, 0.3 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
 
 [node name="WeaponStats" parent="." index="1"]
 accuracy_ads = Vector2( 1, 1 )
@@ -43,3 +42,6 @@ text = "90/30"
 [node name="MuzzleParticles" parent="." index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.7 )
 lifetime = 0.05
+
+[node name="LightPosition" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2 )

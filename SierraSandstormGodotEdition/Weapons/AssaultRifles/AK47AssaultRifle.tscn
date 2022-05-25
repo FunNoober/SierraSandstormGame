@@ -14,18 +14,18 @@ emission_operator = 0
 emission_on_uv2 = false
 
 [node name="AK47AssaultRifle" instance=ExtResource( 1 )]
-weapon_name = "AK47"
+weapon_name = "Ak58"
 
 [node name="MuzzleFlash" parent="Visuals" index="0"]
 visible = false
 
 [node name="MeshInstance" type="MeshInstance" parent="Visuals/MuzzleFlash" index="0"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.15654e-07, 3.24585 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.3, 2.64585 )
 mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="WeaponModel" parent="Visuals" index="1" instance=ExtResource( 2 )]
-transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 9.23427e-08, -0.297744, 0.611558 )
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 0, 0 )
 
 [node name="WeaponStats" parent="." index="1"]
 accuracy_ads = Vector2( 1, 1 )
@@ -33,3 +33,6 @@ accuracy_normal = Vector2( 15, 15 )
 
 [node name="MuzzleParticles" parent="." index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.4 )
+
+[node name="LightPosition" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.117536, 1.19447 )

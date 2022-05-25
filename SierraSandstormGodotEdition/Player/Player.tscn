@@ -32,21 +32,24 @@ near = 0.01
 far = 1000.0
 
 [node name="Hands" type="Spatial" parent="CameraHolder/Camera"]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.539, -0.334, -1.073 )
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.739, -0.934, -1.473 )
 script = ExtResource( 8 )
 
-[node name="ShootCast" type="RayCast" parent="CameraHolder/Camera"]
-enabled = true
-cast_to = Vector3( 0, 0, -100 )
-
 [node name="AimPosition" type="Spatial" parent="CameraHolder/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.222, -0.8 )
+
+[node name="HandsPosNormal" type="Position3D" parent="CameraHolder/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.739, -0.934, -1.473 )
 
 [node name="FlashLight" type="SpotLight" parent="CameraHolder"]
 visible = false
 light_energy = 3.0
 spot_range = 15.0
 spot_angle = 24.0
+
+[node name="ShootCast" type="RayCast" parent="CameraHolder"]
+enabled = true
+cast_to = Vector3( 0, 0, -100 )
 
 [node name="CrouchTween" type="Tween" parent="."]
 
