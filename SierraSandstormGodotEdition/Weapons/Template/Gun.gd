@@ -56,6 +56,17 @@ func shoot():
 	$ShootTimer.start(stats.fire_rate)
 	current_ammo -= 1
 	translation.z -= stats.recoil
+	get_parent().get_parent().get_parent().rotation_degrees.x += stats.recoil * 100
+	
+	$Visuals/MuzzleFlash.show()
+	$MuzzleFlashTimer.start()
+	
+	if FpsApi.is_aiming == false:
+		FpsApi.shoot_cast.rotation_degrees.x = rand_range(-stats.accuracy_normal.x, stats.accuracy_normal.x)
+		FpsApi.shoot_cast.rotation_degrees.y = rand_range(-stats.accuracy_normal.y, stats.accuracy_normal.y)
+	else:
+		FpsApi.shoot_cast.rotation_degrees.x = rand_range(-stats.accuracy_ads.x, stats.accuracy_ads.x)
+		FpsApi.shoot_cast.rotation_degrees.y = rand_range(-stats.accuracy_ads.y, stats.accuracy_ads.y)
 
 func _on_ShootTimer_timeout() -> void:
 	can_shoot = true
@@ -75,3 +86,7 @@ func _on_ReloadTimer_timeout() -> void:
 	is_reloading = false
 	stats.reserve_ammo -= stats.mag_size
 	current_ammo = stats.mag_size
+
+
+func _on_MuzzleFlashTimer_timeout() -> void:
+	$Visuals/MuzzleFlash.hide()

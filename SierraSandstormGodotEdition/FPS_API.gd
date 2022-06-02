@@ -4,6 +4,7 @@ var shoot_cast
 var player
 var time : float
 var cur_delta : float
+var is_aiming : bool
 
 func _process(delta: float) -> void:
 	time += delta

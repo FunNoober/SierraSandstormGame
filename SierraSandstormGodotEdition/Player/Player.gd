@@ -71,6 +71,11 @@ func _process(delta):
 	if Cheats.cheats.fast_mode == true:
 		max_speed = 35
 		crouch_speed = 35
+		
+	$AimNode.is_aiming = is_aiming
+	FpsApi.is_aiming = is_aiming
+	if Input.is_action_just_pressed("ads"):
+		is_aiming = not is_aiming
 
 func _physics_process(delta):
 	process_input(delta)
@@ -104,7 +109,6 @@ func process_input(delta):
 	var input_mv_vec = Vector2()
 	
 	input_mv_vec = $FloorCheckNode.move($FloorCast, input_mv_vec)			
-	is_aiming = $AimNode.aim_down_sights(is_aiming, $AimTween, $CameraHolder/Camera, $CameraHolder/Camera/Hands, original_hand_pos, $CameraHolder/Camera/AimPosition)		
 	is_crouched = $CrouchNode.crouch(is_crouched, $BodyCollision, $CrouchTween)
 	is_leaning = $LeanNode.lean(is_leaning, $LeanTween, $LeanTweenRot, $CameraHolder)
 		

@@ -1,17 +1,18 @@
 extends Node
 
-func aim_down_sights(is_aiming, aim_tween, camera, hands, original_hand_pos, aim_position):
-	if Input.is_action_just_pressed("ads"):
-		if is_aiming == true:
-			is_aiming = false
-			aim_tween.interpolate_property(hands, 'translation', hands.translation, get_parent().get_node("CameraHolder/Camera/HandsPosNormal").translation, 1)
-			aim_tween.start()
-			camera.fov = 90
-			return is_aiming
-		if is_aiming == false:
-			is_aiming = true
-			aim_tween.interpolate_property(hands, 'translation', hands.translation, aim_position.translation, 1)
-			aim_tween.start()
-			camera.fov = 50
-			return is_aiming
-	return is_aiming
+var is_aiming : bool
+
+var starndard_hands_pos
+var aim_pos
+var hands
+
+func _ready() -> void:
+	starndard_hands_pos = get_node("../CameraHolder/Camera/HandsPosNormal")
+	aim_pos = get_node("../CameraHolder/Camera/AimPosition")
+	hands = get_node("../CameraHolder/Camera/Hands")
+
+func _process(delta: float) -> void:
+	if is_aiming == true:
+		hands.translation.z = lerp(hands.translation.z, aim_pos.translation.z, delta * 3)
+	else:
+		hands.translation.z = lerp(hands.translation.z, starndard_hands_pos.translation.z, delta * 3)
