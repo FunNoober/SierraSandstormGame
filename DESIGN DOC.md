@@ -119,6 +119,10 @@ MP50 : Fully Automatic Sub Machine Gun (MP5)
 
 UMP-90 : Fully Automatic Sub Machine Gun (UMP-45)
 
+5-9: Semi-Automatic Handgun
+
+Makarov: Semi-Automatic Handgun
+
 M249 SAW: Fully Automatic Light Machine Gun
 
 PKP Pecheneg: Fully Automatic Light Machine Gun
