@@ -60,6 +60,7 @@ func shoot():
 	
 	$Visuals/MuzzleFlash.show()
 	$MuzzleFlashTimer.start()
+	$AudioStreamPlayer.play()
 	
 	if FpsApi.is_aiming == false:
 		FpsApi.shoot_cast.rotation_degrees.x = rand_range(-stats.accuracy_normal.x, stats.accuracy_normal.x)

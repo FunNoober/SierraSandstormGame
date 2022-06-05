@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Weapons/Template/TemplateGun.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/3d Models/Weapons/AK47.glb" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Sound Effects/Weapons/gun003_shoot_sound.ogg" type="AudioStream" id=3]
 
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 0.5, 0.5 )
@@ -39,6 +40,9 @@ accuracy_normal = Vector2( 15, 15 )
 
 [node name="MuzzleParticles" parent="." index="6"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.4 )
+
+[node name="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource( 3 )
 
 [node name="LightPosition" parent="." index="8"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.117536, 1.19447 )
