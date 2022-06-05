@@ -64,7 +64,6 @@ func _process(delta):
 	if Input.is_action_just_pressed("flash_light"):
 		flash_enabled = $FlashLight.flash_light(flash_enabled, $CameraHolder/FlashLight)
 	$CameraHolder/FlashLight.global_transform.origin = $CameraHolder/Camera/Hands.get_child($CameraHolder/Camera/Hands.cur_i -1).get_node("LightPosition").global_transform.origin
-	$CameraHolder/Camera/AimPosition.translation = $CameraHolder/Camera/Hands.get_child($CameraHolder/Camera/Hands.cur_i -1).aim_pos
 	
 	if health <= 0:
 		get_tree().reload_current_scene()
@@ -83,10 +82,10 @@ func _physics_process(delta):
 	
 	var movement = cos(FpsApi.time+sway_frequency)*sway_amplitude
 	hands.translation.y = FpsApi.move_on_sine(hands.translation.y, movement, -0.934)
-	$CameraHolder/Camera/AimPosition.translation.y = FpsApi.move_on_sine($CameraHolder/Camera/AimPosition.translation.y, movement, -0.222)
-	$CameraHolder/Camera/HandsPosNormal.translation.y = FpsApi.move_on_sine($CameraHolder/Camera/HandsPosNormal.translation.y, movement, -0.222)
+	$CameraHolder/Camera/AimPosition.translation.y = FpsApi.move_on_sine($CameraHolder/Camera/AimPosition.translation.y, movement, -0.022)
+	$CameraHolder/Camera/HandsPosNormal.translation.y = FpsApi.move_on_sine($CameraHolder/Camera/HandsPosNormal.translation.y, movement, -0.934)
 	if is_aiming == false:
-		hands.translation.x = FpsApi.move_on_sine(hands.translation.y, movement, 0.539)
+		hands.translation.x = FpsApi.move_on_sine(hands.translation.y, movement, 0.739)
 	else:
 		hands.translation.x = FpsApi.move_on_sine(hands.translation.y, movement, 0)
 

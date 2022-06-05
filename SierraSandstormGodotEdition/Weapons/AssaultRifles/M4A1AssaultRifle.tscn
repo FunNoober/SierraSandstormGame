@@ -8,9 +8,10 @@
 size = Vector2( 0.5, 0.5 )
 
 [sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.992157, 1, 0, 1 )
 emission_enabled = true
-emission = Color( 1, 0.72549, 0, 1 )
-emission_energy = 1.0
+emission = Color( 0.992157, 1, 0, 1 )
+emission_energy = 3.0
 emission_operator = 0
 emission_on_uv2 = false
 
@@ -25,6 +26,12 @@ visible = false
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.266717, 0.53579 )
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
+
+[node name="OmniLight" type="OmniLight" parent="Visuals/MuzzleFlash/MeshInstance" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0999999, 0 )
+light_color = Color( 1, 0.74902, 0, 1 )
+light_energy = 15.0
+omni_range = 15.0
 
 [node name="WeaponModel" parent="Visuals" index="1" instance=ExtResource( 2 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )

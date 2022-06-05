@@ -16,7 +16,6 @@ height = 3.0
 
 [node name="Player" type="KinematicBody" groups=["Actor", "Player"]]
 script = ExtResource( 1 )
-max_speed = 1
 loadout = [ ExtResource( 2 ), ExtResource( 7 ) ]
 
 [node name="BodyCollision" type="CollisionShape" parent="."]
@@ -36,15 +35,15 @@ transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.739, 
 script = ExtResource( 8 )
 
 [node name="AimPosition" type="Spatial" parent="CameraHolder/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.222, -1.4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0220001, -0.8 )
 
 [node name="HandsPosNormal" type="Position3D" parent="CameraHolder/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.739, -0.934, -1.473 )
 
 [node name="FlashLight" type="SpotLight" parent="CameraHolder"]
 visible = false
-light_energy = 3.0
-spot_range = 15.0
+light_energy = 15.0
+spot_range = 45.0
 spot_angle = 24.0
 
 [node name="ShootCast" type="RayCast" parent="CameraHolder"]
@@ -77,7 +76,6 @@ script = ExtResource( 9 )
 script = ExtResource( 10 )
 
 [node name="Interface" parent="." instance=ExtResource( 6 )]
-visible = false
 
 [node name="Position3D" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
