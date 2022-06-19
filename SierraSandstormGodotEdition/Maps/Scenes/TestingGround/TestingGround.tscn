@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Maps/3d Models/SierraSandstormTestMap/SierraSandstormTestMap.obj" type="ArrayMesh" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://AI/Enemies/Vehicles/PrototypeTurretVehicle.tscn" type="PackedScene" id=6]
 [ext_resource path="res://AI/Friendlies/Infantry/Modified/PrototypeFriendlyInfantry.tscn" type="PackedScene" id=7]
 [ext_resource path="res://AI/Enemies/Infantry/EnemyInfantry.gd" type="Script" id=8]
-[ext_resource path="res://AI/Friendlies/Infantry/FriendlyInfantry.gd" type="Script" id=9]
 [ext_resource path="res://Assets/3d Models/Props/Fortifications/Desert/DesertHesco.obj" type="ArrayMesh" id=10]
 [ext_resource path="res://Assets/Materials/ColorPallete.tres" type="Material" id=11]
 [ext_resource path="res://Assets/3d Models/Props/Fortifications/Desert/DesertSandbags.obj" type="ArrayMesh" id=12]
@@ -283,25 +282,35 @@ material/0 = ExtResource( 11 )
 [node name="CollisionShape" type="CollisionShape" parent="Navigation/NavigationMeshInstance/Obstacles/DesertSandbags8/StaticBody"]
 shape = SubResource( 7 )
 
-[node name="EnemyTemplate" parent="Navigation" instance=ExtResource( 3 )]
-transform = Transform( 0.995229, 0, -0.0975662, 0, 1, 0, 0.0975662, 0, 0.995229, 22.3741, -3.00004, 90.2062 )
-script = ExtResource( 8 )
-group_mask = "Player"
-
 [node name="EnemyTemplate2" parent="Navigation" instance=ExtResource( 3 )]
 transform = Transform( 0.999763, 0, -0.0217457, 0, 1, 0, 0.0217457, 0, 0.999763, 27.0094, -2.89643, 84.199 )
 script = ExtResource( 8 )
-group_mask = "Player"
 type = 0
 
 [node name="EnemyTemplate3" parent="Navigation" instance=ExtResource( 3 )]
-transform = Transform( -0.154606, 0, 0.987976, 0, 1, 0, -0.987976, 0, -0.154606, 15.5095, -2.91854, 92.3101 )
+transform = Transform( 0.999763, 0, -0.0217457, 0, 1, 0, 0.0217457, 0, 0.999763, 11.0783, -2.89643, 84.199 )
 script = ExtResource( 8 )
-group_mask = "Player"
+type = 0
 
-[node name="FriendlyTemplate1" parent="Navigation" instance=ExtResource( 7 )]
-transform = Transform( -0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 13.4644, -3, 51.6249 )
-script = ExtResource( 9 )
+[node name="EnemyTemplate4" parent="Navigation" instance=ExtResource( 3 )]
+transform = Transform( 0.999763, 0, -0.0217457, 0, 1, 0, 0.0217457, 0, 0.999763, 19.3304, -2.89643, 84.199 )
+script = ExtResource( 8 )
+type = 0
+
+[node name="FriendlyTemplate" parent="Navigation" instance=ExtResource( 7 )]
+transform = Transform( -0.999473, 0, 0.0324407, 0, 1, 0, -0.0324407, 0, -0.999473, 19.4438, -3, 73.7576 )
+
+[node name="FriendlyTemplate2" parent="Navigation" instance=ExtResource( 7 )]
+transform = Transform( -0.999473, 0, 0.0324407, 0, 1, 0, -0.0324407, 0, -0.999473, 10.82, -3, 73.7576 )
+
+[node name="FriendlyTemplate3" parent="Navigation" instance=ExtResource( 7 )]
+transform = Transform( -0.999473, 0, 0.0324407, 0, 1, 0, -0.0324407, 0, -0.999473, 14.4289, -3, 68.2206 )
+
+[node name="FriendlyTemplate4" parent="Navigation" instance=ExtResource( 7 )]
+transform = Transform( -0.999473, 0, 0.0324407, 0, 1, 0, -0.0324407, 0, -0.999473, 25.1806, -3, 69.1521 )
+
+[node name="FriendlyTemplate5" parent="Navigation" instance=ExtResource( 7 )]
+transform = Transform( -0.999473, 0, 0.0324407, 0, 1, 0, -0.0324407, 0, -0.999473, 30.8171, -3, 71.436 )
 
 [node name="PrototypeTurretVehicle" parent="." instance=ExtResource( 6 )]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 70.5886, -2, 124.584 )

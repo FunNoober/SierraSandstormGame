@@ -25,11 +25,15 @@ var vel = Vector3.ZERO
 enum TYPE {defensive, offensive}
 export(TYPE) var type = TYPE.defensive
 
+var targets = []
+
 func _ready() -> void:
 	can_shoot = true
 	health = 100
 
 func _process(delta: float) -> void:
+	if targets.size() > 0:
+		enemy = targets[targets.size() - 1]
 	if should_pathfind and is_currently_pathfinding == false:
 		$PathResetTimer.start()
 		is_currently_pathfinding = true
@@ -76,6 +80,8 @@ func get_target_path(target_pos):
 func shoot():
 	if $Weapon/ShootCast.is_colliding() and $Weapon/ShootCast.get_collider().name.find(group_mask) != -1:
 		$Weapon/ShootCast.get_collider().take_damage(damage)
+		if $Weapon/ShootCast.get_collider().health - damage <= 0:
+			targets.pop_back()
 	$Weapon/ShootParticles.emitting = true
 	can_shoot = false
 	$ShootTimer.start()
@@ -85,7 +91,7 @@ func _on_ShootTimer_timeout() -> void:
 
 func _on_BroadVisionCheck_body_entered(body: Node) -> void:
 	if body.name.find(group_mask) != -1:
-		enemy = body
+		targets.append(body)
 
 func _on_PathResetTimer_timeout() -> void:
 	if seen_enemy and is_instance_valid(enemy):
@@ -93,7 +99,6 @@ func _on_PathResetTimer_timeout() -> void:
 
 func take_damage(amount):
 	health -= amount
-	print("ouch")
 	if health <= 0:
 		die()
 
