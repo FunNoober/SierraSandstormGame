@@ -30,6 +30,7 @@ material/0 = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0999999, 0 )
 light_color = Color( 1, 0.74902, 0, 1 )
 light_energy = 15.0
+shadow_enabled = true
 omni_range = 15.0
 
 [node name="WeaponModel" parent="Visuals" index="1" instance=ExtResource( 2 )]

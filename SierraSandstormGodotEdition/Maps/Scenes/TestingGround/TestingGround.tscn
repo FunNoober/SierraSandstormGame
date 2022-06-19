@@ -32,47 +32,56 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8, 0 )
 [node name="OmniLight" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 42 )
 light_energy = 5.0
+shadow_enabled = true
 shadow_bias = 10.0
 omni_range = 10.0
 
 [node name="OmniLight2" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 64 )
 light_energy = 5.0
+shadow_enabled = true
 omni_range = 10.0
 
 [node name="OmniLight3" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 92 )
 light_energy = 5.0
+shadow_enabled = true
 omni_range = 10.0
 
 [node name="OmniLight4" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 39, 2, 64 )
 light_energy = 5.0
+shadow_enabled = true
 omni_range = 10.0
 
 [node name="OmniLight5" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 2, 64 )
 light_energy = 5.0
+shadow_enabled = true
 omni_range = 10.0
 
 [node name="OmniLight6" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -82, 2, 64 )
 light_energy = 5.0
+shadow_enabled = true
 omni_range = 10.0
 
 [node name="OmniLight7" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 2, 116 )
 light_energy = 5.0
+shadow_enabled = true
 omni_range = 10.0
 
 [node name="OmniLight8" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, 2, 116 )
 light_energy = 5.0
+shadow_enabled = true
 omni_range = 10.0
 
 [node name="OmniLight9" type="OmniLight" parent="Lights"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 67, 2, 56 )
 light_energy = 5.0
+shadow_enabled = true
 omni_range = 10.0
 
 [node name="Navigation" type="Navigation" parent="."]

@@ -121,7 +121,7 @@ UMP-90 : Fully Automatic Sub Machine Gun (UMP-45)
 
 5-9: Semi-Automatic Handgun
 
-Makarov: Semi-Automatic Handgun
+MP-443 Grach: Semi-Automatic Handgun
 
 M249 SAW: Fully Automatic Light Machine Gun
 

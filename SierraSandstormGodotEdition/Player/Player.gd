@@ -54,7 +54,7 @@ func _ready():
 	for i in len(loadout):
 		var v = loadout[i].instance()
 		hands.add_child(v)
-		v.global_transform.origin = hands.global_transform.origin
+		v.translation = hands.translation
 		v.set_process(false)
 		v.hide()
 		$CameraHolder/Camera/Hands.switch_weapon()
@@ -82,12 +82,13 @@ func _physics_process(delta):
 	
 	var movement = cos(FpsApi.time+sway_frequency)*sway_amplitude
 	hands.translation.y = FpsApi.move_on_sine(hands.translation.y, movement, -0.934)
-	$CameraHolder/Camera/AimPosition.translation.y = FpsApi.move_on_sine($CameraHolder/Camera/AimPosition.translation.y, movement, -0.022)
+	$CameraHolder/Camera/AimPosition.translation.y = FpsApi.move_on_sine($CameraHolder/Camera/AimPosition.translation.y, movement, -0.678)
 	$CameraHolder/Camera/HandsPosNormal.translation.y = FpsApi.move_on_sine($CameraHolder/Camera/HandsPosNormal.translation.y, movement, -0.934)
 	if is_aiming == false:
 		hands.translation.x = FpsApi.move_on_sine(hands.translation.y, movement, 0.739)
 	else:
 		hands.translation.x = FpsApi.move_on_sine(hands.translation.y, movement, 0)
+		hands.translation.y = $CameraHolder/Camera/AimPosition.translation.y
 
 func process_input(delta):
 	if is_crouched or is_leaning or is_aiming:

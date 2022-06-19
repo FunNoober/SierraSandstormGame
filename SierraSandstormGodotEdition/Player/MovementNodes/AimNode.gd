@@ -14,5 +14,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if is_aiming == true:
 		hands.translation = lerp(hands.translation, aim_pos.translation, delta * 3)
+
 	else:
 		hands.translation = lerp(hands.translation, starndard_hands_pos.translation, delta * 3)
