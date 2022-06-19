@@ -56,8 +56,11 @@ autostart = false
 [node name="CollisionPolygon" parent="BroadVisionCheck" index="0"]
 polygon = PoolVector2Array( -25, 35, 25, 35, 0, 0 )
 
+[node name="VisionCast" parent="." index="6"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+
 [node name="Weapon" type="Spatial" parent="." index="7"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50759, 2, -1.64859 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.50759, 2.46534, -1.64859 )
 
 [node name="ShootCast" type="RayCast" parent="Weapon" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.586189 )

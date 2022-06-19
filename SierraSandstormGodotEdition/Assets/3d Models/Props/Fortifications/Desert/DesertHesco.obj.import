@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/DesertHesco.obj-d3f8f2133c1ad8e31318c594d36e35e2.mesh"
+
+[deps]
+
+files=[ "res://.import/DesertHesco.obj-d3f8f2133c1ad8e31318c594d36e35e2.mesh" ]
+
+source_file="res://Assets/3d Models/Props/Fortifications/Desert/DesertHesco.obj"
+dest_files=[ "res://.import/DesertHesco.obj-d3f8f2133c1ad8e31318c594d36e35e2.mesh", "res://.import/DesertHesco.obj-d3f8f2133c1ad8e31318c594d36e35e2.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

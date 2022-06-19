@@ -4,14 +4,16 @@
 sky_top_color = Color( 0.839216, 0.917647, 0.980392, 1 )
 sky_horizon_color = Color( 0.647059, 0.839216, 0.945098, 1 )
 sky_curve = 0.02
-sky_energy = 0.1
+sky_energy = 0.5
 ground_bottom_color = Color( 0.839216, 0.917647, 0.980392, 1 )
 ground_horizon_color = Color( 0.647059, 0.839216, 0.945098, 1 )
-ground_energy = 0.1
+ground_energy = 0.25
 
 [resource]
 background_mode = 2
 background_sky = SubResource( 1 )
+fog_enabled = true
+fog_depth_begin = 25.0
 glow_enabled = true
 glow_intensity = 1.34
 glow_strength = 1.06

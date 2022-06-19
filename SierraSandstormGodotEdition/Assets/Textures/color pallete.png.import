@@ -2,28 +2,26 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/color pallete.png-fb26b2f551995022163d15ce4460d831.s3tc.stex"
-path.etc2="res://.import/color pallete.png-fb26b2f551995022163d15ce4460d831.etc2.stex"
+path="res://.import/color pallete.png-fb26b2f551995022163d15ce4460d831.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Assets/Textures/color pallete.png"
-dest_files=[ "res://.import/color pallete.png-fb26b2f551995022163d15ce4460d831.s3tc.stex", "res://.import/color pallete.png-fb26b2f551995022163d15ce4460d831.etc2.stex" ]
+dest_files=[ "res://.import/color pallete.png-fb26b2f551995022163d15ce4460d831.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=true
-flags/filter=true
-flags/mipmaps=true
+flags/filter=false
+flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=1
 process/fix_alpha_border=true

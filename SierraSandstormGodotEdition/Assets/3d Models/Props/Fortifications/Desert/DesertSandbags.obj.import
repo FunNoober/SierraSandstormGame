@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/DesertSandbags.obj-7426eb5ab35cd5243e1675408875c0fd.mesh"
+
+[deps]
+
+files=[ "res://.import/DesertSandbags.obj-7426eb5ab35cd5243e1675408875c0fd.mesh" ]
+
+source_file="res://Assets/3d Models/Props/Fortifications/Desert/DesertSandbags.obj"
+dest_files=[ "res://.import/DesertSandbags.obj-7426eb5ab35cd5243e1675408875c0fd.mesh", "res://.import/DesertSandbags.obj-7426eb5ab35cd5243e1675408875c0fd.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
