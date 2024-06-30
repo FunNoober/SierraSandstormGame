@@ -1,3 +1,6 @@
+# ⚠Project Update: 2024⚠
+Sierra Sandstorm is cancelled. This game was of an absolutely giant scope that I was unable to complete with my skill level in Godot. I may return to this project if I finish my current game, but everything in this project is outdated, and many things are not compatible with Godot 4.
+
 ### Introduction
 Sierra Sandstorm is a tactical modern first person shooter game being developed in the Godot game engine. This project is completely free and open source so if you want to, you can contribute to the project directly. Sierra Sandstorm is still in very early alpha with features being added, updated, and removed all the time!
 
